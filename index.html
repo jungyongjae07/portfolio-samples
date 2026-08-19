@@ -5,20 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio Samples</title>
 <style>
-  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  body { margin:0; min-height:100vh; padding:3rem 1.5rem;
     font-family: -apple-system, sans-serif; background:#111; color:#eee; }
-  .card { display:flex; gap:1.5rem; flex-wrap:wrap; padding:2rem; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.3rem; font-weight: 600; margin: 0 0 2rem; }
+  h2.category { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+    color: #888; margin: 2.2rem 0 .8rem; }
+  h2.category:first-of-type { margin-top: 0; }
+  .grid { display:flex; gap:1rem; flex-wrap:wrap; }
   a.tile { display:block; width:260px; padding:1.5rem; border:1px solid #333; border-radius:10px;
-    color:#eee; text-decoration:none; background:#1a1a1a; transition:transform .2s; }
+    color:#eee; text-decoration:none; background:#1a1a1a; transition:transform .2s, border-color .2s; }
   a.tile:hover { transform:translateY(-3px); border-color:#666; }
-  a.tile h2 { margin:0 0 .5rem; font-size:1.1rem; }
-  a.tile p { margin:0; color:#999; font-size:.85rem; }
+  a.tile h3 { margin:0 0 .5rem; font-size:1.05rem; font-weight: 600; }
+  a.tile p { margin:0; color:#999; font-size:.85rem; line-height:1.5; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <a class="tile" href="jae-codes/"><h2>jae.codes</h2><p>Developer portfolio, code-editor concept</p></a>
-    <a class="tile" href="salt-and-still/"><h2>Salt & Still</h2><p>Boutique wellness studio landing page</p></a>
+  <div class="wrap">
+    <h1>Portfolio samples</h1>
+
+    <h2 class="category">Wellness &amp; boutique services</h2>
+    <div class="grid">
+      <a class="tile" href="samples/wellness/salt-and-still/"><h3>Salt &amp; Still</h3><p>Boutique wellness studio — float therapy, sauna, massage booking page.</p></a>
+    </div>
+
+    <h2 class="category">Developer &amp; personal brand</h2>
+    <div class="grid">
+      <a class="tile" href="samples/developer/jae-codes/"><h3>jae.codes</h3><p>Freelance developer portfolio, styled as an open code editor.</p></a>
+    </div>
   </div>
 </body>
 </html>
