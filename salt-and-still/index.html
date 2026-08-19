@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salt & Still — Boutique Wellness Studio</title>
+<meta name="description" content="A quiet, mineral-led wellness studio. Float therapy, massage, sauna, and breathwork in the city center.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --stone: #E7E2D9;
+    --stone-deep: #DBD4C4;
+    --card: #F3F0E8;
+    --ink: #2A241F;
+    --ink-dim: #6B6458;
+    --ink-faint: #9A917F;
+    --sage: #576650;
+    --sage-deep: #3E4A38;
+    --rose: #B0796C;
+    --line: #D2CBBC;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Figtree', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--stone);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
+  .eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--sage-deep); font-weight: 600;
+  }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+
+  :focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+  /* ---------------- nav ---------------- */
+  header {
+    position: fixed; top: 0; inset-inline: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.3rem clamp(1.5rem, 5vw, 3rem);
+    background: rgba(231,226,217,0.82); backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  .brand { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; letter-spacing: 0.01em; }
+  nav.links { display: flex; gap: 2.1rem; font-size: 0.88rem; color: var(--ink-dim); }
+  nav.links a { text-decoration: none; }
+  nav.links a:hover { color: var(--ink); }
+  @media (max-width: 760px) { nav.links { display: none; } }
+  .book-btn {
+    font-size: 0.82rem; text-decoration: none; padding: 0.6rem 1.15rem;
+    border: 1px solid var(--ink); border-radius: 999px; color: var(--ink);
+  }
+
+  /* ---------------- hero ---------------- */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 9.5rem 0 6rem;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none;
+  }
+  .hero .b1 { width: 480px; height: 480px; background: radial-gradient(circle, #C9CCB9 0%, transparent 70%); top: -160px; right: -120px; opacity: .8; }
+  .hero .b2 { width: 380px; height: 380px; background: radial-gradient(circle, var(--rose) 0%, transparent 72%); bottom: -180px; left: -100px; opacity: .35; }
+
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: end; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.1rem); line-height: 1.06; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--sage-deep); }
+  .hero .lede { max-width: 46ch; margin-top: 1.6rem; color: var(--ink-dim); font-size: 1.08rem; }
+  .hero .cta-row { display: flex; gap: 1rem; margin-top: 2.4rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--sage-deep); color: var(--stone); text-decoration: none;
+    padding: 0.95rem 1.7rem; border-radius: 999px; font-size: 0.92rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: transform .25s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-ghost {
+    text-decoration: none; padding: 0.95rem 1.5rem; border-radius: 999px;
+    border: 1px solid var(--ink-faint); color: var(--ink); font-size: 0.92rem;
+  }
+
+  .hero-panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 26px;
+    padding: 1.7rem; position: relative;
+  }
+  .hero-panel .ring {
+    width: 100%; aspect-ratio: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%, #F4F1E7 0%, transparent 45%),
+      conic-gradient(from 200deg, #7C8A6F, #B0796C, #9CA987, #7C8A6F);
+    opacity: 0.9;
+  }
+  .hero-panel .cap { margin-top: 1.2rem; font-size: 0.82rem; color: var(--ink-dim); text-align: center; }
+
+  .stat-row { display: flex; gap: 2.6rem; margin-top: 3.6rem; flex-wrap: wrap; }
+  .stat b { font-family: var(--font-display); font-size: 1.7rem; display: block; }
+  .stat span { font-size: 0.8rem; color: var(--ink-dim); }
+
+  /* ---------------- philosophy ---------------- */
+  .philosophy { padding: 6rem 0; }
+  .phil-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3.5rem; align-items: start; }
+  @media (max-width: 860px) { .phil-grid { grid-template-columns: 1fr; } }
+  .philosophy h2 { font-size: clamp(1.9rem, 3.4vw, 2.5rem); }
+  .philosophy .lede { color: var(--ink-dim); margin-top: 1.2rem; max-width: 40ch; }
+  .value-list { display: flex; flex-direction: column; gap: 1.6rem; }
+  .value { display: flex; gap: 1.1rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); }
+  .value:last-child { border-bottom: none; padding-bottom: 0; }
+  .value .mark { flex-shrink: 0; width: 34px; height: 34px; }
+  .value h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .value p { color: var(--ink-dim); font-size: 0.94rem; max-width: 44ch; }
+
+  /* ---------------- treatments ---------------- */
+  .treatments { padding: 6rem 0; background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-head { max-width: 52ch; margin-bottom: 3rem; }
+  .section-head h2 { font-size: clamp(1.9rem, 3.4vw, 2.5rem); margin-top: 0.6rem; }
+
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 860px) { .t-grid { grid-template-columns: 1fr; } }
+  .t-card {
+    background: var(--stone); border: 1px solid var(--line); border-radius: 20px;
+    padding: 1.9rem; display: flex; flex-direction: column; gap: 1rem;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .t-card:hover { transform: translateY(-4px); box-shadow: 0 18px 32px -18px rgba(42,36,31,0.25); }
+  .t-card .icon { width: 40px; height: 40px; color: var(--sage-deep); }
+  .t-card h3 { font-size: 1.2rem; font-weight: 500; }
+  .t-card p { color: var(--ink-dim); font-size: 0.92rem; }
+  .t-card .meta { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--ink-faint); margin-top: auto; padding-top: 0.8rem; border-top: 1px dashed var(--line); }
+  .t-card .price { font-family: var(--font-display); font-size: 1.35rem; color: var(--ink); }
+
+  /* ---------------- ritual timeline ---------------- */
+  .ritual { padding: 6rem 0; }
+  .ritual-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 3rem; position: relative; }
+  @media (max-width: 860px) { .ritual-track { grid-template-columns: 1fr; gap: 2.2rem; } }
+  .ritual-track::before {
+    content: ""; position: absolute; top: 22px; left: 6%; right: 6%; height: 1px; background: var(--line);
+  }
+  @media (max-width: 860px) { .ritual-track::before { display: none; } }
+  .r-step { position: relative; }
+  .r-num {
+    font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--sage-deep);
+    width: 44px; height: 44px; border-radius: 50%; background: var(--card); border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;
+  }
+  .r-step h3 { margin-top: 1.1rem; font-size: 1.05rem; font-weight: 500; }
+  .r-step p { margin-top: 0.5rem; color: var(--ink-dim); font-size: 0.9rem; }
+
+  /* ---------------- words ---------------- */
+  .words { padding: 6rem 0; background: var(--sage-deep); color: var(--stone); }
+  .words .section-head h2 { color: var(--stone); }
+  .words .eyebrow { color: #C7CFB8; }
+  .w-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 860px) { .w-grid { grid-template-columns: 1fr; } }
+  .w-card { background: rgba(243,240,232,0.07); border: 1px solid rgba(243,240,232,0.16); border-radius: 20px; padding: 1.8rem; }
+  .w-card p.quote { font-family: var(--font-display); font-style: italic; font-size: 1.08rem; line-height: 1.5; }
+  .w-card .who { margin-top: 1.3rem; font-size: 0.84rem; color: #C7CFB8; }
+
+  /* ---------------- cta ---------------- */
+  .cta { padding: 6.5rem 0; text-align: center; }
+  .cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); max-width: 22ch; margin: 0 auto; }
+  .cta .lede { margin: 1.3rem auto 0; color: var(--ink-dim); max-width: 40ch; }
+  .cta .cta-row { justify-content: center; margin-top: 2.2rem; }
+
+  footer {
+    padding: 2.4rem 0 3rem; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.82rem; color: var(--ink-faint);
+  }
+  footer .brand { font-size: 1rem; }
+  footer .fine { max-width: 34ch; text-align: right; }
+  @media (max-width: 600px) { footer { flex-direction: column; align-items: flex-start; } footer .fine { text-align: left; } }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="brand">Salt &amp; Still</div>
+  <nav class="links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#treatments">Treatments</a>
+    <a href="#ritual">The Visit</a>
+    <a href="#words">Words</a>
+  </nav>
+  <a class="book-btn" href="#cta">Book a session</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <p class="eyebrow">Boutique wellness studio</p>
+        <h1>A quiet room, <em>salt-warmed</em> water, and nothing to do but float.</h1>
+        <p class="lede">Salt & Still is a small studio built around slowness — float therapy, sauna, massage, and breathwork, one session at a time, never rushed.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#cta">Book a session
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a class="btn-ghost" href="#treatments">See treatments</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>7</b><span>treatments offered</span></div>
+          <div class="stat"><b>60min</b><span>average session</span></div>
+          <div class="stat"><b>4.9</b><span>average rating</span></div>
+        </div>
+      </div>
+      <div class="hero-panel reveal" style="transition-delay:.12s">
+        <div class="ring"></div>
+        <p class="cap">Mineral pool, drawn each morning at 34°C</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="philosophy" class="philosophy">
+    <div class="wrap phil-grid">
+      <div class="reveal">
+        <p class="eyebrow">Why we're small</p>
+        <h2>Three rooms. One session at a time.</h2>
+        <p class="lede">We turned away a bigger space twice. A studio this size means the water is always right, the room is always quiet, and you're never sharing your hour with anyone else's.</p>
+      </div>
+      <div class="value-list reveal" style="transition-delay:.1s">
+        <div class="value">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-3 4-6 7-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11z"></path></svg>
+          <div><h3>Unhurried by design</h3><p>One booking per room, per hour. No overlap, no rushing you out for the next guest.</p></div>
+        </div>
+        <div class="value">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+          <div><h3>Mineral-first</h3><p>Our float pools run at a 30% magnesium-salt concentration, drawn fresh and tested every morning.</p></div>
+        </div>
+        <div class="value">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h4l2-8 4 16 2-8h4"></path></svg>
+          <div><h3>Practitioner-led</h3><p>Every massage and breathwork session is led by a practitioner with 5+ years of clinical training.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="treatments" class="treatments">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Treatments</p>
+        <h2>Choose your hour</h2>
+      </div>
+      <div class="t-grid">
+        <div class="t-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2c-2.5 4-5 6.5-5 10a5 5 0 0 0 10 0c0-3.5-2.5-6-5-10z"></path></svg>
+          <h3>Float Therapy</h3>
+          <p>60 minutes weightless in a magnesium-salt pool, in total darkness or soft light — your choice.</p>
+          <div class="meta"><span>60 min</span><span class="price">$85</span></div>
+        </div>
+        <div class="t-card reveal" style="transition-delay:.06s">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+          <h3>Deep Tissue Massage</h3>
+          <p>Slow, targeted pressure for chronic tension, led by a practitioner you'll see again.</p>
+          <div class="meta"><span>75 min</span><span class="price">$120</span></div>
+        </div>
+        <div class="t-card reveal" style="transition-delay:.12s">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21c4-3 8-6.5 8-11a5 5 0 0 0-9-3 5 5 0 0 0-9 3c0 4.5 4 8 10 11z" transform="scale(0.9) translate(1.3 0.6)"></path></svg>
+          <h3>Infrared Sauna</h3>
+          <p>Low, steady heat that reaches deeper than steam — 45 minutes, own room, own playlist.</p>
+          <div class="meta"><span>45 min</span><span class="price">$60</span></div>
+        </div>
+        <div class="t-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 18c2-6 4-9 6-9s4 3 6 9"></path><circle cx="12" cy="6" r="2"></circle></svg>
+          <h3>Breathwork Session</h3>
+          <p>Guided one-on-one breathwork for nervous system reset — no experience needed.</p>
+          <div class="meta"><span>50 min</span><span class="price">$70</span></div>
+        </div>
+        <div class="t-card reveal" style="transition-delay:.06s">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M5 7l7-5 7 5M5 17l7 5 7-5"></path></svg>
+          <h3>Float + Massage</h3>
+          <p>Our most-booked pairing: a float to settle in, then hands-on work while you're still loose.</p>
+          <div class="meta"><span>105 min</span><span class="price">$175</span></div>
+        </div>
+        <div class="t-card reveal" style="transition-delay:.12s">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21c4-9 12-9 16 0"></path><circle cx="12" cy="8" r="4"></circle></svg>
+          <h3>Monthly Membership</h3>
+          <p>Two sessions a month, any treatment, 15% off anything extra. Pause or cancel anytime.</p>
+          <div class="meta"><span>per month</span><span class="price">$140</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ritual" class="ritual">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The visit</p>
+        <h2>What an hour here actually looks like</h2>
+      </div>
+      <div class="ritual-track">
+        <div class="r-step reveal">
+          <div class="r-num">1</div>
+          <h3>Arrive, 10 minutes early</h3>
+          <p>Tea in the front room while your space is prepared. No forms to fill out after the first visit.</p>
+        </div>
+        <div class="r-step reveal" style="transition-delay:.08s">
+          <div class="r-num">2</div>
+          <h3>Settle in</h3>
+          <p>Your practitioner walks you through the room, the lighting, and anything you'd like adjusted.</p>
+        </div>
+        <div class="r-step reveal" style="transition-delay:.16s">
+          <div class="r-num">3</div>
+          <h3>The treatment</h3>
+          <p>Your door stays closed and your phone stays outside. This hour is the only agenda.</p>
+        </div>
+        <div class="r-step reveal" style="transition-delay:.24s">
+          <div class="r-num">4</div>
+          <h3>Rest after</h3>
+          <p>Stay as long as you like in the lounge with water and citrus before heading back out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="words" class="words">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">From the guest book</p>
+        <h2>What people say after their first float</h2>
+      </div>
+      <div class="w-grid">
+        <div class="w-card reveal">
+          <p class="quote">"I've tried three float studios in the city. This is the only one where the water actually feels clean, not just advertised as clean."</p>
+          <p class="who">— Guest, 14 visits</p>
+        </div>
+        <div class="w-card reveal" style="transition-delay:.06s">
+          <p class="quote">"The deep tissue work undid something in my shoulder that two physios couldn't. I go every three weeks now."</p>
+          <p class="who">— Guest, monthly member</p>
+        </div>
+        <div class="w-card reveal" style="transition-delay:.12s">
+          <p class="quote">"Booked the float + massage combo for a birthday and now it's just what I do instead of a birthday dinner."</p>
+          <p class="who">— Guest, 6 visits</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="cta">
+    <div class="wrap">
+      <h2 class="reveal">Your first hour of stillness is waiting.</h2>
+      <p class="lede reveal" style="transition-delay:.06s">New guests get a complimentary robe, slippers, and as much tea as you'd like. Book online or call the studio directly.</p>
+      <div class="cta-row reveal" style="transition-delay:.12s">
+        <a class="btn-primary" href="#">Book online
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a class="btn-ghost" href="tel:+15551234567">Call the studio</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="brand">Salt &amp; Still</div>
+  <div class="fine">This page is a portfolio sample built to demonstrate custom web design work — not a real business.</div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    });
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(el => io.observe(el));
+  });
+</script>
+</body>
+</html>
