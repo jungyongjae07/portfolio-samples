@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — The Larder</title>
+<meta name="description" content="This week's menu at The Larder — small plates, mains, and a short wine-by-the-glass list. Changes weekly with what's in season.">
+<meta property="og:title" content="Menu — The Larder">
+<meta property="og:description" content="This week's small-plates menu, updated with what's in season.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F7F4EF; --surface:#FFFFFF; --surface-2:#EFE9DF; --ink:#241E1A;
+    --ink-soft:#5C544C; --ink-faint:#948B80; --border:#E2DACB; --border-strong:#D2C7B2;
+    --burgundy:#7A2E2E; --burgundy-ink:#FBF3F0; --olive:#5C6B4C;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1C1815; --surface:#242019; --surface-2:#2C271F; --ink:#F1E9DD;
+      --ink-soft:#C2B7A6; --ink-faint:#7E7365; --border:#3A332A; --border-strong:#4A4133;
+      --burgundy:#D97C6B; --burgundy-ink:#1C1815; --olive:#9AAD84;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1C1815; --surface:#242019; --surface-2:#2C271F; --ink:#F1E9DD;
+    --ink-soft:#C2B7A6; --ink-faint:#7E7365; --border:#3A332A; --border-strong:#4A4133;
+    --burgundy:#D97C6B; --burgundy-ink:#1C1815; --olive:#9AAD84;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Mulish',-apple-system,sans-serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Cormorant',serif; font-weight:600; margin:0; text-wrap:balance; }
+
+  header.site{ position:sticky; top:0; z-index:30; background:var(--bg); border-bottom:1px solid var(--border); }
+  .site-row{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .wordmark{ font-family:'Cormorant',serif; font-weight:700; font-size:1.35rem; text-decoration:none; color:var(--ink); }
+  nav.site-nav{ display:flex; align-items:center; gap:30px; }
+  nav.site-nav a.navlink{ font-size:.92rem; color:var(--ink-soft); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; }
+  nav.site-nav a.navlink:hover{ color:var(--ink); }
+  nav.site-nav a.navlink.current{ color:var(--ink); border-bottom-color:var(--burgundy); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:.92rem; border-radius:8px; cursor:pointer; border:1px solid transparent; text-decoration:none; }
+  .btn-primary{ background:var(--burgundy); color:var(--burgundy-ink); padding:12px 22px; }
+  .btn-primary:hover{ opacity:.9; }
+  .btn:focus-visible{ outline:2px solid var(--burgundy); outline-offset:2px; }
+
+  .page-head{ padding:clamp(48px,7vw,72px) 0 32px; }
+  .page-eyebrow{ font-family:'Cormorant',serif; font-style:italic; font-size:1.05rem; color:var(--burgundy); margin-bottom:10px; }
+  h1.page-h{ font-size:clamp(2rem,4.4vw,2.9rem); }
+  p.page-sub{ color:var(--ink-soft); max-width:52ch; margin-top:14px; }
+
+  .menu-section{ padding:36px 0; border-top:1px solid var(--border); }
+  .menu-section:first-of-type{ border-top:none; }
+  h2.menu-h{ font-size:1.5rem; margin-bottom:6px; }
+  .menu-note{ color:var(--ink-faint); font-size:.86rem; margin-bottom:22px; }
+
+  .menu-item{ display:flex; justify-content:space-between; gap:20px; padding:16px 0; border-bottom:1px dashed var(--border-strong); }
+  .menu-item:last-child{ border-bottom:none; }
+  .menu-item-name{ font-family:'Cormorant',serif; font-weight:600; font-size:1.18rem; }
+  .menu-item-desc{ color:var(--ink-soft); font-size:.9rem; margin-top:3px; max-width:46ch; }
+  .menu-item-price{ font-family:'Cormorant',serif; font-weight:700; font-size:1.1rem; color:var(--burgundy); white-space:nowrap; flex:none; }
+  .menu-tag{ display:inline-block; font-size:.72rem; color:var(--olive); border:1px solid var(--olive); border-radius:5px; padding:1px 6px; margin-left:8px; vertical-align:middle; }
+
+  .cta-block{ margin:56px 0; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:36px 32px; text-align:center; }
+  .cta-block h2{ font-size:1.6rem; margin-bottom:12px; }
+  .cta-block p{ color:var(--ink-soft); margin-bottom:22px; }
+
+  footer.site{ background:var(--surface); border-top:1px solid var(--border); padding:44px 0; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-links{ display:flex; gap:22px; font-size:.86rem; color:var(--ink-soft); }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:var(--ink); }
+
+  @media (max-width:720px){ nav.site-nav .navlink{ display:none; } .menu-item{ flex-direction:column; gap:4px; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-row">
+    <a class="wordmark" href="index.html">The Larder</a>
+    <nav class="site-nav">
+      <a class="navlink" href="index.html">Home</a>
+      <a class="navlink current" href="menu.html">Menu</a>
+      <a class="navlink" href="reserve.html">Reservations</a>
+      <a class="btn btn-primary" href="reserve.html">Reserve a table</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="page-head">
+      <div class="page-eyebrow">Week of the 17th</div>
+      <h1 class="page-h">This week's menu</h1>
+      <p class="page-sub">Changes most Tuesdays with what came in from the market. Ask your server about pairings — the wine list below is what's open by the glass tonight.</p>
+    </div>
+
+    <section class="menu-section">
+      <h2 class="menu-h">Starters</h2>
+      <div class="menu-note">Meant for the table, not just for one</div>
+
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Charred leeks, hazelnut, whipped feta</span><span class="menu-tag">veg</span>
+          <div class="menu-item-desc">Grilled over the open flame, finished with brown butter and toasted hazelnuts.</div>
+        </div>
+        <div class="menu-item-price">$14</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Beef tartare, rye crisp, pickled shallot</span>
+          <div class="menu-item-desc">Hand-cut daily, dressed to order.</div>
+        </div>
+        <div class="menu-item-price">$17</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Roasted squash soup, sage, brown butter</span><span class="menu-tag">veg</span>
+          <div class="menu-item-desc">Whatever squash the farm sent this week.</div>
+        </div>
+        <div class="menu-item-price">$12</div>
+      </div>
+    </section>
+
+    <section class="menu-section">
+      <h2 class="menu-h">Mains</h2>
+      <div class="menu-note">Portions are sized for one, but plates are shared</div>
+
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Pan-roasted trout, brown butter, capers</span>
+          <div class="menu-item-desc">Whole fish, off the bone at the table.</div>
+        </div>
+        <div class="menu-item-price">$28</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Braised short rib, celery root purée</span>
+          <div class="menu-item-desc">Cooked low for six hours, finished with the braising jus.</div>
+        </div>
+        <div class="menu-item-price">$32</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Wild mushroom risotto, aged parmesan</span><span class="menu-tag">veg</span>
+          <div class="menu-item-desc">Stirred to order — expect a 20-minute wait.</div>
+        </div>
+        <div class="menu-item-price">$24</div>
+      </div>
+    </section>
+
+    <section class="menu-section">
+      <h2 class="menu-h">By the glass</h2>
+      <div class="menu-note">Half-pours available on request</div>
+
+      <div class="menu-item">
+        <div><span class="menu-item-name">Chenin Blanc, Loire Valley</span></div>
+        <div class="menu-item-price">$13</div>
+      </div>
+      <div class="menu-item">
+        <div><span class="menu-item-name">Pinot Noir, Willamette Valley</span></div>
+        <div class="menu-item-price">$15</div>
+      </div>
+      <div class="menu-item">
+        <div><span class="menu-item-name">Pét-nat, house selection</span></div>
+        <div class="menu-item-price">$14</div>
+      </div>
+    </section>
+
+    <section class="menu-section">
+      <h2 class="menu-h">Dessert</h2>
+      <div class="menu-item">
+        <div>
+          <span class="menu-item-name">Olive oil cake, crème fraîche</span><span class="menu-tag">veg</span>
+          <div class="menu-item-desc">Made fresh each morning.</div>
+        </div>
+        <div class="menu-item-price">$11</div>
+      </div>
+    </section>
+
+    <div class="cta-block">
+      <h2>Twenty-two seats. Book ahead if you can.</h2>
+      <p>Walk-ins welcome at the counter — we hold four tables back each night.</p>
+      <a class="btn btn-primary" href="reserve.html">Reserve a table</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <a class="wordmark" href="index.html">The Larder</a>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="reserve.html">Reservations</a>
+      <a href="mailto:hello@thelarder.example">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

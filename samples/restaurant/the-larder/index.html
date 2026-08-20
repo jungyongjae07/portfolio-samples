@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Larder — Neighborhood Bistro &amp; Wine Bar</title>
+<meta name="description" content="A small-plates bistro and wine bar built around a weekly-changing seasonal menu. Reservations, menu, and hours for The Larder.">
+<meta property="og:title" content="The Larder — Neighborhood Bistro & Wine Bar">
+<meta property="og:description" content="A small-plates bistro and wine bar built around a weekly-changing seasonal menu.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F7F4EF;
+    --surface:#FFFFFF;
+    --surface-2:#EFE9DF;
+    --ink:#241E1A;
+    --ink-soft:#5C544C;
+    --ink-faint:#948B80;
+    --border:#E2DACB;
+    --border-strong:#D2C7B2;
+    --burgundy:#7A2E2E;
+    --burgundy-ink:#FBF3F0;
+    --olive:#5C6B4C;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1C1815;
+      --surface:#242019;
+      --surface-2:#2C271F;
+      --ink:#F1E9DD;
+      --ink-soft:#C2B7A6;
+      --ink-faint:#7E7365;
+      --border:#3A332A;
+      --border-strong:#4A4133;
+      --burgundy:#D97C6B;
+      --burgundy-ink:#1C1815;
+      --olive:#9AAD84;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1C1815; --surface:#242019; --surface-2:#2C271F; --ink:#F1E9DD;
+    --ink-soft:#C2B7A6; --ink-faint:#7E7365; --border:#3A332A; --border-strong:#4A4133;
+    --burgundy:#D97C6B; --burgundy-ink:#1C1815; --olive:#9AAD84;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Mulish',-apple-system,sans-serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Cormorant',serif; font-weight:600; margin:0; text-wrap:balance; }
+  ::selection{ background:var(--burgundy); color:var(--burgundy-ink); }
+
+  header.site{ position:sticky; top:0; z-index:30; background:var(--bg); border-bottom:1px solid var(--border); }
+  .site-row{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .wordmark{ font-family:'Cormorant',serif; font-weight:700; font-size:1.35rem; letter-spacing:.01em; text-decoration:none; color:var(--ink); }
+  nav.site-nav{ display:flex; align-items:center; gap:30px; }
+  nav.site-nav a.navlink{ font-size:.92rem; color:var(--ink-soft); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; }
+  nav.site-nav a.navlink:hover{ color:var(--ink); }
+  nav.site-nav a.navlink.current{ color:var(--ink); border-bottom-color:var(--burgundy); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:.92rem; border-radius:8px; cursor:pointer; border:1px solid transparent; text-decoration:none; }
+  .btn-primary{ background:var(--burgundy); color:var(--burgundy-ink); padding:12px 22px; }
+  .btn-primary:hover{ opacity:.9; }
+  .btn-outline{ background:none; color:var(--ink); border-color:var(--border-strong); padding:11px 20px; }
+  .btn-outline:hover{ border-color:var(--ink); }
+  .btn:focus-visible{ outline:2px solid var(--burgundy); outline-offset:2px; }
+
+  .hero{ padding:clamp(60px,10vw,110px) 0 clamp(50px,8vw,80px); }
+  .hero-eyebrow{ font-family:'Cormorant',serif; font-style:italic; font-size:1.1rem; color:var(--burgundy); margin-bottom:14px; }
+  h1.hero-h{ font-size:clamp(2.4rem,5.4vw,3.7rem); line-height:1.06; margin-bottom:22px; max-width:16ch; }
+  p.hero-sub{ color:var(--ink-soft); font-size:1.12rem; max-width:48ch; margin:0 0 30px; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .strip{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--surface); }
+  .strip-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
+  .strip-cell{ padding:26px clamp(16px,3vw,32px); border-left:1px solid var(--border); }
+  .strip-cell:first-child{ border-left:none; }
+  .strip-label{ font-size:.78rem; color:var(--ink-faint); margin-bottom:6px; }
+  .strip-value{ font-family:'Cormorant',serif; font-weight:600; font-size:1.15rem; }
+  @media (max-width:720px){ .strip-row{ grid-template-columns:1fr; } .strip-cell{ border-left:none; border-top:1px solid var(--border); } .strip-cell:first-child{ border-top:none; } }
+
+  .section{ padding:clamp(64px,9vw,96px) 0; }
+  .section-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,6vw,72px); align-items:start; }
+  @media (max-width:800px){ .section-split{ grid-template-columns:1fr; } }
+  .section-label{ font-size:.82rem; color:var(--olive); font-weight:600; margin-bottom:14px; }
+  h2.section-h{ font-size:clamp(1.8rem,3.4vw,2.5rem); margin-bottom:18px; }
+  p.body-copy{ color:var(--ink-soft); max-width:52ch; }
+  p.body-copy + p.body-copy{ margin-top:1rem; }
+
+  .plate{ aspect-ratio:4/5; border-radius:14px; background:
+      radial-gradient(circle at 50% 42%, var(--surface-2) 0%, var(--surface-2) 34%, transparent 35%),
+      conic-gradient(from 200deg at 50% 42%, var(--olive) 0deg 40deg, transparent 40deg 130deg, var(--burgundy) 130deg 165deg, transparent 165deg 260deg, var(--olive) 260deg 300deg, transparent 300deg 360deg),
+      var(--surface);
+    border:1px solid var(--border);
+  }
+
+  .highlight-card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:28px 30px; }
+  .highlight-card + .highlight-card{ margin-top:16px; }
+  .highlight-card .name{ font-family:'Cormorant',serif; font-weight:600; font-size:1.25rem; margin-bottom:6px; }
+  .highlight-card .desc{ color:var(--ink-soft); font-size:.94rem; }
+  .highlight-card .price{ color:var(--burgundy); font-weight:700; float:right; font-family:'Cormorant',serif; font-size:1.15rem; }
+
+  footer.site{ background:var(--surface); border-top:1px solid var(--border); padding:44px 0; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-links{ display:flex; gap:22px; font-size:.86rem; color:var(--ink-soft); }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:var(--ink); }
+
+  @media (max-width:720px){ nav.site-nav .navlink{ display:none; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-row">
+    <a class="wordmark" href="index.html">The Larder</a>
+    <nav class="site-nav">
+      <a class="navlink current" href="index.html">Home</a>
+      <a class="navlink" href="menu.html">Menu</a>
+      <a class="navlink" href="reserve.html">Reservations</a>
+      <a class="btn btn-primary" href="reserve.html">Reserve a table</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-eyebrow">Neighborhood bistro &amp; wine bar</div>
+      <h1 class="hero-h">Small plates, a short wine list, and whatever's good this week.</h1>
+      <p class="hero-sub">The menu changes with the market, not the calendar — usually every Tuesday. Twenty-two seats, a counter for solo diners, and a wine list picked by the glass.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="reserve.html">Reserve a table</a>
+        <a class="btn btn-outline" href="menu.html">See this week's menu</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="strip-row">
+        <div class="strip-cell">
+          <div class="strip-label">Hours</div>
+          <div class="strip-value">Tue–Sat, 5:30–10pm</div>
+        </div>
+        <div class="strip-cell">
+          <div class="strip-label">Location</div>
+          <div class="strip-value">14 Birchwood Lane</div>
+        </div>
+        <div class="strip-cell">
+          <div class="strip-label">Party size</div>
+          <div class="strip-value">Up to 6, larger by request</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="section section-split">
+      <div>
+        <div class="section-label">The idea</div>
+        <h2 class="section-h">Cooked to what showed up at the market, not a fixed menu.</h2>
+        <p class="body-copy">We buy first, then write the menu — so what's on the table this week depends on what came in from three farms within an hour of here. Some things stay (the bread, the butter), most things rotate.</p>
+        <p class="body-copy">Seating is first-come at the counter or booked ahead for a table. We hold four tables back each night for walk-ins.</p>
+      </div>
+      <div class="plate" role="img" aria-label="Illustrated plate composition"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">This week, a preview</div>
+      <h2 class="section-h">Three from the current menu</h2>
+      <div style="margin-top:28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;">
+        <div class="highlight-card">
+          <span class="price">$14</span>
+          <div class="name">Charred leeks, hazelnut, whipped feta</div>
+          <div class="desc">Starter. Serves one, easy to split.</div>
+        </div>
+        <div class="highlight-card">
+          <span class="price">$28</span>
+          <div class="name">Pan-roasted trout, brown butter, capers</div>
+          <div class="desc">Main. Whole fish, off the bone at the table.</div>
+        </div>
+        <div class="highlight-card">
+          <span class="price">$11</span>
+          <div class="name">Olive oil cake, crème fraîche</div>
+          <div class="desc">Dessert. Made fresh each morning.</div>
+        </div>
+      </div>
+      <div style="margin-top:28px;"><a class="btn btn-outline" href="menu.html">View the full menu →</a></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <a class="wordmark" href="index.html">The Larder</a>
+    <div class="footer-links">
+      <a href="menu.html">Menu</a>
+      <a href="reserve.html">Reservations</a>
+      <a href="mailto:hello@thelarder.example">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
