@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jungyongjae07.github.io/portfolio-samples/sitemap.xml
