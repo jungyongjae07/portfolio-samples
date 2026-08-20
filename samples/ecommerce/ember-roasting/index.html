@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember Roasting Co. — Small-Batch Coffee</title>
+<meta name="description" content="Small-batch coffee roasted in 12lb batches, shipped within 48 hours of roasting. Single-origin and house blends.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1B140F;
+    --surface:#241B14;
+    --surface-2:#2C2119;
+    --ink:#F4ECE0;
+    --ink-soft:#C9BBA8;
+    --ink-faint:#8F8071;
+    --border:#3A2E23;
+    --border-strong:#4C3D2E;
+    --accent:#CC8F3E;
+    --accent-ink:#1B140F;
+    --accent-soft:#3A2C18;
+    --green:#7C9A6E;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Work Sans',system-ui,sans-serif; font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:500; letter-spacing:-0.01em; margin:0; }
+
+  header.site{ position:sticky; top:0; z-index:30; background:rgba(27,20,15,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); }
+  .site-row{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ font-family:'Spectral',serif; font-weight:600; font-size:1.2rem; text-decoration:none; color:var(--ink); letter-spacing:.01em; }
+  nav.site-nav{ display:flex; align-items:center; gap:30px; }
+  nav.site-nav a.navlink{ font-size:.88rem; color:var(--ink-soft); text-decoration:none; letter-spacing:.02em; }
+  nav.site-nav a.navlink:hover{ color:var(--ink); }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:.92rem; border-radius:9px; cursor:pointer; border:1px solid transparent; text-decoration:none; font-family:'Work Sans',sans-serif; }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); padding:12px 22px; }
+  .btn-primary:hover{ opacity:.9; }
+  .btn-outline{ background:none; color:var(--ink); border-color:var(--border-strong); padding:11px 20px; }
+  .btn-outline:hover{ border-color:var(--ink-soft); }
+
+  .hero{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; padding:clamp(56px,8vw,100px) 0; }
+  .hero-tag{ font-size:.84rem; color:var(--accent); font-weight:600; letter-spacing:.03em; margin-bottom:16px; }
+  h1.hero-h{ font-size:clamp(2.4rem,4.6vw,3.5rem); line-height:1.08; margin-bottom:20px; text-wrap:balance; }
+  p.hero-sub{ color:var(--ink-soft); font-size:1.05rem; max-width:46ch; margin:0 0 30px; }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-visual{
+    aspect-ratio:4/5; border-radius:16px; overflow:hidden; position:relative;
+    background:linear-gradient(155deg,#3A2C18,#1B140F 70%);
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .bag-illustration{ width:58%; }
+
+  section.strip{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:22px 0; }
+  .strip-row{ display:flex; gap:40px; justify-content:space-between; flex-wrap:wrap; color:var(--ink-faint); font-size:.82rem; letter-spacing:.02em; }
+
+  .section{ padding:clamp(64px,9vw,100px) 0; border-bottom:1px solid var(--border); }
+  .section-label{ font-size:.82rem; color:var(--accent); font-weight:600; letter-spacing:.03em; margin-bottom:12px; }
+  h2.section-h{ font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:16px; text-wrap:balance; }
+  p.section-sub{ color:var(--ink-soft); max-width:56ch; margin:0 0 44px; font-size:1.02rem; }
+
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feat-card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:26px; }
+  .feat-num{ font-family:'Spectral',serif; color:var(--accent); font-size:1.3rem; margin-bottom:14px; }
+  .feat-card h3{ font-size:1.08rem; margin-bottom:8px; }
+  .feat-card p{ color:var(--ink-soft); font-size:.92rem; margin:0; }
+
+  .product-layout{ display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; }
+  .product-visual{ aspect-ratio:1/1; border-radius:16px; background:linear-gradient(160deg,var(--surface-2),var(--surface)); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .product-visual svg{ width:56%; }
+  .product-name{ font-size:1.7rem; margin-bottom:6px; }
+  .product-price{ font-size:1.15rem; color:var(--accent); font-weight:600; margin-bottom:18px; font-family:'Work Sans',sans-serif; }
+  .product-desc{ color:var(--ink-soft); margin-bottom:24px; }
+  .opt-label{ font-size:.82rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px; }
+  .swatch-row{ display:flex; gap:10px; margin-bottom:26px; }
+  .swatch{ padding:10px 16px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink-soft); font-size:.88rem; cursor:pointer; }
+  .swatch.active{ border-color:var(--accent); color:var(--ink); background:var(--accent-soft); }
+  .qty-row{ display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+  .qty-box{ display:flex; align-items:center; border:1px solid var(--border-strong); border-radius:9px; overflow:hidden; }
+  .qty-box button{ background:var(--surface); border:none; color:var(--ink); width:38px; height:40px; font-size:1.1rem; cursor:pointer; }
+  .qty-box span{ width:36px; text-align:center; font-weight:600; }
+  .spec-list{ margin-top:30px; border-top:1px solid var(--border); padding-top:20px; }
+  .spec-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:.9rem; }
+  .spec-row span:first-child{ color:var(--ink-faint); }
+
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .review-card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; }
+  .stars{ color:var(--accent); letter-spacing:2px; margin-bottom:12px; font-size:.9rem; }
+  .review-card p{ color:var(--ink-soft); font-size:.92rem; margin:0 0 14px; }
+  .review-name{ font-size:.84rem; color:var(--ink-faint); font-weight:600; }
+
+  .faq-item{ border-bottom:1px solid var(--border); padding:20px 0; }
+  .faq-q{ display:flex; align-items:center; justify-content:space-between; gap:16px; font-weight:600; font-size:1.02rem; cursor:pointer; background:none; border:none; width:100%; text-align:left; color:var(--ink); font-family:'Work Sans',sans-serif; }
+  .faq-q svg{ width:16px; height:16px; flex:none; transition:transform .18s; color:var(--ink-faint); }
+  .faq-item.open .faq-q svg{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .2s ease; }
+  .faq-item.open .faq-a{ max-height:200px; }
+  .faq-a p{ color:var(--ink-soft); font-size:.92rem; margin:12px 0 0; max-width:60ch; }
+
+  footer.site{ padding:44px 0; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-tag{ font-size:.86rem; color:var(--ink-faint); margin-top:6px; }
+  .footer-links{ display:flex; gap:22px; font-size:.84rem; color:var(--ink-soft); }
+  .footer-links a{ text-decoration:none; }
+
+  @media (max-width:860px){
+    .hero, .product-layout{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; }
+    .grid-3, .review-grid{ grid-template-columns:1fr; }
+    nav.site-nav .navlink{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-row">
+    <a class="logo" href="#top">Ember Roasting Co.</a>
+    <nav class="site-nav">
+      <a class="navlink" href="#process">Process</a>
+      <a class="navlink" href="#shop">Shop</a>
+      <a class="navlink" href="#reviews">Reviews</a>
+      <a class="btn btn-primary" href="#shop">Shop Coffee</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="hero-tag">Small-batch · Roasted to order</div>
+        <h1 class="hero-h">Coffee roasted the week it ships, not the season.</h1>
+        <p class="hero-sub">We roast in 12lb batches and ship within 48 hours. No warehouse sitting, no stale bags — just the roast date printed on every one.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#shop">Shop the current roast</a>
+          <a class="btn btn-outline" href="#process">See our process</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="bag-illustration" viewBox="0 0 200 240" fill="none" stroke="#F4ECE0" stroke-width="1.4">
+          <path d="M40 60 L40 210 Q40 220 50 220 L150 220 Q160 220 160 210 L160 60" />
+          <path d="M40 60 L30 30 Q28 20 38 20 L162 20 Q172 20 170 30 L160 60" />
+          <path d="M70 20 L70 8 Q70 2 76 2 L124 2 Q130 2 130 8 L130 20" />
+          <circle cx="100" cy="120" r="34" stroke-dasharray="3 4"/>
+          <path d="M85 118 q15 -14 30 0" />
+        </svg>
+      </div>
+    </section>
+  </div>
+
+  <section class="strip">
+    <div class="wrap strip-row">
+      <span>Roasted &amp; shipped within 48 hours</span>
+      <span>Direct trade, 9 origin farms</span>
+      <span>Compostable bags</span>
+      <span>Free shipping over $40</span>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="section" id="process">
+      <div class="section-label">How it works</div>
+      <h2 class="section-h">From farm to your cup, without the sitting around.</h2>
+      <p class="section-sub">Most bagged coffee sits in a warehouse for weeks before it reaches you. We roast against actual orders, not a forecast.</p>
+      <div class="grid-3">
+        <div class="feat-card">
+          <div class="feat-num">01</div>
+          <h3>You order</h3>
+          <p>Pick a roast and a grind — whole bean, drip, or espresso.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-num">02</div>
+          <h3>We roast</h3>
+          <p>Your batch is roasted after your order comes in, not pulled from a shelf.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-num">03</div>
+          <h3>It ships</h3>
+          <p>Out the door within 48 hours, with the roast date printed on the bag.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="product-layout">
+        <div class="product-visual">
+          <svg viewBox="0 0 200 240" fill="none" stroke="#CC8F3E" stroke-width="1.4">
+            <path d="M40 60 L40 210 Q40 220 50 220 L150 220 Q160 220 160 210 L160 60" />
+            <path d="M40 60 L30 30 Q28 20 38 20 L162 20 Q172 20 170 30 L160 60" />
+            <path d="M70 20 L70 8 Q70 2 76 2 L124 2 Q130 2 130 8 L130 20" />
+            <text x="100" y="130" font-family="Spectral, serif" font-size="15" fill="#CC8F3E" text-anchor="middle" stroke="none">Ember</text>
+            <text x="100" y="150" font-family="Work Sans, sans-serif" font-size="8" fill="#C9BBA8" text-anchor="middle" stroke="none" letter-spacing="1">HOUSE BLEND</text>
+          </svg>
+        </div>
+        <div>
+          <div class="section-label">Best seller</div>
+          <h2 class="product-name">House Blend — 12oz</h2>
+          <div class="product-price">$19.00</div>
+          <p class="product-desc">A balanced, chocolate-forward blend of Brazilian and Ethiopian beans — built to be a good everyday coffee, not a novelty. Medium roast.</p>
+
+          <div class="opt-label">Grind</div>
+          <div class="swatch-row" id="grindRow">
+            <button class="swatch active" data-grind="Whole Bean">Whole Bean</button>
+            <button class="swatch" data-grind="Drip">Drip</button>
+            <button class="swatch" data-grind="Espresso">Espresso</button>
+          </div>
+
+          <div class="opt-label">Quantity</div>
+          <div class="qty-row">
+            <div class="qty-box">
+              <button id="qtyMinus" type="button">−</button>
+              <span id="qtyVal">1</span>
+              <button id="qtyPlus" type="button">+</button>
+            </div>
+            <a class="btn btn-primary" href="#" id="addToCartBtn">Add to Cart — $19.00</a>
+          </div>
+
+          <div class="spec-list">
+            <div class="spec-row"><span>Origin</span><span>Brazil · Ethiopia</span></div>
+            <div class="spec-row"><span>Roast level</span><span>Medium</span></div>
+            <div class="spec-row"><span>Tasting notes</span><span>Cocoa, orange peel, brown sugar</span></div>
+            <div class="spec-row"><span>Ships</span><span>Within 48 hours of roasting</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-h">What people say after the second bag.</h2>
+      <p class="section-sub">We hear about the first bag less than we hear about the second — that's the one people actually reorder.</p>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>Genuinely tastes different from the grocery store bags I used to buy — noticeably fresher, and the roast date thing is a nice touch.</p>
+          <div class="review-name">— D. Han, repeat customer</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>Ordered the espresso grind for my home machine. Consistent every bag, no burnt aftertaste like a lot of dark roasts I've tried.</p>
+          <div class="review-name">— M. Alvarez</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★☆</div>
+          <p>Shipping really is fast — bag arrived three days after ordering, roasted two days before that. Will reorder.</p>
+          <div class="review-name">— J. Okafor</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="border-bottom:none;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-h">Common questions</h2>
+      <div id="faqList" style="margin-top:20px;">
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>How fresh is "roasted to order," really?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="faq-a"><p>Your batch is roasted after your order comes in and ships within 48 hours — the roast date is printed on every bag so you're not guessing.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Can I subscribe instead of ordering each time?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="faq-a"><p>Yes — subscriptions ship every 2 or 4 weeks, and you can change the grind or pause anytime from your account.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Where do the beans come from?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="faq-a"><p>We buy direct from 9 partner farms across Brazil, Ethiopia, and Colombia — no importer blends.</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <div>
+      <a class="logo" href="#top">Ember Roasting Co.</a>
+      <div class="footer-tag">Small-batch coffee, roasted to order.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="mailto:hello@emberroasting.co">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // grind selector
+  document.querySelectorAll('#grindRow .swatch').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#grindRow .swatch').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+
+  // quantity + price
+  var qty = 1;
+  var unitPrice = 19.00;
+  var qtyVal = document.getElementById('qtyVal');
+  var addBtn = document.getElementById('addToCartBtn');
+  function updatePrice(){
+    qtyVal.textContent = qty;
+    addBtn.textContent = 'Add to Cart — $' + (unitPrice * qty).toFixed(2);
+  }
+  document.getElementById('qtyMinus').addEventListener('click', function(){
+    if (qty > 1) qty--; updatePrice();
+  });
+  document.getElementById('qtyPlus').addEventListener('click', function(){
+    if (qty < 12) qty++; updatePrice();
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>
