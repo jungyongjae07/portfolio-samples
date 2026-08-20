@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>univ.us — Never miss what matters</title>
+<meta name="description" content="univ.us collects, translates, and personalizes important university information for international students in Korea.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#F6F7F9;
+    --surface-2:#EEF0F3;
+    --ink:#14161A;
+    --ink-soft:#565D6B;
+    --ink-faint:#8B92A2;
+    --border:#E6E8EC;
+    --border-strong:#D7DAE0;
+    --accent:#1F48CF;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#EAEFFB;
+    --accent-dark:#15318F;
+    --cta-bg:#0B0E14;
+    --cta-ink:#F3F4F6;
+    --urgent:#D0402A;
+    --urgent-soft:#FBEAE7;
+    --soon:#B5701A;
+    --soon-soft:#FBF1E2;
+    --purple:#7A4FE0;
+    --purple-soft:#F1ECFC;
+    --green:#1E8E5A;
+    --green-soft:#E7F5EE;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR','IBM Plex Sans',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+
+  /* language toggle */
+  .page[data-lang="en"] .t-ko{ display:none; }
+  .page[data-lang="ko"] .t-en{ display:none; }
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .site-row{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .logo{
+    font-weight:700; font-size:1.25rem; letter-spacing:-0.02em;
+    text-decoration:none; color:var(--ink);
+  }
+  .logo .dot{ color:var(--accent); }
+  nav.site-nav{ display:flex; align-items:center; gap:28px; }
+  nav.site-nav a.navlink{
+    font-size:.94rem; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  }
+  nav.site-nav a.navlink:hover{ color:var(--ink); }
+  .lang-switch{
+    display:flex; align-items:center; gap:6px; font-size:.86rem; font-weight:600;
+    color:var(--ink-faint); background:none; border:none; cursor:pointer; padding:4px;
+  }
+  .lang-switch b{ color:var(--ink); }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    font-weight:600; font-size:.94rem; border-radius:10px; cursor:pointer;
+    border:1px solid transparent; text-decoration:none; white-space:nowrap;
+  }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); padding:11px 20px; }
+  .btn-primary:hover{ background:var(--accent-dark); }
+  .btn-ghost{ background:none; color:var(--ink); border-color:var(--border-strong); padding:10px 18px; }
+  .btn-ghost:hover{ border-color:var(--ink-faint); }
+  .btn-text{ background:none; color:var(--ink); padding:0; font-weight:600; }
+  .btn-text svg{ transition:transform .15s; }
+  .btn-text:hover svg{ transform:translate(2px,2px); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+    padding:clamp(48px,8vw,96px) 0 clamp(56px,8vw,110px);
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:.82rem; font-weight:600; color:var(--accent);
+    background:var(--accent-soft); border-radius:999px; padding:6px 14px;
+    margin-bottom:22px;
+  }
+  h1.hero-h{
+    font-weight:700; letter-spacing:-0.03em; line-height:1.02;
+    font-size:clamp(2.6rem,5.4vw,4.1rem); margin:0 0 20px; text-wrap:balance;
+  }
+  h1.hero-h .accent-dot{ color:var(--accent); }
+  p.hero-sub{ font-size:1.08rem; color:var(--ink-soft); max-width:44ch; margin:0 0 32px; }
+  .hero-cta{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+  .hero-visual{ display:flex; justify-content:center; }
+
+  /* ---------- feature sections ---------- */
+  .feature{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+    padding:clamp(52px,8vw,88px) 0; border-top:1px solid var(--border);
+  }
+  .feature-num{ font-weight:700; color:var(--accent); font-size:.92rem; margin-bottom:14px; }
+  h2.feature-h{
+    font-weight:700; letter-spacing:-0.02em; line-height:1.15;
+    font-size:clamp(1.7rem,3vw,2.3rem); margin:0 0 14px; text-wrap:balance;
+  }
+  p.feature-sub{ color:var(--ink-soft); font-size:1.02rem; max-width:38ch; margin:0; }
+  .feature-visual{ display:flex; justify-content:center; }
+
+  /* ---------- phone mockup ---------- */
+  .phone{
+    width:290px; height:594px; background:var(--ink); border-radius:38px;
+    padding:12px; box-shadow:0 30px 60px -20px rgba(20,22,26,.28);
+    flex:none;
+  }
+  .phone-inner{
+    width:100%; height:100%; background:var(--bg); border-radius:28px;
+    overflow:hidden; display:flex; flex-direction:column; position:relative;
+  }
+  .phone-notch{
+    position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:120px; height:22px; background:var(--ink); border-radius:0 0 14px 14px; z-index:5;
+  }
+  .phone-screen{ flex:1; overflow-y:auto; padding:34px 16px 14px; scrollbar-width:none; }
+  .phone-screen::-webkit-scrollbar{ display:none; }
+  .phone-tabbar{
+    flex:none; display:flex; justify-content:space-around; align-items:center;
+    padding:10px 6px 12px; border-top:1px solid var(--border);
+  }
+  .tab-item{
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    background:none; border:none; color:var(--ink-faint); font-size:.62rem; font-weight:600;
+    cursor:default; padding:2px 4px;
+  }
+  .tab-item svg{ width:19px; height:19px; }
+  .tab-item.active{ color:var(--accent); }
+  .tab-item.tappable{ cursor:pointer; }
+
+  .icon{ width:18px; height:18px; flex:none; }
+  .row{ display:flex; align-items:center; }
+
+  /* --- home screen --- */
+  .ph-topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .ph-brand{ font-weight:700; font-size:1rem; }
+  .ph-brand .dot{ color:var(--accent); }
+  .ph-icon-btn{ width:30px; height:30px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; color:var(--ink); border:none; }
+  .ph-greet{ font-weight:700; font-size:1.28rem; letter-spacing:-0.01em; margin:2px 0 2px; }
+  .ph-greet-sub{ color:var(--ink-faint); font-size:.82rem; margin-bottom:16px; }
+  .ph-banner{
+    display:flex; align-items:center; gap:8px; background:var(--accent-soft); color:var(--accent-dark);
+    border-radius:12px; padding:11px 13px; font-size:.78rem; font-weight:600; margin-bottom:16px;
+  }
+  .ph-banner b{ color:var(--accent); }
+  .nav-card{
+    display:flex; align-items:center; gap:12px; width:100%; background:var(--bg);
+    border:1px solid var(--border); border-radius:14px; padding:13px; margin-bottom:10px;
+    cursor:pointer; text-align:left;
+  }
+  .nav-card:hover{ border-color:var(--border-strong); }
+  .nav-ico{ width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .nav-ico svg{ width:19px; height:19px; }
+  .nav-title{ font-weight:600; font-size:.92rem; }
+  .nav-sub{ font-size:.74rem; color:var(--ink-faint); margin-top:1px; }
+  .nav-chev{ margin-left:auto; color:var(--ink-faint); width:16px; height:16px; }
+
+  /* --- notices list --- */
+  .search-bar{
+    display:flex; align-items:center; gap:8px; background:var(--surface); border-radius:11px;
+    padding:9px 12px; font-size:.78rem; color:var(--ink-faint); margin-bottom:12px;
+  }
+  .chip-row{ display:flex; gap:6px; overflow-x:auto; margin-bottom:12px; scrollbar-width:none; }
+  .chip-row::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex:none; font-size:.72rem; font-weight:600; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--border-strong); color:var(--ink-soft); background:var(--bg); cursor:pointer;
+  }
+  .chip.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .notice-card{
+    display:flex; gap:10px; border:1px solid var(--border); border-radius:14px; padding:12px;
+    margin-bottom:9px; cursor:pointer; position:relative;
+  }
+  .notice-card:hover{ border-color:var(--border-strong); }
+  .cat-badge{ width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .cat-badge svg{ width:16px; height:16px; }
+  .notice-cat{ font-size:.66rem; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+  .notice-title{ font-weight:600; font-size:.85rem; margin:2px 0 3px; line-height:1.3; }
+  .notice-desc{ font-size:.72rem; color:var(--ink-faint); line-height:1.35; margin-bottom:6px; }
+  .notice-meta{ display:flex; align-items:center; justify-content:space-between; gap:6px; }
+  .notice-date{ font-size:.68rem; color:var(--ink-faint); }
+  .due-pill{ font-size:.64rem; font-weight:700; padding:3px 8px; border-radius:999px; flex:none; }
+  .due-urgent{ background:var(--urgent-soft); color:var(--urgent); }
+  .due-soon{ background:var(--soon-soft); color:var(--soon); }
+  .bm-btn{ position:absolute; top:10px; right:10px; color:var(--ink-faint); background:none; border:none; padding:2px; cursor:pointer; }
+  .bm-btn svg{ width:15px; height:15px; }
+  .bm-btn.saved{ color:var(--accent); }
+  .bm-btn.saved svg{ fill:var(--accent); }
+
+  /* --- detail --- */
+  .ph-detail-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .icon-btn{ background:none; border:none; color:var(--ink); padding:2px; cursor:pointer; }
+  .icon-btn svg{ width:19px; height:19px; }
+  .icon-btn.saved{ color:var(--accent); }
+  .icon-btn.saved svg{ fill:var(--accent); }
+  .pill-cat{ display:inline-block; font-size:.68rem; font-weight:700; padding:5px 11px; border-radius:999px; margin-bottom:10px; }
+  h3.detail-title{ font-weight:700; font-size:1.28rem; line-height:1.2; letter-spacing:-0.01em; margin:0 0 12px; }
+  .detail-meta{ display:flex; align-items:center; gap:8px; font-size:.72rem; color:var(--ink-faint); margin-bottom:16px; }
+  .detail-meta .sep{ width:1px; height:11px; background:var(--border-strong); }
+  .ai-card{ background:var(--accent-soft); border-radius:13px; padding:13px; margin-bottom:16px; }
+  .ai-head{ display:flex; align-items:center; gap:6px; font-size:.74rem; font-weight:700; color:var(--accent-dark); margin-bottom:8px; }
+  .ai-head svg{ width:14px; height:14px; }
+  .ai-body{ font-size:.78rem; line-height:1.5; color:var(--ink); margin-bottom:9px; }
+  .ai-note{ display:flex; gap:5px; font-size:.63rem; color:var(--ink-faint); line-height:1.4; }
+  .ai-note svg{ width:11px; height:11px; flex:none; margin-top:1px; }
+  .kv-row{ display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); font-size:.78rem; }
+  .kv-row:last-of-type{ border-bottom:none; }
+  .kv-k{ color:var(--ink-faint); }
+  .kv-v{ font-weight:600; text-align:right; }
+  .detail-cta{
+    display:flex; align-items:center; justify-content:center; gap:6px; width:100%;
+    background:var(--accent); color:#fff; border:none; border-radius:11px; padding:12px;
+    font-weight:600; font-size:.82rem; margin-top:16px; cursor:pointer;
+  }
+  .detail-cta svg{ width:14px; height:14px; }
+
+  /* --- calendar --- */
+  .cal-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .cal-month-nav{ display:flex; align-items:center; gap:14px; font-weight:700; font-size:.95rem; }
+  .cal-month-nav button{ background:none; border:none; color:var(--ink-faint); cursor:default; padding:2px; }
+  .cal-month-nav button svg{ width:15px; height:15px; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:2px 0; margin-bottom:14px; }
+  .cal-dow{ text-align:center; font-size:.6rem; font-weight:700; color:var(--ink-faint); padding-bottom:6px; }
+  .cal-day{ text-align:center; font-size:.76rem; padding:6px 0; position:relative; color:var(--ink); cursor:default; }
+  .cal-day.muted{ color:var(--border-strong); }
+  .cal-day .num{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; }
+  .cal-day.today .num{ background:var(--accent); color:#fff; font-weight:700; }
+  .cal-day .dot{ display:block; width:4px; height:4px; border-radius:50%; background:var(--accent); margin:2px auto 0; opacity:0; }
+  .cal-day.has-event .dot{ opacity:1; }
+  .cal-day.muted .dot{ background:var(--border-strong); }
+  .agenda-label{ font-size:.78rem; font-weight:600; color:var(--accent); margin-bottom:8px; }
+  .agenda-card{
+    display:flex; gap:10px; border:1px solid var(--border); border-radius:13px; padding:11px;
+    cursor:pointer; align-items:flex-start;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{ background:var(--cta-bg); color:var(--cta-ink); margin-top:8px; }
+  .cta-inner{ padding:clamp(56px,8vw,96px) 0; text-align:center; }
+  h2.cta-h{ font-weight:700; letter-spacing:-0.02em; font-size:clamp(1.9rem,4vw,2.6rem); margin:0 0 14px; text-wrap:balance; }
+  p.cta-sub{ color:#A6ACBB; font-size:1rem; margin:0 auto 30px; max-width:42ch; }
+  .cta-form{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; max-width:440px; margin:0 auto; }
+  .cta-form input{
+    flex:1; min-width:220px; background:#181B22; border:1px solid #2B2F3A; color:#fff;
+    border-radius:10px; padding:12px 15px; font-size:.94rem; font-family:inherit;
+  }
+  .cta-form input::placeholder{ color:#6B7180; }
+  .cta-note{ margin-top:14px; font-size:.78rem; color:#6B7180; }
+
+  /* ---------- FAQ ---------- */
+  .faq-section{ padding:clamp(56px,8vw,96px) 0; }
+  .faq-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:48px; }
+  .faq-label{ font-size:.85rem; font-weight:700; color:var(--accent); margin-bottom:10px; }
+  h2.faq-h{ font-weight:700; letter-spacing:-0.02em; font-size:clamp(1.7rem,3vw,2.2rem); margin:0; text-wrap:balance; }
+  .faq-item{ border-bottom:1px solid var(--border); padding:20px 0; }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-weight:600; font-size:1.02rem; cursor:pointer; background:none; border:none;
+    width:100%; text-align:left; color:var(--ink); font-family:inherit;
+  }
+  .faq-q svg{ width:16px; height:16px; flex:none; transition:transform .18s; color:var(--ink-faint); }
+  .faq-item.open .faq-q svg{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .2s ease; }
+  .faq-item.open .faq-a{ max-height:200px; }
+  .faq-a p{ color:var(--ink-soft); font-size:.92rem; margin:12px 0 0; max-width:60ch; }
+
+  /* ---------- footer ---------- */
+  footer.site{ background:var(--surface); border-top:1px solid var(--border); padding:44px 0; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-tag{ font-size:.86rem; color:var(--ink-faint); margin-top:4px; }
+  .footer-links{ display:flex; gap:22px; font-size:.84rem; color:var(--ink-soft); }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:var(--ink); }
+
+  @media (max-width:860px){
+    .hero, .feature{ grid-template-columns:1fr; }
+    .hero-visual, .feature-visual{ order:-1; }
+    .faq-grid{ grid-template-columns:1fr; }
+    nav.site-nav .navlink{ display:none; }
+  }
+  @media (max-width:520px){
+    .phone{ width:250px; height:520px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page" data-lang="en">
+
+<header class="site">
+  <div class="wrap site-row">
+    <a class="logo" href="#top">univ<span class="dot">.us</span></a>
+    <nav class="site-nav">
+      <a class="navlink" href="#product"><span class="t-en">Product</span><span class="t-ko">제품</span></a>
+      <a class="navlink" href="#faq"><span class="t-en">FAQ</span><span class="t-ko">자주 묻는 질문</span></a>
+      <button class="lang-switch" id="langBtn" type="button"><b>EN</b><span>/</span><span>KO</span></button>
+      <a class="btn btn-primary" href="#early-access"><span class="t-en">Join Early Access</span><span class="t-ko">얼리 액세스 신청</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">
+          <span class="t-en">For international students in Korea</span>
+          <span class="t-ko">한국 대학 유학생을 위해</span>
+        </span>
+        <h1 class="hero-h">
+          <span class="t-en">Never miss what matters<span class="accent-dot">.</span></span>
+          <span class="t-ko">중요한 걸 놓치지 마세요<span class="accent-dot">.</span></span>
+        </h1>
+        <p class="hero-sub">
+          <span class="t-en">univ.us collects, translates, and personalizes important university information for you. All in one place.</span>
+          <span class="t-ko">univ.us가 여러 대학 채널의 중요한 공지를 모으고, 번역하고, 나에게 맞게 정리해드립니다.</span>
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#early-access"><span class="t-en">Join Early Access</span><span class="t-ko">얼리 액세스 신청</span></a>
+          <a class="btn btn-text" href="#product">
+            <span class="t-en">See how it works</span><span class="t-ko">어떻게 작동하는지 보기</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l8 7-8 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone" id="phone-hero"><div class="phone-inner"><div class="phone-notch"></div><div class="phone-screen"></div><div class="phone-tabbar"></div></div></div>
+      </div>
+    </section>
+
+    <section class="feature" id="product">
+      <div>
+        <div class="feature-num">01</div>
+        <h2 class="feature-h">
+          <span class="t-en">All your info, in one place.</span>
+          <span class="t-ko">중요한 정보를 한곳에서.</span>
+        </h2>
+        <p class="feature-sub">
+          <span class="t-en">Stop checking five different university channels. See everything relevant to you, together.</span>
+          <span class="t-ko">여러 대학 채널을 반복해서 확인하지 않고, 관련 공지를 한곳에서 보세요.</span>
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="phone" id="phone-notices"><div class="phone-inner"><div class="phone-notch"></div><div class="phone-screen"></div><div class="phone-tabbar"></div></div></div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div>
+        <div class="feature-num">02</div>
+        <h2 class="feature-h">
+          <span class="t-en">Understand what matters.</span>
+          <span class="t-ko">중요한 내용을 이해하세요.</span>
+        </h2>
+        <p class="feature-sub">
+          <span class="t-en">Every notice comes with a plain-language AI summary and translation, so nothing gets lost.</span>
+          <span class="t-ko">모든 공지는 AI 요약과 번역이 함께 제공돼 이해하기 쉽습니다.</span>
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="phone" id="phone-detail"><div class="phone-inner"><div class="phone-notch"></div><div class="phone-screen"></div><div class="phone-tabbar"></div></div></div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div>
+        <div class="feature-num">03</div>
+        <h2 class="feature-h">
+          <span class="t-en">Stay ahead of every date.</span>
+          <span class="t-ko">다가오는 일정을 확인하세요.</span>
+        </h2>
+        <p class="feature-sub">
+          <span class="t-en">Key dates and deadlines, laid out on one calendar so you always know what's next.</span>
+          <span class="t-ko">중요한 날짜와 마감일을 정리해 앞으로의 일정을 한눈에 확인하세요.</span>
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="phone" id="phone-cal"><div class="phone-inner"><div class="phone-notch"></div><div class="phone-screen"></div><div class="phone-tabbar"></div></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="cta-band" id="early-access">
+    <div class="wrap cta-inner">
+      <h2 class="cta-h">
+        <span class="t-en">Be first to know when we launch.</span>
+        <span class="t-ko">출시 소식을 가장 먼저 받아보세요.</span>
+      </h2>
+      <p class="cta-sub">
+        <span class="t-en">Leave your email and we'll reach out the moment early access opens.</span>
+        <span class="t-ko">이메일을 남겨주시면 얼리 액세스가 열리는 대로 가장 먼저 알려드립니다.</span>
+      </p>
+      <form class="cta-form" id="accessForm">
+        <input type="email" required placeholder="you@university.ac.kr" id="accessEmail">
+        <button class="btn btn-primary" type="submit">
+          <span class="t-en">Notify me</span><span class="t-ko">알림 신청</span>
+        </button>
+      </form>
+      <p class="cta-note" id="accessNote">
+        <span class="t-en">No spam — just one email when we open up.</span>
+        <span class="t-ko">스팸 없이, 오픈될 때 딱 한 번만 알려드려요.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="faq-section" id="faq">
+      <div class="faq-grid">
+        <div>
+          <div class="faq-label"><span class="t-en">FAQ</span><span class="t-ko">자주 묻는 질문</span></div>
+          <h2 class="faq-h"><span class="t-en">Questions, answered.</span><span class="t-ko">궁금한 점을 확인해보세요.</span></h2>
+        </div>
+        <div id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span><span class="t-en">What is univ.us?</span><span class="t-ko">univ.us는 어떤 서비스인가요?</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><p>
+              <span class="t-en">univ.us is a single feed that collects notices from your university's scattered channels, translates them, and summarizes what actually matters.</span>
+              <span class="t-ko">univ.us는 흩어진 대학 공지 채널을 하나로 모아 번역하고, 진짜 중요한 내용만 요약해서 보여주는 서비스입니다.</span>
+            </p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span><span class="t-en">Who is it for?</span><span class="t-ko">누구를 위한 서비스인가요?</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><p>
+              <span class="t-en">International students enrolled at universities in Korea who don't want to miss deadlines buried in a language or channel they don't check.</span>
+              <span class="t-ko">한국 대학에 재학 중인 외국인 유학생을 위한 서비스입니다. 언어나 채널 때문에 마감일을 놓치는 일을 막아드려요.</span>
+            </p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span><span class="t-en">Which universities are supported?</span><span class="t-ko">어떤 대학교를 지원하나요?</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><p>
+              <span class="t-en">We're onboarding partner universities during early access — join the list and we'll tell you as soon as yours is supported.</span>
+              <span class="t-ko">얼리 액세스 기간 동안 파트너 대학을 순차적으로 추가하고 있습니다. 신청해주시면 소속 대학이 지원되는 대로 알려드려요.</span>
+            </p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <div>
+      <a class="logo" href="#top">univ<span class="dot">.us</span></a>
+      <div class="footer-tag"><span class="t-en">University info, made simple.</span><span class="t-ko">대학 정보를 더 쉽게.</span></div>
+    </div>
+    <div class="footer-links">
+      <a href="#"><span class="t-en">Privacy</span><span class="t-ko">개인정보 처리방침</span></a>
+      <a href="#"><span class="t-en">Terms</span><span class="t-ko">이용약관</span></a>
+      <a href="mailto:hello@univ.us"><span class="t-en">Contact</span><span class="t-ko">문의</span></a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var page = document.querySelector('.page');
+  var langBtn = document.getElementById('langBtn');
+  function setLang(l){
+    page.dataset.lang = l;
+    langBtn.innerHTML = l === 'en'
+      ? '<b>EN</b><span>/</span><span>KO</span>'
+      : '<span>EN</span><span>/</span><b>KO</b>';
+  }
+  langBtn.addEventListener('click', function(){ setLang(page.dataset.lang === 'en' ? 'ko' : 'en'); });
+
+  /* ---------- icons ---------- */
+  var ICON = {
+    home:'<path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>',
+    calendar:'<rect x="4" y="6" width="16" height="14" rx="2.5"/><path d="M8 4v4M16 4v4M4 10.5h16"/>',
+    people:'<circle cx="9" cy="9" r="3"/><circle cx="17" cy="10.5" r="2.2"/><path d="M4 19.5c0-3.3 2.4-5.5 5.5-5.5s5.5 2.2 5.5 5.5"/><path d="M15 15c1.8.2 3.2 1.7 3.2 4.5"/>',
+    bookmark:'<path d="M7 4.5h10v15L12 16l-5 3.5v-15Z"/>',
+    profile:'<circle cx="12" cy="9" r="3.4"/><path d="M5.2 19.5c0-3.9 2.9-6.3 6.8-6.3s6.8 2.4 6.8 6.3"/>',
+    search:'<circle cx="10.3" cy="10.3" r="6.3"/><path d="M19 19l-4-4"/>',
+    bell:'<path d="M12 4.2a4.8 4.8 0 0 0-4.8 4.8v2.8l-1.4 2.8h12.4l-1.4-2.8V9a4.8 4.8 0 0 0-4.8-4.8Z"/><path d="M10.2 17.6a1.8 1.8 0 0 0 3.6 0"/>',
+    back:'<path d="M15 5 8 12l7 7"/>',
+    chevL:'<path d="M14 5 8 11l6 6"/>',
+    chevR:'<path d="M9 5l6 6-6 6"/>',
+    chevSm:'<path d="M8.5 5.5 13 10l-4.5 4.5"/>',
+    sparkle:'<path d="M12 3.5l1.4 4.1L17.5 9l-4.1 1.4L12 14.5l-1.4-4.1L6.5 9l4.1-1.4Z"/>',
+    doc:'<rect x="6" y="3" width="12" height="18" rx="1.6"/><path d="M9 8h6M9 11.2h6M9 14.4h3.6"/>',
+    cap:'<path d="M12 5 3.5 9l8.5 4 8.5-4L12 5Z"/><path d="M7 11.2v3.8c0 1.4 2.1 2.4 5 2.4s5-1 5-2.4v-3.8"/>',
+    megaphone:'<path d="M4 10.2v3.6l2.6.9v2.6l1.8-.4v-2.4l7.6 2.6V6.9L8.4 9.5H4Z"/>',
+    house:'<path d="M5 11 12 5l7 6"/><path d="M7 10v9.5h10V10"/>',
+    external:'<path d="M7 17 17 7"/><path d="M9 7h8v8"/>',
+    info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.2M12 8v.1"/>'
+  };
+  function icon(name, cls){
+    return '<svg class="'+(cls||'icon')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+ICON[name]+'</svg>';
+  }
+
+  /* ---------- notice data ---------- */
+  var NOTICES = {
+    'course-reg': {
+      cat:'academic', catLabel:'Academic', title:'Course Registration for Fall 2026',
+      desc:'Register for your Fall 2026 courses before the deadline.',
+      posted:'Jul 27, 2026', due:'Due today', urgency:'urgent',
+      summary:'Register for your Fall 2026 courses through the HY-in portal before the deadline. Course registration is required for all undergraduate students.',
+      kv:[['Registration Period','Jul 27 – Aug 1, 2026'],['Eligible Students','All undergraduate students'],['Platform','HY-in Portal']]
+    },
+    scholarship: {
+      cat:'scholarship', catLabel:'Scholarship', title:'Global Excellence Scholarship',
+      desc:'Apply for the Global Excellence Scholarship for Fall 2026.',
+      posted:'Jul 24, 2026', due:'Due Aug 3', urgency:'soon',
+      summary:'The Global Excellence Scholarship covers up to 100% of tuition for high-achieving international students. Submit your application and transcript through the scholarship portal before the deadline.',
+      kv:[['Award','Up to 100% tuition'],['Eligible Students','International students, GPA 3.5+'],['Platform','Scholarship Portal']]
+    },
+    'intl-week': {
+      cat:'event', catLabel:'Event', title:'International Week 2026',
+      desc:'Join cultural events and activities during International Week.',
+      posted:'Jul 21, 2026', due:'Due Aug 2', urgency:'soon',
+      summary:'International Week runs from July 28 to August 2, featuring cultural exchange events, food fairs, and networking sessions for international students. Registration is free but seats are limited.',
+      kv:[['Dates','Jul 28 – Aug 2, 2026'],['Eligible Students','All students'],['Platform','Community Tab']]
+    },
+    housing: {
+      cat:'housing', catLabel:'Housing', title:'Dormitory Move-in Information',
+      desc:'Check move-in dates and required dormitory procedures.',
+      posted:'Jul 20, 2026', due:'Due Aug 3', urgency:'soon',
+      summary:'Dormitory move-in for Fall 2026 begins August 3. Bring your student ID and housing confirmation email. Room assignments will be posted on the housing portal 3 days before move-in.',
+      kv:[['Move-in Date','Aug 3, 2026'],['Required','Student ID + confirmation email'],['Platform','Housing Portal']]
+    }
+  };
+  var CAT_STYLE = {
+    academic:{ bg:'var(--accent-soft)', fg:'var(--accent)', icon:'doc' },
+    scholarship:{ bg:'var(--purple-soft)', fg:'var(--purple)', icon:'cap' },
+    event:{ bg:'var(--soon-soft)', fg:'var(--soon)', icon:'megaphone' },
+    housing:{ bg:'var(--green-soft)', fg:'var(--green)', icon:'house' }
+  };
+  var NOTICE_ORDER = ['course-reg','scholarship','intl-week','housing'];
+
+  /* ---------- calendar data (Aug 2026) ---------- */
+  var CAL_ROWS = [
+    [{d:26,m:1},{d:27,m:1},{d:28,m:1},{d:29,m:1},{d:30,m:1,e:1},{d:31,m:1,e:1},{d:1,e:1,today:1}],
+    [{d:2,e:1},{d:3,e:1},{d:4},{d:5,e:1},{d:6},{d:7,e:1},{d:8}],
+    [{d:9,e:1},{d:10,e:1},{d:11},{d:12,e:1},{d:13},{d:14},{d:15}],
+    [{d:16},{d:17},{d:18},{d:19},{d:20},{d:21},{d:22}],
+    [{d:23},{d:24},{d:25},{d:26},{d:27},{d:28},{d:29}],
+    [{d:30},{d:31},{d:1,m:1},{d:2,m:1},{d:3,m:1},{d:4,m:1},{d:5,m:1}]
+  ];
+  var DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+  /* ---------- phone controller ---------- */
+  function Phone(el, startScreen, startId){
+    this.el = el;
+    this.screenEl = el.querySelector('.phone-screen');
+    this.tabEl = el.querySelector('.phone-tabbar');
+    this.saved = {};
+    this.go(startScreen, startId);
+    var self = this;
+    el.addEventListener('click', function(ev){
+      var navEl = ev.target.closest('[data-nav]');
+      if (navEl){ self.go(navEl.dataset.nav, navEl.dataset.id); return; }
+      var bm = ev.target.closest('[data-bm]');
+      if (bm){ ev.stopPropagation(); self.toggleSaved(bm.dataset.bm); return; }
+      var chip = ev.target.closest('[data-filter]');
+      if (chip){ self.filter = chip.dataset.filter; self.renderNotices(); return; }
+    });
+  }
+  Phone.prototype.toggleSaved = function(id){
+    this.saved[id] = !this.saved[id];
+    if (this.screen === 'notices') this.renderNotices();
+    if (this.screen === 'detail') this.renderDetail(this.currentId);
+  };
+  Phone.prototype.go = function(screen, id){
+    this.screen = screen; this.currentId = id;
+    if (screen === 'home') this.renderHome();
+    else if (screen === 'notices') this.renderNotices();
+    else if (screen === 'detail') this.renderDetail(id);
+    else if (screen === 'calendar') this.renderCalendar();
+  };
+  Phone.prototype.tabbar = function(active, tappable){
+    var tabs = [['home','Home',ICON.home],['calendar','Calendar',ICON.calendar],['people','Community',ICON.people],['bookmark','Bookmarks',ICON.bookmark],['profile','Profile',ICON.profile]];
+    var self = this;
+    this.tabEl.innerHTML = tabs.map(function(t){
+      var isActive = t[0] === active;
+      var canTap = tappable && (t[0] === 'home' || t[0] === 'calendar');
+      return '<'+(canTap?'button':'div')+' class="tab-item'+(isActive?' active':'')+(canTap?' tappable':'')+'"'+(canTap?' data-nav="'+t[0]+'"':'')+'>'
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+t[2]+'</svg>'
+        + '<span>'+t[1]+'</span></'+(canTap?'button':'div')+'>';
+    }).join('');
+  };
+  Phone.prototype.renderHome = function(){
+    this.tabEl.style.display = 'flex';
+    this.tabbar('home', true);
+    this.screenEl.innerHTML =
+      '<div class="ph-topbar"><span class="ph-brand">univ<span class="dot">.us</span></span>'
+      + '<div class="row" style="gap:6px"><button class="ph-icon-btn">'+icon('search')+'</button><button class="ph-icon-btn">'+icon('bell')+'</button></div></div>'
+      + '<div class="ph-greet">Good afternoon, Ken!</div>'
+      + '<div class="ph-greet-sub">Here’s what’s happening today.</div>'
+      + '<div class="ph-banner">'+icon('info')+'<span>You have <b>2 important things</b> to check today.</span></div>'
+      + navCard('cal-today','#DDE7FF','var(--accent)', ICON.calendar, 'Today','2 important items')
+      + navCard('notices','var(--purple-soft)','var(--purple)', ICON.doc, 'Notices','3 new notices')
+      + navCard('calendar','var(--green-soft)','var(--green)', ICON.calendar, 'Calendar','1 event today');
+    var el = this.screenEl;
+    el.querySelectorAll('.nav-card')[0].setAttribute('data-nav','notices');
+    el.querySelectorAll('.nav-card')[1].setAttribute('data-nav','notices');
+    el.querySelectorAll('.nav-card')[2].setAttribute('data-nav','calendar');
+    function navCard(key,bg,fg,svg,title,sub){
+      return '<div class="nav-card" data-nav=""><div class="nav-ico" style="background:'+bg+';color:'+fg+'">'
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+svg+'</svg></div>'
+        + '<div><div class="nav-title">'+title+'</div><div class="nav-sub">'+sub+'</div></div>'
+        + '<svg class="nav-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+ICON.chevSm+'</svg></div>';
+    }
+  };
+  Phone.prototype.renderNotices = function(){
+    this.tabEl.style.display = 'flex';
+    this.tabbar('notices', true);
+    var filter = this.filter || 'all';
+    var self = this;
+    var cats = [['all','All'],['academic','Academic'],['scholarship','Scholarship'],['event','Event'],['housing','Housing']];
+    var chips = cats.map(function(c){ return '<button class="chip'+(filter===c[0]?' active':'')+'" data-filter="'+c[0]+'">'+c[1]+'</button>'; }).join('');
+    var list = NOTICE_ORDER.filter(function(id){ return filter==='all' || NOTICES[id].cat===filter; }).map(function(id){
+      var n = NOTICES[id], s = CAT_STYLE[n.cat];
+      var saved = self.saved[id];
+      return '<div class="notice-card" data-nav="detail" data-id="'+id+'">'
+        + '<div class="cat-badge" style="background:'+s.bg+';color:'+s.fg+'">'+icon(s.icon)+'</div>'
+        + '<div style="flex:1;min-width:0"><div class="notice-cat" style="color:'+s.fg+'">'+n.catLabel+'</div>'
+        + '<div class="notice-title">'+n.title+'</div><div class="notice-desc">'+n.desc+'</div>'
+        + '<div class="notice-meta"><span class="notice-date">Posted '+n.posted+'</span>'
+        + '<span class="due-pill due-'+n.urgency+'">'+n.due+'</span></div></div>'
+        + '<button class="bm-btn'+(saved?' saved':'')+'" data-bm="'+id+'">'+icon('bookmark')+'</button></div>';
+    }).join('');
+    this.screenEl.innerHTML =
+      '<div class="ph-topbar"><span class="ph-brand" style="font-size:1.05rem">Notices</span></div>'
+      + '<div class="search-bar">'+icon('search')+' Search notices…</div>'
+      + '<div class="chip-row">'+chips+'</div>' + list;
+  };
+  Phone.prototype.renderDetail = function(id){
+    this.tabEl.style.display = 'none';
+    var n = NOTICES[id], s = CAT_STYLE[n.cat];
+    var saved = this.saved[id];
+    this.screenEl.innerHTML =
+      '<div class="ph-detail-top"><button class="icon-btn" data-nav="notices">'+icon('back')+'</button>'
+      + '<button class="icon-btn'+(saved?' saved':'')+'" data-bm="'+id+'">'+icon('bookmark')+'</button></div>'
+      + '<span class="pill-cat" style="background:'+s.bg+';color:'+s.fg+'">'+n.catLabel+'</span>'
+      + '<h3 class="detail-title">'+n.title+'</h3>'
+      + '<div class="detail-meta"><span>Posted '+n.posted+'</span><span class="sep"></span><span style="color:var(--urgent);font-weight:600">'+n.due+'</span></div>'
+      + '<div class="ai-card"><div class="ai-head">'+icon('sparkle')+' AI Summary</div>'
+      + '<div class="ai-body">'+n.summary+'</div>'
+      + '<div class="ai-note">'+icon('info')+' AI-generated summary and translation. Refer to the original notice for official information.</div></div>'
+      + '<div>' + n.kv.map(function(row){ return '<div class="kv-row"><span class="kv-k">'+row[0]+'</span><span class="kv-v">'+row[1]+'</span></div>'; }).join('') + '</div>'
+      + '<button class="detail-cta">View Original Notice '+icon('external')+'</button>';
+  };
+  Phone.prototype.renderCalendar = function(){
+    this.tabEl.style.display = 'flex';
+    this.tabbar('calendar', true);
+    var dow = DOW.map(function(d){ return '<div class="cal-dow">'+d+'</div>'; }).join('');
+    var grid = CAL_ROWS.map(function(row){
+      return row.map(function(c){
+        var cls = 'cal-day' + (c.m?' muted':'') + (c.e?' has-event':'') + (c.today?' today':'');
+        return '<div class="'+cls+'"><span class="num">'+c.d+'</span><span class="dot"></span></div>';
+      }).join('');
+    }).join('');
+    this.screenEl.innerHTML =
+      '<div class="cal-top"><button class="icon-btn" data-nav="home">'+icon('back')+'</button>'
+      + '<div class="cal-month-nav"><button>'+icon('chevL')+'</button><span>August 2026</span><button>'+icon('chevR')+'</button></div>'
+      + '<span style="width:19px"></span></div>'
+      + '<div class="cal-grid">'+dow+grid+'</div>'
+      + '<div class="agenda-label">Today • Saturday, August 1</div>'
+      + '<div class="agenda-card" data-nav="detail" data-id="course-reg">'
+      + '<div class="cat-badge" style="background:var(--accent-soft);color:var(--accent)">'+icon('doc')+'</div>'
+      + '<div style="flex:1"><div class="notice-cat" style="color:var(--accent)">Academic</div>'
+      + '<div class="notice-title">Course Registration for Fall 2026</div>'
+      + '<div class="notice-desc">Register for your Fall 2026 courses before the deadline.</div>'
+      + '<div class="notice-meta"><span class="notice-date">Posted Jul 27, 2026</span><span class="due-pill due-urgent">Due today</span></div></div></div>';
+  };
+
+  new Phone(document.getElementById('phone-hero'), 'home');
+  new Phone(document.getElementById('phone-notices'), 'notices');
+  new Phone(document.getElementById('phone-detail'), 'detail', 'course-reg');
+  new Phone(document.getElementById('phone-cal'), 'calendar');
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---------- early access form (static, no backend) ---------- */
+  document.getElementById('accessForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var note = document.getElementById('accessNote');
+    var email = document.getElementById('accessEmail').value;
+    note.innerHTML = '<span class="t-en">Thanks — we’ll email <b>'+email+'</b> when early access opens.</span>'
+      + '<span class="t-ko"><b>'+email+'</b>(으)로 얼리 액세스가 열리면 알려드릴게요. 감사합니다.</span>';
+    setLang(page.dataset.lang);
+    document.getElementById('accessEmail').value = '';
+  });
+})();
+</script>
+</body>
+</html>
