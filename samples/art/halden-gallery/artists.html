@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists — Halden Gallery</title>
+<meta name="description" content="Artists represented by Halden Gallery.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#FAF9F6; --surface-2:#EFEDE6;
+    --ink:#171614; --ink-soft:#5C574E; --ink-faint:#938D80;
+    --border:#E2DFD5; --border-strong:#CFC9B8;
+    --accent:#1F5E52; --accent-ink:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Archivo', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.serif{ font-family:'Spectral', Georgia, serif; font-weight:500; margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Spectral', Georgia, serif; font-size:21px; font-weight:600; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+
+  .page-head{ padding:56px 0 40px; }
+  .page-head h1{ font-size:40px; margin-bottom:10px; }
+  .page-head p{ color:var(--ink-soft); font-size:15px; }
+
+  .roster{ padding-bottom:96px; border-top:1px solid var(--border); }
+  .artist-row{
+    display:grid; grid-template-columns:200px 1fr auto; gap:28px; align-items:center;
+    padding:26px 0; border-bottom:1px solid var(--border);
+  }
+  .artist-row .art{ aspect-ratio:4/3; border-radius:2px; overflow:hidden; background:var(--surface-2); }
+  .artist-row .name{ font-size:20px; font-family:'Spectral', serif; margin-bottom:6px; }
+  .artist-row .bio{ font-size:14px; color:var(--ink-soft); line-height:1.6; max-width:480px; }
+  .artist-row .tag{ font-size:13px; color:var(--ink-faint); white-space:nowrap; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .artist-row{ grid-template-columns:1fr; gap:14px; }
+    .artist-row .art{ max-width:220px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Halden Gallery</a>
+    <ul class="nav-links">
+      <li><a href="exhibitions.html">Exhibitions</a></li>
+      <li><a href="artists.html" class="active">Artists</a></li>
+      <li><a href="index.html#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap page-head">
+  <h1>Artists</h1>
+  <p>Four artists, represented on an ongoing basis.</p>
+</div>
+
+<div class="wrap roster" id="roster"></div>
+
+<footer>&copy; 2026 Halden Gallery. A demo portfolio site — not a real gallery. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var ARTISTS = [
+    { name:"Marta Yun", tag:"Sculpture, relief", bio:"Works in cast plaster and pigmented concrete, building up wall reliefs in thin layers over weeks. Based two blocks from the gallery.", art:"blocks" },
+    { name:"Desmond Okoye", tag:"Painting", bio:"Oil on linen, usually unfinished by conventional standards — Okoye stops a piece the moment it stops changing his mind about it.", art:"curves" },
+    { name:"Ines Farrow", tag:"Works on paper", bio:"Graphite and gouache studies of water and weather, most under a foot wide. Represented by the gallery since 2023.", art:"grain" },
+    { name:"Peter Nakada", tag:"Photography", bio:"Large-format film photography of decommissioned industrial sites, always shot in overcast or fading light.", art:"lines" }
+  ];
+  var ART = {
+    curves: '<g stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.8"><path d="M40 200 C 90 140, 110 90, 70 30"/><path d="M90 220 C 150 170, 180 110, 150 20"/></g>',
+    blocks: '<g fill="none" stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.7"><rect x="30" y="40" width="80" height="55"/><rect x="130" y="100" width="60" height="80"/></g>',
+    grain: '<g stroke="var(--ink-faint)" stroke-width="1" opacity="0.6">' +
+      Array.from({length:15}).map(function(_,i){ var x=25+(i%5)*45, y=30+Math.floor(i/5)*45; return '<circle cx="'+x+'" cy="'+y+'" r="'+(4+(i%3)*3)+'"/>'; }).join('') +
+      '</g>',
+    lines: '<g stroke="var(--ink-soft)" stroke-width="1" opacity="0.7">' +
+      Array.from({length:6}).map(function(_,i){ return '<line x1="15" y1="'+(25+i*25)+'" x2="200" y2="'+(25+i*25+(i%2?8:-8))+'"/>'; }).join('') +
+      '</g>'
+  };
+
+  document.getElementById('roster').innerHTML = ARTISTS.map(function(a){
+    return '' +
+      '<div class="artist-row">' +
+      '  <div class="art"><svg viewBox="0 0 220 165" width="100%" height="100%"><rect width="220" height="165" fill="var(--surface-2)"/>' + ART[a.art] + '</svg></div>' +
+      '  <div><div class="name">' + a.name + '</div><div class="bio">' + a.bio + '</div></div>' +
+      '  <div class="tag">' + a.tag + '</div>' +
+      '</div>';
+  }).join('');
+</script>
+
+</body>
+</html>

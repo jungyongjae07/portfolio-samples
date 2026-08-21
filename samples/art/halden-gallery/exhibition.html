@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Exhibition — Halden Gallery</title>
+<meta name="description" content="An exhibition at Halden Gallery — works, dates, and inquiries.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#FAF9F6; --surface-2:#EFEDE6;
+    --ink:#171614; --ink-soft:#5C574E; --ink-faint:#938D80;
+    --border:#E2DFD5; --border-strong:#CFC9B8;
+    --accent:#1F5E52; --accent-ink:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Archivo', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.serif{ font-family:'Spectral', Georgia, serif; font-weight:500; margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Spectral', Georgia, serif; font-size:21px; font-weight:600; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+
+  .crumb{ padding:20px 0 0; font-size:13px; color:var(--ink-faint); }
+  .crumb a:hover{ color:var(--ink); }
+
+  .exh-head{ padding:24px 0 48px; max-width:640px; }
+  .exh-head h1{ font-size:38px; margin-bottom:10px; }
+  .exh-head .meta{ font-size:14px; color:var(--ink-faint); margin-bottom:16px; }
+  .exh-head p{ font-size:15px; line-height:1.7; color:var(--ink-soft); }
+
+  .works-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-bottom:96px; }
+  .work-card{ }
+  .work-card .art{ aspect-ratio:4/5; border-radius:2px; overflow:hidden; background:var(--surface-2); margin-bottom:12px; cursor:pointer; }
+  .work-card .name{ font-size:15px; font-weight:500; font-family:'Spectral', serif; }
+  .work-card .meta{ font-size:13px; color:var(--ink-faint); margin-top:2px; }
+  .inquire-link{ font-size:13px; color:var(--accent); margin-top:6px; display:inline-block; background:none; border:none; cursor:pointer; padding:0; font-family:'Archivo', sans-serif; text-decoration:underline; }
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(23,22,20,0.5); z-index:100;
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal{ background:var(--bg); border-radius:4px; padding:32px; max-width:420px; width:100%; }
+  .modal h3{ font-size:20px; margin-bottom:4px; }
+  .modal .sub{ font-size:13px; color:var(--ink-faint); margin-bottom:20px; }
+  .modal .field{ margin-bottom:14px; }
+  .modal label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:5px; }
+  .modal input, .modal textarea{
+    width:100%; border:1px solid var(--border-strong); border-radius:2px; padding:9px 10px;
+    font-family:'Archivo', sans-serif; font-size:14px; color:var(--ink); resize:vertical;
+  }
+  .modal input:focus, .modal textarea:focus{ outline:none; border-color:var(--accent); }
+  .modal-actions{ display:flex; gap:10px; margin-top:8px; }
+  .modal-actions button{
+    font-family:'Archivo', sans-serif; font-size:13px; font-weight:600; padding:10px 18px;
+    border-radius:2px; cursor:pointer;
+  }
+  .modal-submit{ background:var(--accent); color:var(--accent-ink); border:1px solid var(--accent); flex:1; }
+  .modal-cancel{ background:none; border:1px solid var(--border-strong); color:var(--ink); }
+  .modal-sent{ text-align:center; font-size:14px; color:var(--ink-soft); padding:12px 0; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .works-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Halden Gallery</a>
+    <ul class="nav-links">
+      <li><a href="exhibitions.html">Exhibitions</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="index.html#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap crumb"><a href="index.html">Home</a> / <a href="exhibitions.html">Exhibitions</a> / <span id="crumb-name">Exhibition</span></div>
+
+<div class="wrap exh-head">
+  <h1 id="exh-name">Loading…</h1>
+  <div class="meta" id="exh-meta"></div>
+  <p id="exh-desc"></p>
+</div>
+
+<div class="wrap works-grid" id="works-grid"></div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div id="modal-form-state">
+      <h3 id="modal-title">Inquire</h3>
+      <div class="sub" id="modal-sub"></div>
+      <div class="field">
+        <label for="inq-name">Name</label>
+        <input type="text" id="inq-name" required>
+      </div>
+      <div class="field">
+        <label for="inq-email">Email</label>
+        <input type="email" id="inq-email" required>
+      </div>
+      <div class="field">
+        <label for="inq-msg">Message</label>
+        <textarea id="inq-msg" rows="3" placeholder="Price, availability, shipping to..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-cancel" id="modal-cancel">Cancel</button>
+        <button class="modal-submit" id="modal-submit">Send inquiry</button>
+      </div>
+    </div>
+    <div class="modal-sent" id="modal-sent" style="display:none;">
+      <p>Thanks — this is a demo, so nothing was actually sent, but the form works end to end.</p>
+      <button class="modal-cancel" id="modal-close" style="margin-top:8px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Halden Gallery. A demo portfolio site — not a real gallery. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var EXHIBITIONS = {
+    "slow-light": {
+      name:"Slow Light", meta:"Group show, six artists · through March 2026",
+      desc:"Six artists working in painting, relief, and paper, chosen for how long each piece asks you to look. Nothing here reads in a glance.",
+      works:[
+        {name:"Held Water", artist:"Ines Farrow", price:"$2,400", art:"curves"},
+        {name:"Interval II", artist:"Marta Yun", price:"$3,100", art:"blocks"},
+        {name:"Morning, Unfinished", artist:"Desmond Okoye", price:"$1,800", art:"grain"}
+      ]
+    },
+    "low-relief": {
+      name:"Low Relief", meta:"Solo — Marta Yun · opens April 2026",
+      desc:"New wall-mounted relief work, cast in plaster and pigmented concrete. Marta's first solo show with the gallery.",
+      works:[
+        {name:"Interval III", artist:"Marta Yun", price:"$3,400", art:"blocks"},
+        {name:"Interval IV", artist:"Marta Yun", price:"$3,400", art:"blocks"},
+        {name:"Interval V", artist:"Marta Yun", price:"$4,100", art:"blocks"}
+      ]
+    },
+    "field-notes": {
+      name:"Field Notes", meta:"Group show, four artists · closed January 2026",
+      desc:"Works made in direct response to a place — a shared prompt across four very different practices. This exhibition has closed.",
+      works:[
+        {name:"Site Study 4", artist:"Peter Nakada", price:"Sold", art:"lines"},
+        {name:"Ground Cover", artist:"Ines Farrow", price:"Sold", art:"grain"}
+      ]
+    },
+    "quiet-machines": {
+      name:"Quiet Machines", meta:"Solo — Peter Nakada · closed November 2025",
+      desc:"Large-format photographs of decommissioned industrial equipment, shot only in overcast light. This exhibition has closed.",
+      works:[
+        {name:"Turbine Hall, Empty", artist:"Peter Nakada", price:"Sold", art:"lines"},
+        {name:"Cooling Tower", artist:"Peter Nakada", price:"Sold", art:"lines"}
+      ]
+    }
+  };
+  var ART = {
+    curves: '<g stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.8"><path d="M40 250 C 90 180, 110 120, 70 40"/><path d="M90 270 C 150 210, 180 140, 150 30"/></g>',
+    blocks: '<g fill="none" stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.7"><rect x="40" y="60" width="90" height="60"/><rect x="150" y="140" width="70" height="90"/><rect x="60" y="200" width="60" height="50"/></g>',
+    grain: '<g stroke="var(--ink-faint)" stroke-width="1" opacity="0.6">' +
+      Array.from({length:24}).map(function(_,i){ var x=30+(i%6)*40, y=40+Math.floor(i/6)*50; return '<circle cx="'+x+'" cy="'+y+'" r="'+(4+(i%3)*3)+'"/>'; }).join('') +
+      '</g>',
+    lines: '<g stroke="var(--ink-soft)" stroke-width="1" opacity="0.7">' +
+      Array.from({length:8}).map(function(_,i){ return '<line x1="20" y1="'+(30+i*28)+'" x2="240" y2="'+(30+i*28+(i%2?10:-10))+'"/>'; }).join('') +
+      '</g>'
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if (!id || !EXHIBITIONS[id]) id = 'slow-light';
+  var exh = EXHIBITIONS[id];
+
+  document.getElementById('doc-title').textContent = exh.name + ' — Halden Gallery';
+  document.getElementById('crumb-name').textContent = exh.name;
+  document.getElementById('exh-name').textContent = exh.name;
+  document.getElementById('exh-meta').textContent = exh.meta;
+  document.getElementById('exh-desc').textContent = exh.desc;
+
+  document.getElementById('works-grid').innerHTML = exh.works.map(function(w, i){
+    return '' +
+      '<div class="work-card">' +
+      '  <div class="art" data-i="' + i + '"><svg viewBox="0 0 260 260" width="100%" height="100%"><rect width="260" height="260" fill="var(--surface-2)"/>' + ART[w.art] + '</svg></div>' +
+      '  <div class="name">' + w.name + '</div>' +
+      '  <div class="meta">' + w.artist + ' &middot; ' + w.price + '</div>' +
+      (w.price === 'Sold' ? '' : '<button class="inquire-link" data-i="' + i + '">Inquire</button>') +
+      '</div>';
+  }).join('');
+
+  var overlay = document.getElementById('modal-overlay');
+  function openModal(work){
+    document.getElementById('modal-title').textContent = 'Inquire — ' + work.name;
+    document.getElementById('modal-sub').textContent = work.artist + ' · ' + work.price;
+    document.getElementById('modal-form-state').style.display = 'block';
+    document.getElementById('modal-sent').style.display = 'none';
+    overlay.classList.add('show');
+  }
+  function closeModal(){ overlay.classList.remove('show'); }
+
+  document.getElementById('works-grid').addEventListener('click', function(e){
+    var trigger = e.target.closest('.inquire-link') || e.target.closest('.art');
+    if (!trigger) return;
+    var i = parseInt(trigger.dataset.i, 10);
+    openModal(exh.works[i]);
+  });
+
+  document.getElementById('modal-cancel').addEventListener('click', closeModal);
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
+
+  document.getElementById('modal-submit').addEventListener('click', function(){
+    var name = document.getElementById('inq-name').value.trim();
+    var email = document.getElementById('inq-email').value.trim();
+    if (!name || !email){
+      document.getElementById('inq-name').style.borderColor = name ? 'var(--border-strong)' : 'var(--accent)';
+      document.getElementById('inq-email').style.borderColor = email ? 'var(--border-strong)' : 'var(--accent)';
+      return;
+    }
+    document.getElementById('modal-form-state').style.display = 'none';
+    document.getElementById('modal-sent').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

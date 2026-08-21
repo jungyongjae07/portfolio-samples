@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halden Gallery — Contemporary Art</title>
+<meta name="description" content="Halden Gallery shows new and mid-career artists in a converted print shop. Current exhibition: Slow Light, through March.">
+<meta property="og:title" content="Halden Gallery — Contemporary Art">
+<meta property="og:description" content="Current exhibition: Slow Light, through March.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#FAF9F6; --surface-2:#EFEDE6;
+    --ink:#171614; --ink-soft:#5C574E; --ink-faint:#938D80;
+    --border:#E2DFD5; --border-strong:#CFC9B8;
+    --accent:#1F5E52; --accent-ink:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Archivo', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:'Spectral', Georgia, serif; font-weight:500; margin:0; letter-spacing:-0.005em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Spectral', Georgia, serif; font-size:21px; font-weight:600; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); transition:color 180ms ease; }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .status-line{ font-size:13px; color:var(--ink-faint); }
+  .status-dot{ display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:6px; position:relative; top:-1px; }
+  .status-dot.open{ background:var(--accent); }
+  .status-dot.closed{ background:var(--ink-faint); }
+
+  .hero{ padding:72px 0 40px; border-bottom:1px solid var(--border); }
+  .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .hero h1{ font-size:clamp(38px,4.6vw,58px); line-height:1.06; margin-bottom:18px; }
+  .hero p{ font-size:16px; color:var(--ink-soft); line-height:1.6; max-width:440px; margin-bottom:26px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--accent); color:var(--accent-ink);
+    font-family:'Archivo', sans-serif; font-size:14px; font-weight:600;
+    padding:12px 22px; border-radius:2px; border:1px solid var(--accent);
+    transition: opacity 180ms ease;
+  }
+  .btn:hover{ opacity:0.88; }
+  .btn-outline{ background:transparent; color:var(--ink); border:1px solid var(--border-strong); }
+  .btn-outline:hover{ border-color:var(--ink); opacity:1; }
+
+  .hero-art .art{ aspect-ratio:4/5; border-radius:2px; overflow:hidden; background:var(--surface-2); }
+
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:30px; gap:16px; flex-wrap:wrap; }
+  .section-head h2{ font-size:26px; }
+  .section-head a{ font-size:13px; color:var(--ink-soft); }
+  .section-head a:hover{ color:var(--accent); }
+
+  .exh{ padding:80px 0; border-bottom:1px solid var(--border); }
+  .exh-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .exh-card{ display:block; }
+  .exh-card .art{ aspect-ratio:4/5; border-radius:2px; overflow:hidden; background:var(--surface-2); margin-bottom:14px; position:relative; transition:transform 220ms ease; }
+  .exh-card:hover .art{ transform:translateY(-4px); }
+  .save-btn{
+    position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.92); border:1px solid var(--border-strong); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--ink-soft);
+    transition: all 160ms ease;
+  }
+  .save-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .save-btn.saved{ color:var(--accent); border-color:var(--accent); }
+  .exh-card .name{ font-size:17px; font-weight:500; font-family:'Spectral', serif; }
+  .exh-card .meta{ font-size:13px; color:var(--ink-faint); margin-top:3px; }
+
+  .artists{ padding:80px 0; }
+  .artist-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .artist-card{ padding:20px; border:1px solid var(--border); border-radius:2px; transition:border-color 180ms ease; }
+  .artist-card:hover{ border-color:var(--accent); }
+  .artist-card .name{ font-size:15px; font-weight:600; margin-bottom:4px; }
+  .artist-card .tag{ font-size:13px; color:var(--ink-faint); }
+
+  .visit{ padding:64px 0; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .visit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  .visit h2{ font-size:26px; margin-bottom:16px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--border); font-size:14px; }
+  .hours-row:last-child{ border-bottom:none; }
+  .hours-row .day{ color:var(--ink-soft); }
+  .visit address{ font-style:normal; font-size:14px; color:var(--ink-soft); line-height:1.8; margin-bottom:18px; }
+
+  footer{ padding:56px 0 32px; }
+  .foot-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; margin-bottom:40px; }
+  .foot-col h4{ font-size:14px; font-weight:600; margin-bottom:14px; font-family:'Spectral',serif; }
+  .foot-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .foot-col a{ font-size:14px; color:var(--ink-soft); }
+  .foot-col a:hover{ color:var(--accent); }
+  .news-form{ display:flex; gap:0; margin-top:14px; max-width:320px; border-bottom:1px solid var(--border-strong); }
+  .news-form input{ flex:1; border:none; background:transparent; padding:9px 0; font-family:'Archivo', sans-serif; font-size:14px; color:var(--ink); }
+  .news-form input:focus{ outline:none; }
+  .news-form button{ border:none; background:none; color:var(--ink); font-family:'Spectral',serif; font-size:18px; cursor:pointer; padding:0 4px; }
+  .news-note{ font-size:12px; color:var(--ink-faint); margin-top:8px; min-height:16px; }
+  .foot-bottom{ display:flex; justify-content:space-between; font-size:12px; color:var(--ink-faint); flex-wrap:wrap; gap:10px; border-top:1px solid var(--border); padding-top:24px; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:320px; }
+    .exh-grid{ grid-template-columns:repeat(2,1fr); }
+    .artist-row{ grid-template-columns:repeat(2,1fr); }
+    .visit-grid{ grid-template-columns:1fr; gap:28px; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Halden Gallery</a>
+    <ul class="nav-links">
+      <li><a href="exhibitions.html" class="active">Exhibitions</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="index.html#visit">Visit</a></li>
+    </ul>
+    <div class="status-line" id="status-line"></div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Slow Light</h1>
+      <p>New paintings and works on paper by six artists exploring how long a single image can hold attention. Through March 2026.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="exhibition.html?id=slow-light" class="btn">View the exhibition</a>
+        <a href="index.html#visit" class="btn btn-outline">Plan a visit</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 500" width="100%" role="img" aria-label="Abstract line composition">
+        <rect width="400" height="500" fill="var(--surface-2)"/>
+        <g stroke="var(--accent)" stroke-width="1.4" fill="none" opacity="0.85">
+          <path d="M40 420 C 120 300, 160 200, 90 90"/>
+          <path d="M100 460 C 200 380, 240 260, 200 60"/>
+          <path d="M180 470 C 260 400, 320 300, 300 120"/>
+        </g>
+        <circle cx="90" cy="90" r="4" fill="var(--accent)"/>
+        <circle cx="200" cy="60" r="4" fill="var(--ink)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="exh wrap">
+  <div class="section-head">
+    <h2>Current &amp; upcoming</h2>
+    <a href="exhibitions.html">All exhibitions</a>
+  </div>
+  <div class="exh-grid" id="exh-grid"></div>
+</section>
+
+<section class="artists wrap">
+  <div class="section-head">
+    <h2>Represented artists</h2>
+    <a href="artists.html">Full roster</a>
+  </div>
+  <div class="artist-row" id="artist-row"></div>
+</section>
+
+<section class="visit wrap" id="visit">
+  <div class="visit-grid">
+    <div>
+      <h2>Visit</h2>
+      <address>412 Kessler Street<br>Unit 3, back courtyard<br>Open to the public, no appointment needed</address>
+    </div>
+    <div>
+      <div class="hours-row"><span class="day">Tuesday &ndash; Friday</span><span>11:00 &ndash; 18:00</span></div>
+      <div class="hours-row"><span class="day">Saturday</span><span>12:00 &ndash; 17:00</span></div>
+      <div class="hours-row"><span class="day">Sunday &ndash; Monday</span><span>Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot-grid">
+    <div>
+      <div class="wordmark" style="margin-bottom:12px;">Halden Gallery</div>
+      <p style="font-size:14px; color:var(--ink-soft); max-width:280px; line-height:1.6;">Notes on new exhibitions, roughly monthly.</p>
+      <form class="news-form" id="news-form">
+        <input type="email" placeholder="Email address" required aria-label="Email address">
+        <button type="submit" aria-label="Subscribe">&rarr;</button>
+      </form>
+      <div class="news-note" id="news-note"></div>
+    </div>
+    <div class="foot-col">
+      <h4>Gallery</h4>
+      <ul>
+        <li><a href="exhibitions.html">Exhibitions</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="index.html#visit">Visit</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Inquiries</h4>
+      <ul>
+        <li><a href="exhibition.html?id=slow-light">About a work</a></li>
+        <li><a href="artists.html">Studio visits</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Halden Gallery. A demo portfolio site — not a real gallery.</span>
+    <span>Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a></span>
+  </div>
+</footer>
+
+<script>
+  var EXHIBITIONS = [
+    { id:"slow-light", name:"Slow Light", meta:"Group show &middot; through Mar 2026", art:"curves" },
+    { id:"low-relief", name:"Low Relief", meta:"Solo, Marta Yun &middot; opens Apr 2026", art:"blocks" },
+    { id:"field-notes", name:"Field Notes", meta:"Group show &middot; closed Jan 2026", art:"grain" }
+  ];
+  var ARTISTS = [
+    { name:"Marta Yun", tag:"Sculpture, relief" },
+    { name:"Desmond Okoye", tag:"Painting" },
+    { name:"Ines Farrow", tag:"Works on paper" },
+    { name:"Peter Nakada", tag:"Photography" }
+  ];
+  var ART = {
+    curves: '<g stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.8"><path d="M40 250 C 90 180, 110 120, 70 40"/><path d="M90 270 C 150 210, 180 140, 150 30"/></g>',
+    blocks: '<g fill="none" stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.7"><rect x="40" y="60" width="90" height="60"/><rect x="150" y="140" width="70" height="90"/><rect x="60" y="200" width="60" height="50"/></g>',
+    grain: '<g stroke="var(--ink-faint)" stroke-width="1" opacity="0.6">' +
+      Array.from({length:24}).map(function(_,i){ var x=30+(i%6)*40, y=40+Math.floor(i/6)*50; return '<circle cx="'+x+'" cy="'+y+'" r="'+(4+(i%3)*3)+'"/>'; }).join('') +
+      '</g>'
+  };
+
+  document.getElementById('exh-grid').innerHTML = EXHIBITIONS.map(function(e){
+    return '' +
+      '<div class="exh-card">' +
+      '  <div class="art">' +
+      '    <a href="exhibition.html?id=' + e.id + '"><svg viewBox="0 0 260 260" width="100%" height="100%"><rect width="260" height="260" fill="var(--surface-2)"/>' + ART[e.art] + '</svg></a>' +
+      '    <button class="save-btn" data-id="' + e.id + '">&#9825;</button>' +
+      '  </div>' +
+      '  <a href="exhibition.html?id=' + e.id + '"><div class="name">' + e.name + '</div></a>' +
+      '  <div class="meta">' + e.meta + '</div>' +
+      '</div>';
+  }).join('');
+
+  document.getElementById('artist-row').innerHTML = ARTISTS.map(function(a){
+    return '<a href="artists.html" class="artist-card"><div class="name">' + a.name + '</div><div class="tag">' + a.tag + '</div></a>';
+  }).join('');
+
+  var SAVED_KEY = 'halden_saved';
+  function getSaved(){ try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); } catch(e){ return []; } }
+  function refreshSaved(){
+    var saved = getSaved();
+    document.querySelectorAll('.save-btn').forEach(function(btn){
+      var isSaved = saved.indexOf(btn.dataset.id) > -1;
+      btn.innerHTML = isSaved ? '&#9829;' : '&#9825;';
+      btn.classList.toggle('saved', isSaved);
+    });
+  }
+  refreshSaved();
+  document.getElementById('exh-grid').addEventListener('click', function(e){
+    var btn = e.target.closest('.save-btn');
+    if (!btn) return;
+    e.preventDefault();
+    var saved = getSaved();
+    var idx = saved.indexOf(btn.dataset.id);
+    if (idx > -1) saved.splice(idx, 1); else saved.push(btn.dataset.id);
+    localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+    refreshSaved();
+  });
+
+  var form = document.getElementById('news-form');
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('news-note').textContent = "Thanks — you're on the list.";
+      form.reset();
+    });
+  }
+
+  (function(){
+    var now = new Date();
+    var day = now.getDay();
+    var hour = now.getHours() + now.getMinutes() / 60;
+    var open = false;
+    if (day >= 2 && day <= 5) open = hour >= 11 && hour < 18;
+    if (day === 6) open = hour >= 12 && hour < 17;
+    var el = document.getElementById('status-line');
+    el.innerHTML = '<span class="status-dot ' + (open ? 'open' : 'closed') + '"></span>' +
+      (open ? 'Open now' : 'Closed now') + ' &middot; see hours below';
+  })();
+</script>
+
+</body>
+</html>
