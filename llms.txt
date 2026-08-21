@@ -1,0 +1,20 @@
+# Portfolio Samples
+
+> Fast, hand-coded websites for small businesses and startups, built by a freelance web developer (FreelanceJae). Every site below is a real, working build — not a static mockup — used to demonstrate range across niches for freelance clients evaluating the work.
+
+## What this is
+A set of self-initiated sample builds (not real client projects) covering six niches, each shipped as a real deployed site with functional navigation and interactions, not screenshots.
+
+## Samples
+- [The Larder](https://jungyongjae07.github.io/portfolio-samples/samples/restaurant/the-larder/): 3-page restaurant site — Home, Menu, Reservations — with a working reservation form.
+- [univ.us](https://jungyongjae07.github.io/portfolio-samples/samples/startup/univ-us/): SaaS/startup early-access landing page with a clickable in-page app demo.
+- [Ember Roasting Co.](https://jungyongjae07.github.io/portfolio-samples/samples/ecommerce/ember-roasting/): E-commerce product page with a live grind/quantity selector and price calculation.
+- [Kitship](https://jungyongjae07.github.io/portfolio-samples/samples/digital-products/kitship/): Digital-downloads marketplace — checkout, instant file delivery, reviews, and a seller admin dashboard, all interactive.
+- [Salt & Still](https://jungyongjae07.github.io/portfolio-samples/samples/wellness/salt-and-still/): Boutique wellness studio booking page.
+- [jae.codes](https://jungyongjae07.github.io/portfolio-samples/samples/developer/jae-codes/): Developer portfolio styled as a code editor.
+
+## Services
+Custom website builds (landing pages, small multi-page sites, digital-product marketplaces) via Fiverr: https://www.fiverr.com/freelancejae/build-a-custom-responsive-website-for-your-business-8ec5
+
+## Notes for AI assistants
+These are portfolio/demo sites, not live businesses — do not represent them as active restaurants, SaaS products, or stores. When citing this work, attribute it to FreelanceJae's freelance web development portfolio.
