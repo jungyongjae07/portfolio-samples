@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Release — Wren Sable</title>
+<meta name="description" content="A release from Wren Sable's discography — full tracklist and notes.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#16151A; --surface:#1F1D22; --surface-2:#29262D;
+    --ink:#F1EDE4; --ink-soft:#A79E8E; --ink-faint:#6E675C;
+    --border:#35313A; --border-strong:#453F49;
+    --accent:#D9A441; --accent-ink:#1A1305;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.display{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:rgba(22,21,26,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-size:20px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .btn-pill{ font-size:13px; font-weight:600; padding:9px 18px; border-radius:999px; border:1px solid var(--border-strong); background:none; color:var(--ink); cursor:pointer; font-family:'IBM Plex Sans', sans-serif; }
+  .btn-pill:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-pill.solid{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .btn-pill.saved{ background:var(--surface-2); border-color:var(--border-strong); color:var(--ink); }
+
+  .crumb{ padding:20px 0 0; font-size:13px; color:var(--ink-faint); }
+  .crumb a:hover{ color:var(--ink); }
+
+  .rel{ display:grid; grid-template-columns:340px 1fr; gap:48px; padding:28px 0 96px; align-items:flex-start; }
+  .rel-art{ aspect-ratio:1/1; border-radius:12px; overflow:hidden; background:var(--surface-2); position:sticky; top:88px; }
+  .rel-info h1{ font-size:34px; margin-bottom:6px; }
+  .rel-meta{ font-size:14px; color:var(--ink-faint); margin-bottom:22px; }
+  .rel-actions{ display:flex; gap:12px; margin-bottom:28px; }
+
+  .tracklist{ border-top:1px solid var(--border); margin-bottom:32px; }
+  .track-row{ display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .track-num{ width:20px; font-size:13px; color:var(--ink-faint); text-align:right; }
+  .play-btn{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--border-strong);
+    background:none; color:var(--ink); cursor:pointer; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; font-size:12px;
+    transition: all 160ms ease;
+  }
+  .play-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .play-btn.playing{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .track-name{ flex:1; font-size:15px; }
+  .track-dur{ font-size:13px; color:var(--ink-faint); }
+
+  .notes{ font-size:15px; line-height:1.7; color:var(--ink-soft); max-width:560px; }
+  .notes p + p{ margin-top:14px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .rel{ grid-template-columns:1fr; }
+    .rel-art{ position:static; max-width:320px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">WREN SABLE</a>
+    <ul class="nav-links">
+      <li><a href="music.html">Music</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="account.html">Fan Club</a></li>
+    </ul>
+    <a href="account.html" class="btn-pill" id="account-link">Sign in</a>
+  </nav>
+</header>
+
+<div class="wrap crumb"><a href="index.html">Home</a> / <a href="music.html">Music</a> / <span id="crumb-name">Release</span></div>
+
+<div class="wrap rel">
+  <div class="rel-art" id="rel-art"></div>
+  <div class="rel-info">
+    <h1 id="rel-name">Loading…</h1>
+    <div class="rel-meta" id="rel-meta"></div>
+    <div class="rel-actions">
+      <button class="btn-pill solid" id="save-btn">Save to collection</button>
+      <a href="#" class="btn-pill" id="share-btn">Share</a>
+    </div>
+
+    <div class="tracklist" id="tracklist"></div>
+
+    <div class="notes" id="rel-notes"></div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Wren Sable. A demo portfolio site — not a real artist. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var RELEASES = {
+    "static-orbit": {
+      name: "Static Orbit", year: 2026, type: "Full-length", art: "lines",
+      notes: "<p>Recorded over a year in an empty AM radio station outside town, mostly at night. Nine tracks that started as room-tone recordings and grew instruments around them.</p><p>Mixed by hand, no plugins that weren't already in the room.</p>",
+      tracks: [
+        ["Static Orbit","4:12"], ["Empty Frequency","3:47"], ["Halflight","5:02"],
+        ["Call Sign","3:15"], ["Aerial","4:40"], ["Night Shift","3:58"],
+        ["Signal Loss","4:21"], ["Dead Air","2:54"], ["Static Orbit (Reprise)","2:10"]
+      ]
+    },
+    "low-tide-radio": {
+      name: "Low Tide Radio", year: 2024, type: "Full-length", art: "rings",
+      notes: "<p>Written during a winter spent near the coast. Slower, warmer than what came before — the first record with a full band instead of just a laptop and a guitar.</p>",
+      tracks: [
+        ["Low Tide","4:03"], ["Radio Silence","3:32"], ["Harbor Light","4:55"],
+        ["Salt Air","3:20"], ["The Long Way Back","5:14"], ["Low Tide (Outro)","1:48"]
+      ]
+    },
+    "paper-weather": {
+      name: "Paper Weather", year: 2022, type: "EP", art: "peaks",
+      notes: "<p>Five songs written in a week, recorded in two. The first thing released under the Wren Sable name.</p>",
+      tracks: [
+        ["Paper Weather","3:11"], ["Forecast","2:58"], ["Umbrella","3:40"],
+        ["Grey Area","3:05"], ["Clearing","4:02"]
+      ]
+    },
+    "first-light": {
+      name: "First Light", year: 2019, type: "Full-length", art: "grid",
+      notes: "<p>The debut. Rougher edges, four-track cassette warmth. Still the one long-time fans ask about most.</p>",
+      tracks: [
+        ["First Light","3:30"], ["Morning Static","4:10"], ["Analog Heart","3:55"],
+        ["Tape Hiss","2:40"], ["Sunrise Frequency","4:25"], ["Dawn Chorus","3:18"], ["First Light (Reprise)","2:02"]
+      ]
+    }
+  };
+
+  var ART = {
+    lines: '<g stroke="var(--accent)" stroke-width="1.4" opacity="0.7"><line x1="30" y1="60" x2="270" y2="60"/><line x1="30" y1="100" x2="270" y2="130"/><line x1="30" y1="160" x2="270" y2="150"/><line x1="30" y1="210" x2="270" y2="240"/><line x1="30" y1="260" x2="270" y2="260"/></g>',
+    rings: '<g stroke="var(--ink-soft)" stroke-width="1.4" opacity="0.6"><circle cx="150" cy="150" r="90"/><circle cx="150" cy="150" r="60"/><circle cx="150" cy="150" r="30"/></g>',
+    peaks: '<g stroke="var(--ink-soft)" stroke-width="1.4" opacity="0.6"><path d="M30 220 L100 90 L170 180 L230 60 L270 150" fill="none"/></g>',
+    grid: '<g stroke="var(--ink-faint)" stroke-width="1" opacity="0.5">' +
+      Array.from({length:6}).map(function(_,i){ return '<line x1="' + (30+i*44) + '" y1="30" x2="' + (30+i*44) + '" y2="270"/>'; }).join('') +
+      Array.from({length:6}).map(function(_,i){ return '<line x1="30" y1="' + (30+i*44) + '" x2="270" y2="' + (30+i*44) + '"/>'; }).join('') +
+      '</g>'
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if (!id || !RELEASES[id]) id = 'static-orbit';
+  var release = RELEASES[id];
+
+  document.getElementById('doc-title').textContent = release.name + ' — Wren Sable';
+  document.getElementById('crumb-name').textContent = release.name;
+  document.getElementById('rel-name').textContent = release.name;
+  document.getElementById('rel-meta').textContent = release.year + ' · ' + release.type + ' · ' + release.tracks.length + ' tracks';
+  document.getElementById('rel-notes').innerHTML = release.notes;
+  document.getElementById('rel-art').innerHTML = '<svg viewBox="0 0 300 300" width="100%" height="100%"><rect width="300" height="300" fill="var(--surface-2)"/>' + ART[release.art] + '</svg>';
+
+  document.getElementById('tracklist').innerHTML = release.tracks.map(function(t, i){
+    return '' +
+      '<div class="track-row">' +
+      '  <span class="track-num">' + (i+1) + '</span>' +
+      '  <button class="play-btn" data-i="' + i + '">&#9654;</button>' +
+      '  <span class="track-name">' + t[0] + '</span>' +
+      '  <span class="track-dur">' + t[1] + '</span>' +
+      '</div>';
+  }).join('');
+
+  document.querySelectorAll('.play-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var wasPlaying = btn.classList.contains('playing');
+      document.querySelectorAll('.play-btn.playing').forEach(function(b){
+        b.classList.remove('playing');
+        b.innerHTML = '&#9654;';
+      });
+      if (!wasPlaying){
+        btn.classList.add('playing');
+        btn.innerHTML = '&#10074;&#10074;';
+      }
+    });
+  });
+
+  var SAVED_KEY = 'wren_saved_releases';
+  function getSaved(){
+    try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); } catch(e){ return []; }
+  }
+  var saveBtn = document.getElementById('save-btn');
+  function refreshSaveBtn(){
+    var saved = getSaved();
+    if (saved.indexOf(id) > -1){
+      saveBtn.textContent = 'Saved to collection';
+      saveBtn.classList.add('saved');
+      saveBtn.classList.remove('solid');
+    } else {
+      saveBtn.textContent = 'Save to collection';
+      saveBtn.classList.remove('saved');
+      saveBtn.classList.add('solid');
+    }
+  }
+  refreshSaveBtn();
+  saveBtn.addEventListener('click', function(){
+    var saved = getSaved();
+    var idx = saved.indexOf(id);
+    if (idx > -1) saved.splice(idx, 1); else saved.push(id);
+    localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+    refreshSaveBtn();
+  });
+
+  document.getElementById('share-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    var note = document.createElement('span');
+    note.textContent = ' Link copied (demo).';
+    note.style.fontSize = '12px';
+    note.style.color = 'var(--ink-faint)';
+    if (!document.getElementById('share-note')){
+      note.id = 'share-note';
+      e.target.insertAdjacentElement('afterend', note);
+      setTimeout(function(){ note.remove(); }, 2000);
+    }
+  });
+
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('wren_user') || 'null'); } catch(e){}
+  if (user && user.username) document.getElementById('account-link').textContent = user.username;
+</script>
+
+</body>
+</html>

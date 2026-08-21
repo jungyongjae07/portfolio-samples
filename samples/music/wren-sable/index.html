@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wren Sable — Official Site</title>
+<meta name="description" content="Official site for Wren Sable — new album Static Orbit out now. Music, tour dates, and the fan club.">
+<meta property="og:title" content="Wren Sable — Official Site">
+<meta property="og:description" content="New album Static Orbit out now.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#16151A; --surface:#1F1D22; --surface-2:#29262D;
+    --ink:#F1EDE4; --ink-soft:#A79E8E; --ink-faint:#6E675C;
+    --border:#35313A; --border-strong:#453F49;
+    --accent:#D9A441; --accent-ink:#1A1305;
+  }
+  :root[data-theme="light"]{
+    --bg:#F5F2EA; --surface:#FFFFFF; --surface-2:#EAE3D2;
+    --ink:#1C1A17; --ink-soft:#5E574A; --ink-faint:#948B78;
+    --border:#DCD3BC; --border-strong:#C7BB9E;
+    --accent:#A9782B; --accent-ink:#FFF8E8;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:rgba(22,21,26,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); }
+  :root[data-theme="light"] header{ background:rgba(245,242,234,0.92); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.01em; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); transition:color 180ms ease; }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .nav-utility{ display:flex; align-items:center; gap:20px; font-size:14px; }
+  .btn-pill{
+    font-family:'IBM Plex Sans', sans-serif; font-size:13px; font-weight:600;
+    padding:9px 18px; border-radius:999px; border:1px solid var(--border-strong);
+    transition: all 180ms ease;
+  }
+  .btn-pill:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-pill.solid{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .btn-pill.solid:hover{ opacity:0.9; color:var(--accent-ink); }
+
+  .hero{ padding:72px 0 88px; }
+  .hero-grid{ display:grid; grid-template-columns:1fr 0.9fr; gap:48px; align-items:center; }
+  .hero h1{ font-size:clamp(40px,5.2vw,64px); line-height:1.04; margin-bottom:18px; }
+  .hero p{ font-size:16px; color:var(--ink-soft); line-height:1.6; max-width:440px; margin-bottom:28px; }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .eq{ display:flex; align-items:flex-end; gap:5px; height:24px; }
+  .eq span{ width:4px; background:var(--accent); border-radius:2px; animation:eqbar 1.1s ease-in-out infinite; }
+  .eq span:nth-child(1){ animation-delay:0s; }
+  .eq span:nth-child(2){ animation-delay:0.15s; }
+  .eq span:nth-child(3){ animation-delay:0.3s; }
+  .eq span:nth-child(4){ animation-delay:0.45s; }
+  @keyframes eqbar{ 0%,100%{ height:6px; } 50%{ height:22px; } }
+
+  .rings{ animation: spin 26s linear infinite; transform-origin:center; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; gap:16px; flex-wrap:wrap; }
+  .section-head h2{ font-size:26px; }
+  .section-head a{ font-size:13px; color:var(--ink-soft); }
+  .section-head a:hover{ color:var(--accent); }
+
+  .latest{ padding:0 0 88px; }
+  .latest-card{
+    display:grid; grid-template-columns:280px 1fr; gap:36px;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:28px; align-items:center;
+  }
+  .latest-art{ aspect-ratio:1/1; border-radius:8px; overflow:hidden; background:var(--surface-2); }
+  .latest-info h3{ font-size:28px; margin-bottom:6px; }
+  .latest-info .meta{ font-size:14px; color:var(--ink-faint); margin-bottom:18px; }
+  .track-row{
+    display:flex; align-items:center; gap:14px; padding:10px 0;
+    border-top:1px solid var(--border);
+  }
+  .track-row:last-of-type{ border-bottom:1px solid var(--border); margin-bottom:20px; }
+  .play-btn{
+    width:30px; height:30px; border-radius:50%; border:1px solid var(--border-strong);
+    background:none; color:var(--ink); cursor:pointer; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; font-size:12px;
+    transition: all 160ms ease;
+  }
+  .play-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .play-btn.playing{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .track-name{ flex:1; font-size:14px; }
+  .track-dur{ font-size:13px; color:var(--ink-faint); }
+
+  .cities{ overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:20px 0; margin-bottom:88px; }
+  .cities-track{ display:flex; gap:40px; white-space:nowrap; animation: marquee 28s linear infinite; width:max-content; }
+  .cities-track span{ font-family:'Bricolage Grotesque', sans-serif; font-size:20px; color:var(--ink-faint); }
+  .cities-track span.dot{ color:var(--accent); }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding-bottom:96px; }
+  .rel-card{ display:block; }
+  .rel-card .art{ aspect-ratio:1/1; border-radius:10px; overflow:hidden; background:var(--surface-2); margin-bottom:12px; transition:transform 220ms ease; }
+  .rel-card:hover .art{ transform:translateY(-4px); }
+  .rel-card .name{ font-size:15px; font-weight:600; }
+  .rel-card .year{ font-size:13px; color:var(--ink-faint); margin-top:2px; }
+
+  footer{ padding:56px 0 32px; border-top:1px solid var(--border); }
+  .foot-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; margin-bottom:40px; }
+  .foot-col h4{ font-size:14px; color:var(--ink); margin-bottom:14px; font-weight:600; font-family:'Bricolage Grotesque', sans-serif; }
+  .foot-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .foot-col a{ font-size:14px; color:var(--ink-soft); }
+  .foot-col a:hover{ color:var(--accent); }
+  .news-form{ display:flex; gap:8px; margin-top:14px; max-width:340px; }
+  .news-form input{
+    flex:1; border:1px solid var(--border-strong); background:var(--surface);
+    border-radius:8px; padding:10px 12px; font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px; color:var(--ink);
+  }
+  .news-form input:focus{ outline:none; border-color:var(--accent); }
+  .news-form button{
+    border:none; background:var(--accent); color:var(--accent-ink); border-radius:8px;
+    padding:0 16px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; font-size:13px;
+  }
+  .news-note{ font-size:12px; color:var(--ink-faint); margin-top:8px; min-height:16px; }
+  .foot-bottom{ display:flex; justify-content:space-between; font-size:12px; color:var(--ink-faint); flex-wrap:wrap; gap:10px; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
+    .latest-card{ grid-template-columns:1fr; }
+    .grid-3{ grid-template-columns:repeat(2,1fr); }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">WREN SABLE</a>
+    <ul class="nav-links">
+      <li><a href="music.html" class="active">Music</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="account.html">Fan Club</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="account.html" class="btn-pill" id="account-link">Sign in</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Static Orbit</h1>
+      <p><strong style="color:var(--accent);">Out now.</strong> Nine tracks recorded over a year in an empty radio station — Wren Sable's fourth full-length record, the quietest one yet, and the loudest at the end.</p>
+      <div class="hero-cta">
+        <a href="release.html?id=static-orbit" class="btn-pill solid">Listen to the album</a>
+        <a href="tour.html" class="btn-pill">See tour dates</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 420" width="100%" role="img" aria-label="Line illustration of a vinyl record">
+        <circle cx="210" cy="210" r="170" fill="var(--surface-2)"/>
+        <g class="rings" stroke="var(--border-strong)" stroke-width="1" fill="none">
+          <circle cx="210" cy="210" r="150"/>
+          <circle cx="210" cy="210" r="128"/>
+          <circle cx="210" cy="210" r="106"/>
+          <circle cx="210" cy="210" r="84"/>
+        </g>
+        <circle cx="210" cy="210" r="52" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="210" cy="210" r="6" fill="var(--accent)"/>
+        <text x="210" y="200" text-anchor="middle" fill="var(--ink-soft)" font-family="Bricolage Grotesque, sans-serif" font-size="11" letter-spacing="1">WREN SABLE</text>
+        <text x="210" y="222" text-anchor="middle" fill="var(--ink-faint)" font-family="IBM Plex Sans, sans-serif" font-size="9">STATIC ORBIT</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="latest wrap">
+  <div class="latest-card">
+    <div class="latest-art">
+      <svg viewBox="0 0 300 300" width="100%" height="100%">
+        <rect width="300" height="300" fill="var(--surface-2)"/>
+        <g stroke="var(--accent)" stroke-width="1.2" opacity="0.7">
+          <line x1="30" y1="60" x2="270" y2="60"/>
+          <line x1="30" y1="100" x2="270" y2="130"/>
+          <line x1="30" y1="160" x2="270" y2="150"/>
+          <line x1="30" y1="210" x2="270" y2="240"/>
+          <line x1="30" y1="260" x2="270" y2="260"/>
+        </g>
+      </svg>
+    </div>
+    <div class="latest-info">
+      <h3>Static Orbit</h3>
+      <div class="meta">Latest release &middot; Full-length &middot; 9 tracks &middot; 2026</div>
+
+      <div id="track-preview">
+        <div class="track-row">
+          <button class="play-btn" data-track="0">&#9654;</button>
+          <span class="track-name">Static Orbit</span>
+          <span class="track-dur">4:12</span>
+        </div>
+        <div class="track-row">
+          <button class="play-btn" data-track="1">&#9654;</button>
+          <span class="track-name">Empty Frequency</span>
+          <span class="track-dur">3:47</span>
+        </div>
+        <div class="track-row">
+          <button class="play-btn" data-track="2">&#9654;</button>
+          <span class="track-name">Halflight</span>
+          <span class="track-dur">5:02</span>
+        </div>
+      </div>
+
+      <a href="release.html?id=static-orbit" class="btn-pill solid">View full tracklist</a>
+    </div>
+  </div>
+</section>
+
+<div class="cities">
+  <div class="cities-track">
+    <span>PORTLAND</span><span class="dot">&bull;</span>
+    <span>DENVER</span><span class="dot">&bull;</span>
+    <span>AUSTIN</span><span class="dot">&bull;</span>
+    <span>CHICAGO</span><span class="dot">&bull;</span>
+    <span>TORONTO</span><span class="dot">&bull;</span>
+    <span>PORTLAND</span><span class="dot">&bull;</span>
+    <span>DENVER</span><span class="dot">&bull;</span>
+    <span>AUSTIN</span><span class="dot">&bull;</span>
+    <span>CHICAGO</span><span class="dot">&bull;</span>
+    <span>TORONTO</span><span class="dot">&bull;</span>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>Discography</h2>
+    <a href="music.html">View all</a>
+  </div>
+  <div class="grid-3">
+    <a href="release.html?id=static-orbit" class="rel-card">
+      <div class="art">
+        <svg viewBox="0 0 300 300" width="100%" height="100%"><rect width="300" height="300" fill="var(--surface-2)"/>
+          <g stroke="var(--accent)" stroke-width="1.2" opacity="0.7"><line x1="30" y1="60" x2="270" y2="60"/><line x1="30" y1="100" x2="270" y2="130"/><line x1="30" y1="160" x2="270" y2="150"/><line x1="30" y1="210" x2="270" y2="240"/><line x1="30" y1="260" x2="270" y2="260"/></g>
+        </svg>
+      </div>
+      <div class="name">Static Orbit</div>
+      <div class="year">2026 &middot; Full-length</div>
+    </a>
+    <a href="release.html?id=low-tide-radio" class="rel-card">
+      <div class="art">
+        <svg viewBox="0 0 300 300" width="100%" height="100%"><rect width="300" height="300" fill="var(--surface-2)"/>
+          <g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.6"><circle cx="150" cy="150" r="90"/><circle cx="150" cy="150" r="60"/><circle cx="150" cy="150" r="30"/></g>
+        </svg>
+      </div>
+      <div class="name">Low Tide Radio</div>
+      <div class="year">2024 &middot; Full-length</div>
+    </a>
+    <a href="release.html?id=paper-weather" class="rel-card">
+      <div class="art">
+        <svg viewBox="0 0 300 300" width="100%" height="100%"><rect width="300" height="300" fill="var(--surface-2)"/>
+          <g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.6"><path d="M30 220 L100 90 L170 180 L230 60 L270 150" fill="none"/></g>
+        </svg>
+      </div>
+      <div class="name">Paper Weather</div>
+      <div class="year">2022 &middot; EP</div>
+    </a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot-grid">
+    <div>
+      <div class="wordmark" style="margin-bottom:12px;">WREN SABLE</div>
+      <p style="font-size:14px; color:var(--ink-soft); max-width:280px; line-height:1.6;">Join the fan club for early access to tickets and unreleased demos.</p>
+      <form class="news-form" id="news-form">
+        <input type="email" placeholder="Email address" required aria-label="Email address">
+        <button type="submit">Join</button>
+      </form>
+      <div class="news-note" id="news-note"></div>
+    </div>
+    <div class="foot-col">
+      <h4>Site</h4>
+      <ul>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="tour.html">Tour</a></li>
+        <li><a href="account.html">Fan Club</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Account</h4>
+      <ul>
+        <li><a href="account.html">Sign in</a></li>
+        <li><a href="account.html">Create an account</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Wren Sable. A demo portfolio site — not a real artist.</span>
+    <span>Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a></span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    document.querySelectorAll('.play-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var wasPlaying = btn.classList.contains('playing');
+        document.querySelectorAll('.play-btn.playing').forEach(function(b){
+          b.classList.remove('playing');
+          b.innerHTML = '&#9654;';
+        });
+        if (!wasPlaying){
+          btn.classList.add('playing');
+          btn.innerHTML = '&#10074;&#10074;';
+        }
+      });
+    });
+
+    var form = document.getElementById('news-form');
+    if (form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        document.getElementById('news-note').textContent = "Thanks — you're on the list.";
+        form.reset();
+      });
+    }
+
+    var user = null;
+    try { user = JSON.parse(localStorage.getItem('wren_user') || 'null'); } catch(e){}
+    if (user && user.username){
+      document.getElementById('account-link').textContent = user.username;
+    }
+  })();
+</script>
+
+</body>
+</html>

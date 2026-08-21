@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour — Wren Sable</title>
+<meta name="description" content="Upcoming Wren Sable tour dates.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#16151A; --surface:#1F1D22; --surface-2:#29262D;
+    --ink:#F1EDE4; --ink-soft:#A79E8E; --ink-faint:#6E675C;
+    --border:#35313A; --border-strong:#453F49;
+    --accent:#D9A441; --accent-ink:#1A1305;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:rgba(22,21,26,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); }
+  nav.wrap{ max-width:1180px; display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-size:20px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .btn-pill{ font-size:13px; font-weight:600; padding:9px 18px; border-radius:999px; border:1px solid var(--border-strong); background:none; color:var(--ink); cursor:pointer; font-family:'IBM Plex Sans', sans-serif; }
+  .btn-pill:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .page-head{ padding:56px 0 40px; }
+  .page-head h1{ font-size:40px; margin-bottom:10px; }
+  .page-head p{ color:var(--ink-soft); font-size:15px; }
+
+  .dates{ padding-bottom:96px; }
+  .date-row{
+    display:grid; grid-template-columns:100px 1fr auto; gap:20px; align-items:center;
+    padding:20px 0; border-bottom:1px solid var(--border);
+  }
+  .date-row:first-child{ border-top:1px solid var(--border); }
+  .date-mo{ font-size:12px; color:var(--accent); font-weight:600; }
+  .date-day{ font-size:26px; font-family:'Bricolage Grotesque', sans-serif; font-weight:700; }
+  .date-city{ font-size:16px; font-weight:600; }
+  .date-venue{ font-size:13px; color:var(--ink-faint); margin-top:2px; }
+  .going-btn{
+    font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--border-strong); background:none; color:var(--ink); cursor:pointer;
+    font-family:'IBM Plex Sans', sans-serif; transition:all 160ms ease; white-space:nowrap;
+  }
+  .going-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .going-btn.going{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 700px){
+    .nav-links{ display:none; }
+    .date-row{ grid-template-columns:70px 1fr; }
+    .going-btn{ grid-column:1 / -1; justify-self:start; margin-top:8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">WREN SABLE</a>
+    <ul class="nav-links">
+      <li><a href="music.html">Music</a></li>
+      <li><a href="tour.html" class="active">Tour</a></li>
+      <li><a href="account.html">Fan Club</a></li>
+    </ul>
+    <a href="account.html" class="btn-pill" id="account-link">Sign in</a>
+  </nav>
+</header>
+
+<div class="wrap page-head">
+  <h1>Tour dates</h1>
+  <p>Six dates so far. More being added as the Static Orbit run continues.</p>
+</div>
+
+<div class="wrap dates" id="dates"></div>
+
+<footer>&copy; 2026 Wren Sable. A demo portfolio site — not a real artist. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var SHOWS = [
+    { id:"pdx", mo:"MAR", day:"14", city:"Portland, OR", venue:"The Hollow Room" },
+    { id:"den", mo:"MAR", day:"18", city:"Denver, CO", venue:"Larimer Hall" },
+    { id:"aus", mo:"MAR", day:"22", city:"Austin, TX", venue:"Radio East" },
+    { id:"chi", mo:"MAR", day:"27", city:"Chicago, IL", venue:"Static Room" },
+    { id:"tor", mo:"APR", day:"02", city:"Toronto, ON", venue:"Lakeside Hall" },
+    { id:"mtl", mo:"APR", day:"04", city:"Montreal, QC", venue:"Salle Nord" }
+  ];
+
+  var GOING_KEY = 'wren_going';
+  function getGoing(){
+    try { return JSON.parse(localStorage.getItem(GOING_KEY) || '[]'); } catch(e){ return []; }
+  }
+
+  var container = document.getElementById('dates');
+  container.innerHTML = SHOWS.map(function(s){
+    return '' +
+      '<div class="date-row">' +
+      '  <div><div class="date-mo">' + s.mo + '</div><div class="date-day">' + s.day + '</div></div>' +
+      '  <div><div class="date-city">' + s.city + '</div><div class="date-venue">' + s.venue + '</div></div>' +
+      '  <button class="going-btn" data-id="' + s.id + '">I&rsquo;m going</button>' +
+      '</div>';
+  }).join('');
+
+  function refresh(){
+    var going = getGoing();
+    container.querySelectorAll('.going-btn').forEach(function(btn){
+      var isGoing = going.indexOf(btn.dataset.id) > -1;
+      btn.textContent = isGoing ? "You're going" : "I’m going";
+      btn.classList.toggle('going', isGoing);
+    });
+  }
+  refresh();
+
+  container.addEventListener('click', function(e){
+    var btn = e.target.closest('.going-btn');
+    if (!btn) return;
+    var going = getGoing();
+    var idx = going.indexOf(btn.dataset.id);
+    if (idx > -1) going.splice(idx, 1); else going.push(btn.dataset.id);
+    localStorage.setItem(GOING_KEY, JSON.stringify(going));
+    refresh();
+  });
+
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('wren_user') || 'null'); } catch(e){}
+  if (user && user.username) document.getElementById('account-link').textContent = user.username;
+</script>
+
+</body>
+</html>

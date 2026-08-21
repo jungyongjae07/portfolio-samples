@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music — Wren Sable</title>
+<meta name="description" content="Full discography for Wren Sable — albums and EPs from Paper Weather through Static Orbit.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#16151A; --surface:#1F1D22; --surface-2:#29262D;
+    --ink:#F1EDE4; --ink-soft:#A79E8E; --ink-faint:#6E675C;
+    --border:#35313A; --border-strong:#453F49;
+    --accent:#D9A441; --accent-ink:#1A1305;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.display{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:rgba(22,21,26,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Bricolage Grotesque', Arial, sans-serif; font-size:20px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .btn-pill{ font-size:13px; font-weight:600; padding:9px 18px; border-radius:999px; border:1px solid var(--border-strong); }
+  .btn-pill:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .page-head{ padding:56px 0 40px; }
+  .page-head h1{ font-size:40px; margin-bottom:10px; }
+  .page-head p{ color:var(--ink-soft); font-size:15px; }
+
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-bottom:96px; }
+  .rel-card{ display:block; }
+  .rel-card .art{ aspect-ratio:1/1; border-radius:10px; overflow:hidden; background:var(--surface-2); margin-bottom:12px; transition:transform 220ms ease; }
+  .rel-card:hover .art{ transform:translateY(-4px); }
+  .rel-card .name{ font-size:16px; font-weight:600; }
+  .rel-card .year{ font-size:13px; color:var(--ink-faint); margin-top:2px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .grid-3{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">WREN SABLE</a>
+    <ul class="nav-links">
+      <li><a href="music.html" class="active">Music</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="account.html">Fan Club</a></li>
+    </ul>
+    <a href="account.html" class="btn-pill" id="account-link">Sign in</a>
+  </nav>
+</header>
+
+<div class="wrap page-head">
+  <h1>Music</h1>
+  <p>Four releases, 2019 through 2026.</p>
+</div>
+
+<div class="wrap">
+  <div class="grid-3" id="rel-grid"></div>
+</div>
+
+<footer>&copy; 2026 Wren Sable. A demo portfolio site — not a real artist. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var RELEASES = [
+    { id:"static-orbit", name:"Static Orbit", year:2026, type:"Full-length", art:"lines" },
+    { id:"low-tide-radio", name:"Low Tide Radio", year:2024, type:"Full-length", art:"rings" },
+    { id:"paper-weather", name:"Paper Weather", year:2022, type:"EP", art:"peaks" },
+    { id:"first-light", name:"First Light", year:2019, type:"Full-length", art:"grid" }
+  ];
+
+  var ART = {
+    lines: '<g stroke="var(--accent)" stroke-width="1.2" opacity="0.7"><line x1="30" y1="60" x2="270" y2="60"/><line x1="30" y1="100" x2="270" y2="130"/><line x1="30" y1="160" x2="270" y2="150"/><line x1="30" y1="210" x2="270" y2="240"/><line x1="30" y1="260" x2="270" y2="260"/></g>',
+    rings: '<g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.6"><circle cx="150" cy="150" r="90"/><circle cx="150" cy="150" r="60"/><circle cx="150" cy="150" r="30"/></g>',
+    peaks: '<g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.6"><path d="M30 220 L100 90 L170 180 L230 60 L270 150" fill="none"/></g>',
+    grid: '<g stroke="var(--ink-faint)" stroke-width="1" opacity="0.5">' +
+      Array.from({length:6}).map(function(_,i){ return '<line x1="' + (30+i*44) + '" y1="30" x2="' + (30+i*44) + '" y2="270"/>'; }).join('') +
+      Array.from({length:6}).map(function(_,i){ return '<line x1="30" y1="' + (30+i*44) + '" x2="270" y2="' + (30+i*44) + '"/>'; }).join('') +
+      '</g>'
+  };
+
+  document.getElementById('rel-grid').innerHTML = RELEASES.map(function(r){
+    return '' +
+      '<a href="release.html?id=' + r.id + '" class="rel-card">' +
+      '  <div class="art"><svg viewBox="0 0 300 300" width="100%" height="100%"><rect width="300" height="300" fill="var(--surface-2)"/>' + ART[r.art] + '</svg></div>' +
+      '  <div class="name">' + r.name + '</div>' +
+      '  <div class="year">' + r.year + ' &middot; ' + r.type + '</div>' +
+      '</a>';
+  }).join('');
+
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('wren_user') || 'null'); } catch(e){}
+  if (user && user.username) document.getElementById('account-link').textContent = user.username;
+</script>
+
+</body>
+</html>
