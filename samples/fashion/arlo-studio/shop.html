@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop the Edit — Arlo Studio</title>
+<meta name="description" content="Shop Arlo Studio's current edit — outerwear, knitwear, tailoring, and accessories. A small collection, restocked rarely.">
+<meta property="og:title" content="Shop the Edit — Arlo Studio">
+<meta property="og:description" content="A small collection, restocked rarely.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F3EEE6; --surface:#FFFFFF; --surface-2:#EAE2D4;
+    --ink:#211D1A; --ink-soft:#6E655B; --ink-faint:#9A9184;
+    --border:#DDD3C1; --border-strong:#C9BCA3;
+    --accent:#AE4A25; --accent-ink:#FBF1EA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+      --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+      --border:#3A332A; --border-strong:#4C4335;
+      --accent:#E08659; --accent-ink:#241209;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+    --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+    --border:#3A332A; --border-strong:#4C4335;
+    --accent:#E08659; --accent-ink:#241209;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:'Newsreader', Georgia, serif; font-weight:500; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Newsreader', Georgia, serif; font-size:22px; font-weight:600; }
+  .nav-links{ display:flex; gap:32px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; padding-bottom:2px; border-bottom:1px solid transparent; transition:border-color 180ms ease; }
+  .nav-links a.active{ border-bottom-color:var(--ink); }
+  .nav-links a:hover{ border-bottom-color:var(--ink); }
+  .nav-utility{ display:flex; align-items:center; gap:22px; font-size:14px; }
+  .bag-count{ display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:17px; padding:0 4px; border-radius:999px; background:var(--accent); color:var(--accent-ink); font-size:11px; font-weight:600; }
+
+  .page-head{ padding:56px 0 28px; }
+  .page-head h1{ font-size:40px; margin-bottom:8px; }
+  .page-head p{ color:var(--ink-soft); font-size:15px; }
+
+  .cat-strip{ display:flex; gap:12px; padding-bottom:32px; overflow-x:auto; }
+  .cat-pill{
+    flex:0 0 auto; font-size:13px; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--border-strong); color:var(--ink-soft);
+    transition: all 180ms ease; cursor:pointer; background:transparent;
+    font-family:'Work Sans', sans-serif;
+  }
+  .cat-pill.active, .cat-pill:hover{ border-color:var(--ink); color:var(--ink); background:var(--surface-2); }
+
+  .filter-bar{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin-bottom:32px; font-size:13px; color:var(--ink-soft); }
+  .filter-bar select{
+    font-family:'Work Sans', sans-serif; font-size:13px; color:var(--ink);
+    background:transparent; border:none; padding:4px 0; cursor:pointer;
+  }
+
+  .grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:24px 20px; padding-bottom:96px; }
+  .card{ display:flex; flex-direction:column; }
+  .card .art{ position:relative; aspect-ratio:3/4; border-radius:2px; overflow:hidden; background:var(--surface-2); margin-bottom:12px; }
+  .card .art a{ display:block; width:100%; height:100%; transition:opacity 220ms ease; }
+  .card .art a:hover{ opacity:0.86; }
+  .card .quick-add{
+    position:absolute; left:10px; right:10px; bottom:10px;
+    background:var(--ink); color:var(--bg);
+    font-family:'Work Sans', sans-serif; font-size:12px; font-weight:600;
+    padding:9px 0; text-align:center; border-radius:2px; border:none; cursor:pointer;
+    opacity:0; transform:translateY(6px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .card:hover .quick-add, .card .quick-add:focus-visible{ opacity:1; transform:translateY(0); }
+  .card .quick-add.added{ background:var(--accent); color:var(--accent-ink); }
+  .card .name{ font-size:14px; font-weight:500; }
+  .card .name a:hover{ text-decoration:underline; }
+  .card .price{ font-size:14px; color:var(--ink-soft); margin-top:2px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .grid{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Arlo Studio</a>
+    <ul class="nav-links">
+      <li><a href="shop.html" class="active">New</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="index.html#philosophy">Studio</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="account.html" id="account-link">Account</a>
+      <a href="shop.html">Bag <span class="bag-count" id="bag-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap page-head">
+  <h1>Shop the edit</h1>
+  <p>Eight styles. Nothing restocked until it sells out.</p>
+</div>
+
+<div class="wrap">
+  <div class="cat-strip" id="cat-strip">
+    <button class="cat-pill active" data-cat="all">All</button>
+    <button class="cat-pill" data-cat="outerwear">Outerwear</button>
+    <button class="cat-pill" data-cat="knitwear">Knitwear</button>
+    <button class="cat-pill" data-cat="tailoring">Tailoring</button>
+    <button class="cat-pill" data-cat="accessories">Accessories</button>
+  </div>
+
+  <div class="filter-bar">
+    <span id="result-count">8 styles</span>
+    <label>sort by
+      <select id="sort-select">
+        <option value="featured">featured</option>
+        <option value="price-asc">price: low to high</option>
+        <option value="price-desc">price: high to low</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="grid" id="product-grid"></div>
+</div>
+
+<footer>&copy; 2026 Arlo Studio. A demo portfolio site — not a real retailer. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var PRODUCTS = [
+    { id:"overcoat-clay", name:"The Overcoat — Clay", price:428, cat:"outerwear", shape:"coat" },
+    { id:"wool-trench", name:"Unlined Wool Trench", price:512, cat:"outerwear", shape:"coat" },
+    { id:"merino-half-zip", name:"Merino Half-Zip", price:168, cat:"knitwear", shape:"knit" },
+    { id:"cable-crew", name:"Cable Crewneck", price:174, cat:"knitwear", shape:"knit" },
+    { id:"wide-leg-trouser", name:"Wide-Leg Trouser", price:212, cat:"tailoring", shape:"tailor" },
+    { id:"silk-shirt", name:"Silk Camp Shirt", price:186, cat:"tailoring", shape:"tailor" },
+    { id:"structured-tote", name:"Structured Tote", price:186, cat:"accessories", shape:"bag" },
+    { id:"leather-belt", name:"Saddle Leather Belt", price:96, cat:"accessories", shape:"bag" }
+  ];
+
+  var ART = {
+    coat: '<path d="M60 60 L100 40 L140 60 L155 100 L135 250 L65 250 L45 100 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M60 60 L30 130 L48 145 L70 100" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M140 60 L170 130 L152 145 L130 100" fill="none" stroke="var(--ink)" stroke-width="1.6"/>',
+    knit: '<path d="M65 70 L100 55 L135 70 L145 95 L128 100 L128 220 L72 220 L72 100 L55 95 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M78 90 h44 M78 110 h44 M78 130 h44 M78 150 h44 M78 170 h44 M78 190 h44" stroke="var(--border-strong)" stroke-width="1.6"/>',
+    tailor: '<path d="M70 55 L100 68 L130 55 L150 90 L134 100 L130 230 L70 230 L66 100 L50 90 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M92 68 L100 100 L108 68" fill="none" stroke="var(--ink)" stroke-width="1.6"/>',
+    bag: '<rect x="55" y="110" width="90" height="70" rx="4" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M75 110 Q75 80 100 80 Q125 80 125 110" fill="none" stroke="var(--ink)" stroke-width="1.6"/>'
+  };
+
+  var grid = document.getElementById('product-grid');
+  var resultCount = document.getElementById('result-count');
+  var activeCat = 'all';
+  var sortMode = 'featured';
+
+  function render(){
+    var items = PRODUCTS.filter(function(p){ return activeCat === 'all' || p.cat === activeCat; });
+    if (sortMode === 'price-asc') items = items.slice().sort(function(a,b){ return a.price - b.price; });
+    if (sortMode === 'price-desc') items = items.slice().sort(function(a,b){ return b.price - a.price; });
+
+    resultCount.textContent = items.length + (items.length === 1 ? ' style' : ' styles');
+    grid.innerHTML = items.map(function(p){
+      return '' +
+        '<div class="card">' +
+        '  <div class="art">' +
+        '    <a href="product.html?id=' + p.id + '"><svg viewBox="0 0 200 280" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="200" height="280" fill="var(--surface-2)"/>' + ART[p.shape] + '</svg></a>' +
+        '    <button class="quick-add" data-id="' + p.id + '">Add to bag</button>' +
+        '  </div>' +
+        '  <div class="name"><a href="product.html?id=' + p.id + '">' + p.name + '</a></div>' +
+        '  <div class="price">$' + p.price + '</div>' +
+        '</div>';
+    }).join('');
+
+    grid.querySelectorAll('.quick-add').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        addToBag();
+        btn.textContent = 'Added';
+        btn.classList.add('added');
+        setTimeout(function(){ btn.textContent = 'Add to bag'; btn.classList.remove('added'); }, 1400);
+      });
+    });
+  }
+
+  document.getElementById('cat-strip').addEventListener('click', function(e){
+    var btn = e.target.closest('.cat-pill');
+    if (!btn) return;
+    document.querySelectorAll('.cat-pill').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+
+  document.getElementById('sort-select').addEventListener('change', function(e){
+    sortMode = e.target.value;
+    render();
+  });
+
+  function addToBag(){
+    var count = parseInt(localStorage.getItem('arlo_bag_count') || '0', 10) + 1;
+    localStorage.setItem('arlo_bag_count', String(count));
+    document.getElementById('bag-count').textContent = String(count);
+  }
+
+  (function(){
+    var count = parseInt(localStorage.getItem('arlo_bag_count') || '0', 10);
+    document.getElementById('bag-count').textContent = String(count);
+    var user = null;
+    try { user = JSON.parse(localStorage.getItem('arlo_user') || 'null'); } catch(e){}
+    if (user && user.email) document.getElementById('account-link').textContent = user.email.split('@')[0];
+
+    var hash = window.location.hash.replace('#','');
+    if (hash) {
+      var target = document.querySelector('.cat-pill[data-cat="' + hash + '"]');
+      if (target) target.click();
+    }
+  })();
+
+  render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account — Arlo Studio</title>
+<meta name="description" content="Sign in or create an Arlo Studio account to check order status and save favorites.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F3EEE6; --surface:#FFFFFF; --surface-2:#EAE2D4;
+    --ink:#211D1A; --ink-soft:#6E655B; --ink-faint:#9A9184;
+    --border:#DDD3C1; --border-strong:#C9BCA3;
+    --accent:#AE4A25; --accent-ink:#FBF1EA;
+    --error:#A3341F;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+      --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+      --border:#3A332A; --border-strong:#4C4335;
+      --accent:#E08659; --accent-ink:#241209; --error:#E38268;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+    --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+    --border:#3A332A; --border-strong:#4C4335;
+    --accent:#E08659; --accent-ink:#241209; --error:#E38268;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.serif{ font-family:'Newsreader', Georgia, serif; font-weight:500; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Newsreader', Georgia, serif; font-size:22px; font-weight:600; }
+  .nav-links{ display:flex; gap:32px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; }
+  .nav-links a:hover{ text-decoration:underline; }
+  .nav-utility{ display:flex; align-items:center; gap:22px; font-size:14px; }
+  .bag-count{ display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:17px; padding:0 4px; border-radius:999px; background:var(--accent); color:var(--accent-ink); font-size:11px; font-weight:600; }
+
+  .account-shell{ display:grid; grid-template-columns:1fr 1fr; min-height:calc(100vh - 66px); }
+  .account-art{ background:var(--surface-2); display:flex; align-items:center; justify-content:center; padding:40px; }
+  .account-panel{ display:flex; align-items:center; padding:40px; }
+  .account-inner{ max-width:380px; margin:0 auto; width:100%; }
+
+  .tabs{ display:flex; gap:24px; margin-bottom:28px; border-bottom:1px solid var(--border); }
+  .tab{ font-family:'Work Sans', sans-serif; font-size:14px; font-weight:600; background:none; border:none; padding:0 0 12px; color:var(--ink-faint); cursor:pointer; border-bottom:2px solid transparent; }
+  .tab.active{ color:var(--ink); border-bottom-color:var(--ink); }
+
+  .signed-in-card{ display:none; }
+  .signed-in-card.show{ display:block; }
+  .signed-in-card p{ color:var(--ink-soft); font-size:14px; line-height:1.6; margin:14px 0 22px; }
+
+  form{ display:none; flex-direction:column; gap:18px; }
+  form.active{ display:flex; }
+
+  .field{ position:relative; }
+  .field label{ display:block; font-size:12px; color:var(--ink-faint); margin-bottom:6px; }
+  .field input{
+    width:100%; border:none; border-bottom:1px solid var(--border-strong);
+    background:transparent; padding:8px 0; font-family:'Work Sans', sans-serif;
+    font-size:15px; color:var(--ink);
+  }
+  .field input:focus{ outline:none; border-bottom-color:var(--ink); }
+  .hint{ font-size:12px; color:var(--ink-faint); margin-top:6px; }
+  .error-text{ font-size:12px; color:var(--error); margin-top:6px; min-height:14px; }
+
+  .submit-btn{
+    background:var(--ink); color:var(--bg); border:none; border-radius:2px;
+    font-family:'Work Sans', sans-serif; font-size:14px; font-weight:600;
+    padding:14px 0; cursor:pointer; margin-top:6px;
+  }
+  .submit-btn:hover{ opacity:0.92; }
+  .legal{ font-size:12px; color:var(--ink-faint); text-align:center; margin-top:2px; }
+  .guest-link{ text-align:center; font-size:13px; margin-top:20px; text-decoration:underline; display:block; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .account-shell{ grid-template-columns:1fr; }
+    .account-art{ min-height:220px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Arlo Studio</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">New</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="index.html#philosophy">Studio</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="account.html" id="account-link">Account</a>
+      <a href="shop.html">Bag <span class="bag-count" id="bag-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<div class="account-shell">
+  <div class="account-art">
+    <svg viewBox="0 0 480 560" width="100%" height="100%" style="max-width:420px;">
+      <path d="M180 80 Q240 60 300 80" stroke="var(--ink)" stroke-width="2" fill="none"/>
+      <path d="M150 120 L180 82 L240 108 L300 82 L330 120 L318 200 L300 300 L290 470 Q240 490 190 470 L180 300 L162 200 Z"
+            fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M150 120 L110 230 L138 250 L182 165" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M330 120 L370 230 L342 250 L298 165" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="240" cy="200" r="3" fill="var(--accent)"/>
+      <circle cx="240" cy="260" r="3" fill="var(--accent)"/>
+      <circle cx="240" cy="320" r="3" fill="var(--accent)"/>
+    </svg>
+  </div>
+
+  <div class="account-panel">
+    <div class="account-inner">
+
+      <div class="signed-in-card" id="signed-in-card">
+        <h1 style="font-size:26px;">Welcome back</h1>
+        <p id="signed-in-email"></p>
+        <a href="shop.html" class="submit-btn" style="display:block; text-align:center; text-decoration:none;">Continue shopping</a>
+        <a href="#" id="sign-out-link" class="guest-link">Sign out</a>
+      </div>
+
+      <div id="auth-forms">
+        <div class="tabs">
+          <button class="tab active" data-tab="signin">Sign in</button>
+          <button class="tab" data-tab="signup">Create an account</button>
+        </div>
+
+        <form id="signin-form" class="active">
+          <div class="field">
+            <label for="si-email">Email</label>
+            <input type="email" id="si-email" required>
+          </div>
+          <div class="field">
+            <label for="si-password">Password</label>
+            <input type="password" id="si-password" required>
+          </div>
+          <div class="error-text" id="si-error"></div>
+          <button type="submit" class="submit-btn">Sign in</button>
+          <a href="shop.html" class="guest-link">Continue as guest</a>
+        </form>
+
+        <form id="signup-form">
+          <div class="field">
+            <label for="su-email">Email</label>
+            <input type="email" id="su-email" required>
+          </div>
+          <div class="field">
+            <label for="su-password">Password</label>
+            <input type="password" id="su-password" required minlength="7">
+            <div class="hint">7 characters minimum</div>
+          </div>
+          <div class="field">
+            <label for="su-confirm">Confirm password</label>
+            <input type="password" id="su-confirm" required minlength="7">
+          </div>
+          <div class="error-text" id="su-error"></div>
+          <button type="submit" class="submit-btn">Create an account</button>
+          <p class="legal">By signing up you accept our Terms &amp; Privacy Policy.</p>
+          <a href="shop.html" class="guest-link">Continue as guest</a>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Arlo Studio. A demo portfolio site — not a real retailer. Accounts are stored locally in your browser only. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var USER_KEY = 'arlo_user';
+  var USERS_KEY = 'arlo_users';
+
+  function getUsers(){
+    try { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); } catch(e){ return {}; }
+  }
+  function getCurrentUser(){
+    try { return JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch(e){ return null; }
+  }
+
+  function showSignedIn(user){
+    document.getElementById('auth-forms').style.display = 'none';
+    document.getElementById('signed-in-card').classList.add('show');
+    document.getElementById('signed-in-email').textContent = 'Signed in as ' + user.email + '. Order history and favorites are simulated for this demo.';
+    document.getElementById('account-link').textContent = user.email.split('@')[0];
+  }
+
+  var current = getCurrentUser();
+  if (current) showSignedIn(current);
+
+  document.querySelectorAll('.tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById('signin-form').classList.toggle('active', tab.dataset.tab === 'signin');
+      document.getElementById('signup-form').classList.toggle('active', tab.dataset.tab === 'signup');
+    });
+  });
+
+  document.getElementById('signin-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('si-email').value.trim().toLowerCase();
+    var pass = document.getElementById('si-password').value;
+    var users = getUsers();
+    var errEl = document.getElementById('si-error');
+    if (!users[email] || users[email].password !== pass){
+      errEl.textContent = 'No account matches that email and password. Try creating an account instead.';
+      return;
+    }
+    errEl.textContent = '';
+    var user = { email: email };
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    showSignedIn(user);
+  });
+
+  document.getElementById('signup-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('su-email').value.trim().toLowerCase();
+    var pass = document.getElementById('su-password').value;
+    var confirm = document.getElementById('su-confirm').value;
+    var errEl = document.getElementById('su-error');
+
+    if (pass.length < 7){
+      errEl.textContent = 'Password must be at least 7 characters.';
+      return;
+    }
+    if (pass !== confirm){
+      errEl.textContent = 'Passwords do not match.';
+      return;
+    }
+    var users = getUsers();
+    if (users[email]){
+      errEl.textContent = 'An account with that email already exists — try signing in.';
+      return;
+    }
+    errEl.textContent = '';
+    users[email] = { password: pass };
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    var user = { email: email };
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    showSignedIn(user);
+  });
+
+  document.getElementById('sign-out-link').addEventListener('click', function(e){
+    e.preventDefault();
+    localStorage.removeItem(USER_KEY);
+    window.location.reload();
+  });
+
+  (function(){
+    var count = parseInt(localStorage.getItem('arlo_bag_count') || '0', 10);
+    document.getElementById('bag-count').textContent = String(count);
+  })();
+</script>
+
+</body>
+</html>

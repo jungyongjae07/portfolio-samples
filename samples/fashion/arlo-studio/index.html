@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arlo Studio — Fewer Pieces, Worn for Years</title>
+<meta name="description" content="Arlo Studio designs a small, considered collection of ready-to-wear built to be worn for years, not one season. Outerwear, knitwear, and tailoring made to last.">
+<meta property="og:title" content="Arlo Studio — Fewer Pieces, Worn for Years">
+<meta property="og:description" content="A small, considered ready-to-wear collection built to last.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F3EEE6;
+    --surface:#FFFFFF;
+    --surface-2:#EAE2D4;
+    --ink:#211D1A;
+    --ink-soft:#6E655B;
+    --ink-faint:#9A9184;
+    --border:#DDD3C1;
+    --border-strong:#C9BCA3;
+    --accent:#AE4A25;
+    --accent-ink:#FBF1EA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1A1714;
+      --surface:#221E1A;
+      --surface-2:#2A251F;
+      --ink:#F1E9DC;
+      --ink-soft:#BDB2A0;
+      --ink-faint:#7C7365;
+      --border:#3A332A;
+      --border-strong:#4C4335;
+      --accent:#E08659;
+      --accent-ink:#241209;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A1714;
+    --surface:#221E1A;
+    --surface-2:#2A251F;
+    --ink:#F1E9DC;
+    --ink-soft:#BDB2A0;
+    --ink-faint:#7C7365;
+    --border:#3A332A;
+    --border-strong:#4C4335;
+    --accent:#E08659;
+    --accent-ink:#241209;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- announcement bar ---------- */
+  .announce{
+    background:var(--ink);
+    color:var(--bg);
+    text-align:center;
+    font-size:13px;
+    letter-spacing:0.02em;
+    padding:9px 16px;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .wordmark{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .nav-links{
+    display:flex; gap:32px; list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    font-size:14px;
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:border-color 180ms ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ border-bottom-color:var(--ink); }
+  .nav-utility{ display:flex; align-items:center; gap:22px; font-size:14px; }
+  .nav-utility a{ display:flex; align-items:center; gap:6px; }
+  .bag-count{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:17px; height:17px; padding:0 4px;
+    border-radius:999px; background:var(--accent); color:var(--accent-ink);
+    font-size:11px; font-weight:600;
+  }
+  .nav-toggle{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:64px 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items:center;
+    gap:40px;
+  }
+  .hero-word{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:500;
+    font-size:clamp(72px, 11vw, 168px);
+    line-height:0.86;
+    letter-spacing:-0.03em;
+    margin-left:-6px;
+    animation: rise 900ms cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero-copy{ max-width:360px; margin-top:22px; animation: rise 900ms cubic-bezier(.2,.7,.2,1) 120ms both; }
+  .hero-copy p{ font-size:17px; line-height:1.55; color:var(--ink-soft); margin:14px 0 22px; }
+  .hero-art{ animation: fade-in 1100ms ease 200ms both; }
+
+  @keyframes rise{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:translateY(0);} }
+  @keyframes fade-in{ from{ opacity:0; } to{ opacity:1; } }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--bg);
+    font-family:'Work Sans', sans-serif;
+    font-size:14px; font-weight:600;
+    padding:13px 22px; border-radius:2px;
+    border:1px solid var(--ink);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+  .btn:hover{ transform:translateX(3px); }
+  .btn-outline{
+    background:transparent; color:var(--ink); border:1px solid var(--border-strong);
+  }
+  .btn-outline:hover{ border-color:var(--ink); }
+
+  /* ---------- category strip ---------- */
+  .cats{ padding:88px 0 8px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:32px; gap:16px; flex-wrap:wrap; }
+  .section-head h2{ font-size:28px; }
+  .section-head .tag{ font-size:14px; color:var(--ink-soft); font-style:italic; font-family:'Newsreader', Georgia, serif; }
+  .cat-row{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;
+  }
+  .cat-card{
+    display:block; border-radius:2px; overflow:hidden;
+    background:var(--surface-2);
+    transition: transform 220ms ease;
+  }
+  .cat-card:hover{ transform:translateY(-4px); }
+  .cat-card .art{ aspect-ratio:4/5; }
+  .cat-card .label{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; font-size:14px; font-weight:500;
+  }
+  .cat-card .label .arrow{ color:var(--accent); font-family:'Newsreader', serif; font-size:16px; }
+
+  /* ---------- split banner ---------- */
+  .split{ padding:88px 0; }
+  .split-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .split-panel{
+    position:relative; min-height:420px;
+    display:flex; align-items:flex-end;
+    padding:32px; overflow:hidden;
+  }
+  .split-panel .art{ position:absolute; inset:0; }
+  .split-panel .content{ position:relative; z-index:1; }
+  .split-panel h3{ font-size:32px; color:#FFFFFF; margin-bottom:10px; }
+  .split-panel .btn-outline{ border-color:rgba(255,255,255,0.55); color:#FFFFFF; }
+  .split-panel .btn-outline:hover{ border-color:#FFFFFF; }
+
+  /* ---------- philosophy ---------- */
+  .philosophy{ padding:96px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .philosophy-grid{ display:grid; grid-template-columns:0.85fr 1fr; gap:64px; align-items:start; }
+  .philosophy h2{ font-size:clamp(28px,3.4vw,42px); line-height:1.18; }
+  .philosophy .body{ font-size:16px; line-height:1.7; color:var(--ink-soft); }
+  .philosophy .body p + p{ margin-top:16px; }
+
+  /* ---------- product preview rail ---------- */
+  .rail{ padding:88px 0; }
+  .rail-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .p-card{ display:block; }
+  .p-card .art{ aspect-ratio:3/4; border-radius:2px; overflow:hidden; background:var(--surface-2); margin-bottom:12px; transition:opacity 220ms ease; }
+  .p-card:hover .art{ opacity:0.86; }
+  .p-card .name{ font-size:14px; font-weight:500; }
+  .p-card .price{ font-size:14px; color:var(--ink-soft); margin-top:2px; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:72px 0 32px; border-top:1px solid var(--border); margin-top:40px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr repeat(3, 1fr); gap:32px; margin-bottom:56px; }
+  .foot-col h4{ font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:16px; font-weight:600; font-family:'Work Sans',sans-serif; }
+  .foot-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .foot-col a{ font-size:14px; color:var(--ink-soft); }
+  .foot-col a:hover{ color:var(--ink); }
+  .foot-brand .wordmark{ margin-bottom:14px; }
+  .foot-brand p{ font-size:14px; color:var(--ink-soft); max-width:280px; line-height:1.6; }
+  .news-form{ display:flex; gap:0; margin-top:16px; border-bottom:1px solid var(--border-strong); max-width:320px; }
+  .news-form input{
+    flex:1; border:none; background:transparent; padding:10px 0;
+    font-family:'Work Sans', sans-serif; font-size:14px; color:var(--ink);
+  }
+  .news-form input:focus{ outline:none; }
+  .news-form button{
+    border:none; background:none; color:var(--ink); font-family:'Newsreader',serif; font-size:18px; cursor:pointer; padding:0 4px;
+  }
+  .news-note{ font-size:12px; color:var(--ink-faint); margin-top:8px; min-height:16px; }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ink-faint); flex-wrap:wrap; gap:12px; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; }
+    .cat-row{ grid-template-columns:repeat(2,1fr); }
+    .split-grid{ grid-template-columns:1fr; }
+    .philosophy-grid{ grid-template-columns:1fr; gap:28px; }
+    .rail-row{ grid-template-columns:repeat(2,1fr); }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Considered pieces, restocked rarely — the current edit is final until spring.</div>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Arlo Studio</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">New</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="index.html#philosophy">Studio</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="account.html" id="account-link">Account</a>
+      <a href="shop.html">Bag <span class="bag-count" id="bag-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-word">Arlo</div>
+      <div class="hero-copy">
+        <p>A small, considered collection of outerwear, knitwear, and tailoring — designed to be worn for years, not one season.</p>
+        <a href="shop.html" class="btn">Shop the edit <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 480 560" role="img" aria-label="Line illustration of a tailored coat on a hanger">
+        <rect width="480" height="560" fill="var(--surface-2)"/>
+        <line x1="240" y1="40" x2="240" y2="80" stroke="var(--ink-faint)" stroke-width="2"/>
+        <path d="M180 80 Q240 60 300 80" stroke="var(--ink)" stroke-width="2" fill="none"/>
+        <path d="M150 120 L180 82 L240 108 L300 82 L330 120 L318 200 L300 300 L290 470 Q240 490 190 470 L180 300 L162 200 Z"
+              fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M150 120 L110 230 L138 250 L182 165" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M330 120 L370 230 L342 250 L298 165" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="240" y1="150" x2="240" y2="460" stroke="var(--border-strong)" stroke-width="1.5"/>
+        <circle cx="240" cy="200" r="3" fill="var(--accent)"/>
+        <circle cx="240" cy="260" r="3" fill="var(--accent)"/>
+        <circle cx="240" cy="320" r="3" fill="var(--accent)"/>
+        <circle cx="240" cy="380" r="3" fill="var(--accent)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="cats wrap">
+  <div class="section-head">
+    <h2>Shop by category</h2>
+    <span class="tag">Four groups. Nothing extra.</span>
+  </div>
+  <div class="cat-row">
+    <a href="shop.html#outerwear" class="cat-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M60 60 L100 40 L140 60 L155 100 L135 250 L65 250 L45 100 Z" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M60 60 L30 130 L48 145 L70 100" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M140 60 L170 130 L152 145 L130 100" fill="none" stroke="var(--ink)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="label">Outerwear <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="shop.html#knitwear" class="cat-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M65 70 L100 55 L135 70 L145 95 L128 100 L128 220 L72 220 L72 100 L55 95 Z" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M78 90 h44 M78 110 h44 M78 130 h44 M78 150 h44 M78 170 h44 M78 190 h44" stroke="var(--border-strong)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="label">Knitwear <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="shop.html#tailoring" class="cat-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M70 55 L100 68 L130 55 L150 90 L134 100 L130 230 L70 230 L66 100 L50 90 Z" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M92 68 L100 100 L108 68" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="100" cy="130" r="2.4" fill="var(--accent)"/>
+          <circle cx="100" cy="150" r="2.4" fill="var(--accent)"/>
+          <circle cx="100" cy="170" r="2.4" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <div class="label">Tailoring <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="shop.html#accessories" class="cat-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <rect x="55" y="110" width="90" height="70" rx="4" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M75 110 Q75 80 100 80 Q125 80 125 110" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <rect x="90" y="130" width="20" height="14" rx="2" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <div class="label">Accessories <span class="arrow">&rarr;</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap">
+    <div class="split-grid">
+      <a href="shop.html" class="split-panel">
+        <div class="art">
+          <svg viewBox="0 0 600 420" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="420" fill="#1F1B17"/>
+            <g opacity="0.5" stroke="#F3EEE6" stroke-width="1.4" fill="none">
+              <path d="M120 340 L160 60 L200 340" />
+              <path d="M260 340 L300 60 L340 340" />
+              <path d="M400 340 L440 60 L480 340" />
+            </g>
+          </svg>
+        </div>
+        <div class="content">
+          <h3>New arrivals</h3>
+          <span class="btn btn-outline">View the edit</span>
+        </div>
+      </a>
+      <a href="shop.html" class="split-panel">
+        <div class="art">
+          <svg viewBox="0 0 600 420" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="420" fill="#AE4A25"/>
+            <g opacity="0.55" stroke="#FBF1EA" stroke-width="1.4" fill="none">
+              <circle cx="300" cy="210" r="120"/>
+              <circle cx="300" cy="210" r="80"/>
+              <circle cx="300" cy="210" r="40"/>
+            </g>
+          </svg>
+        </div>
+        <div class="content">
+          <h3>The Archive</h3>
+          <span class="btn btn-outline">Reissued styles</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy wrap" id="philosophy">
+  <div class="philosophy-grid">
+    <h2>We design for the fortieth wear, not the first photo.</h2>
+    <div class="body">
+      <p>Arlo Studio releases one small collection at a time — usually under twenty styles — and holds each one until it's genuinely worn out before replacing it. Fabrics are chosen for how they age: wool that softens, cotton that keeps its shape, hardware that doesn't pit.</p>
+      <p>Every piece is pattern-tested on real bodies before it ships, sized honestly rather than vanity-sized, and priced to reflect a garment meant to outlast a season. Nothing is restocked until the last one sells — the edit you see is the edit that exists.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rail wrap">
+  <div class="section-head">
+    <h2>From the current edit</h2>
+    <a href="shop.html" class="btn-outline btn" style="padding:9px 16px; font-size:13px;">View all</a>
+  </div>
+  <div class="rail-row">
+    <a href="product.html" class="p-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M60 60 L100 40 L140 60 L155 100 L135 250 L65 250 L45 100 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="name">The Overcoat — Clay</div>
+      <div class="price">$428</div>
+    </a>
+    <a href="shop.html#knitwear" class="p-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M65 70 L100 55 L135 70 L145 95 L128 100 L128 220 L72 220 L72 100 L55 95 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="name">Merino Half-Zip</div>
+      <div class="price">$168</div>
+    </a>
+    <a href="shop.html#tailoring" class="p-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <path d="M70 55 L100 68 L130 55 L150 90 L134 100 L130 230 L70 230 L66 100 L50 90 Z" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="name">Wide-Leg Trouser</div>
+      <div class="price">$212</div>
+    </a>
+    <a href="shop.html#accessories" class="p-card">
+      <div class="art">
+        <svg viewBox="0 0 200 250" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="var(--surface-2)"/>
+          <rect x="55" y="110" width="90" height="70" rx="4" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+          <path d="M75 110 Q75 80 100 80 Q125 80 125 110" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="name">Structured Tote</div>
+      <div class="price">$186</div>
+    </a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="wordmark">Arlo Studio</div>
+      <p>A small, considered collection — designed to be worn for years, not one season.</p>
+      <form class="news-form" id="news-form">
+        <input type="email" placeholder="Email address" required aria-label="Email address">
+        <button type="submit" aria-label="Subscribe">&rarr;</button>
+      </form>
+      <div class="news-note" id="news-note"></div>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html#outerwear">Outerwear</a></li>
+        <li><a href="shop.html#knitwear">Knitwear</a></li>
+        <li><a href="shop.html#tailoring">Tailoring</a></li>
+        <li><a href="shop.html#accessories">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="index.html#philosophy">Our approach</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="shop.html">Shipping &amp; returns</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="account.html">Sign in</a></li>
+        <li><a href="account.html">Create an account</a></li>
+        <li><a href="shop.html">Size guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Arlo Studio. A demo portfolio site — not a real retailer.</span>
+    <span>Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a></span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var BAG_KEY = 'arlo_bag_count';
+    var USER_KEY = 'arlo_user';
+
+    function refreshChrome(){
+      var count = parseInt(localStorage.getItem(BAG_KEY) || '0', 10);
+      var el = document.getElementById('bag-count');
+      if (el) el.textContent = String(count);
+
+      var accountLink = document.getElementById('account-link');
+      var user = null;
+      try { user = JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch(e){}
+      if (accountLink && user && user.email) {
+        accountLink.textContent = user.email.split('@')[0];
+      }
+    }
+    refreshChrome();
+
+    var form = document.getElementById('news-form');
+    if (form) {
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        document.getElementById('news-note').textContent = 'Thanks — you\'re on the list.';
+        form.reset();
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

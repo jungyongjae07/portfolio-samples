@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Product — Arlo Studio</title>
+<meta name="description" content="A single piece from Arlo Studio's current edit — details, fabric, and fit.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F3EEE6; --surface:#FFFFFF; --surface-2:#EAE2D4;
+    --ink:#211D1A; --ink-soft:#6E655B; --ink-faint:#9A9184;
+    --border:#DDD3C1; --border-strong:#C9BCA3;
+    --accent:#AE4A25; --accent-ink:#FBF1EA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+      --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+      --border:#3A332A; --border-strong:#4C4335;
+      --accent:#E08659; --accent-ink:#241209;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A1714; --surface:#221E1A; --surface-2:#2A251F;
+    --ink:#F1E9DC; --ink-soft:#BDB2A0; --ink-faint:#7C7365;
+    --border:#3A332A; --border-strong:#4C4335;
+    --accent:#E08659; --accent-ink:#241209;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:'Newsreader', Georgia, serif; font-weight:500; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; }
+  .wordmark{ font-family:'Newsreader', Georgia, serif; font-size:22px; font-weight:600; }
+  .nav-links{ display:flex; gap:32px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; padding-bottom:2px; border-bottom:1px solid transparent; transition:border-color 180ms ease; }
+  .nav-links a:hover{ border-bottom-color:var(--ink); }
+  .nav-utility{ display:flex; align-items:center; gap:22px; font-size:14px; }
+  .bag-count{ display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:17px; padding:0 4px; border-radius:999px; background:var(--accent); color:var(--accent-ink); font-size:11px; font-weight:600; }
+
+  .crumb{ padding:20px 0 0; font-size:13px; color:var(--ink-faint); }
+  .crumb a:hover{ color:var(--ink); }
+
+  .pdp{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; padding:24px 0 96px; align-items:flex-start; }
+  .gallery{ display:flex; flex-direction:column; gap:8px; }
+  .gallery .art{ background:var(--surface-2); border-radius:2px; overflow:hidden; aspect-ratio:4/5; }
+
+  .pdp-info{ position:sticky; top:88px; }
+  .pdp-info h1{ font-size:28px; margin-bottom:8px; }
+  .pdp-info .price{ font-size:18px; color:var(--ink-soft); margin-bottom:24px; }
+
+  .swatches{ display:flex; gap:10px; margin-bottom:22px; }
+  .swatch{ width:26px; height:26px; border-radius:50%; border:2px solid transparent; cursor:pointer; padding:0; }
+  .swatch.active{ border-color:var(--ink); }
+  .swatch-label{ font-size:13px; color:var(--ink-soft); margin-bottom:10px; }
+
+  .size-row{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+  .size-opt{
+    font-family:'Work Sans', sans-serif; font-size:13px; padding:9px 14px;
+    border:1px solid var(--border-strong); background:transparent; color:var(--ink);
+    cursor:pointer; border-radius:2px; transition:all 160ms ease;
+  }
+  .size-opt.active{ border-color:var(--ink); background:var(--ink); color:var(--bg); }
+  .size-opt:hover:not(.active){ border-color:var(--ink); }
+
+  .add-btn{
+    display:block; width:100%; background:var(--ink); color:var(--bg);
+    font-family:'Work Sans', sans-serif; font-size:14px; font-weight:600;
+    padding:15px 0; border-radius:2px; border:none; cursor:pointer;
+    transition: background 180ms ease;
+  }
+  .add-btn.added{ background:var(--accent); color:var(--accent-ink); }
+  .add-note{ font-size:12px; color:var(--ink-faint); margin-top:10px; min-height:16px; }
+
+  .desc{ font-size:15px; line-height:1.6; color:var(--ink-soft); margin:24px 0; }
+
+  .accordion{ border-top:1px solid var(--border); }
+  .acc-item{ border-bottom:1px solid var(--border); }
+  .acc-item button{
+    width:100%; display:flex; justify-content:space-between; align-items:center;
+    background:none; border:none; padding:16px 0; font-family:'Work Sans', sans-serif;
+    font-size:14px; font-weight:500; color:var(--ink); cursor:pointer;
+  }
+  .acc-item .plus{ font-family:'Newsreader', serif; font-size:18px; transition:transform 180ms ease; }
+  .acc-item.open .plus{ transform:rotate(45deg); }
+  .acc-body{ max-height:0; overflow:hidden; transition:max-height 220ms ease; font-size:14px; color:var(--ink-soft); line-height:1.6; }
+  .acc-item.open .acc-body{ max-height:200px; padding-bottom:16px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .pdp{ grid-template-columns:1fr; }
+    .pdp-info{ position:static; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Arlo Studio</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">New</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="index.html#philosophy">Studio</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="account.html" id="account-link">Account</a>
+      <a href="shop.html">Bag <span class="bag-count" id="bag-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap crumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / <span id="crumb-name">Product</span></div>
+
+<div class="wrap pdp">
+  <div class="gallery">
+    <div class="art" id="art-main"></div>
+    <div class="art" id="art-detail" style="aspect-ratio:16/7;"></div>
+  </div>
+
+  <div class="pdp-info">
+    <h1 id="p-name">Loading…</h1>
+    <div class="price" id="p-price"></div>
+
+    <div class="swatch-label">colorway</div>
+    <div class="swatches" id="swatches"></div>
+
+    <div class="swatch-label">size</div>
+    <div class="size-row" id="sizes"></div>
+
+    <button class="add-btn" id="add-btn">Add to bag</button>
+    <div class="add-note" id="add-note"></div>
+
+    <p class="desc" id="p-desc"></p>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <button type="button">Fit &amp; details <span class="plus">+</span></button>
+        <div class="acc-body" id="acc-fit"></div>
+      </div>
+      <div class="acc-item">
+        <button type="button">Fabric &amp; care <span class="plus">+</span></button>
+        <div class="acc-body" id="acc-fabric"></div>
+      </div>
+      <div class="acc-item">
+        <button type="button">Shipping &amp; returns <span class="plus">+</span></button>
+        <div class="acc-body">Ships within 3 business days. Free exchanges within 30 days on unworn pieces with tags attached.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Arlo Studio. A demo portfolio site — not a real retailer. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var PRODUCTS = {
+    "overcoat-clay": {
+      name: "The Overcoat — Clay", price: 428, shape: "coat",
+      desc: "A single-breasted overcoat cut from a heavy Italian wool. Room through the shoulder, cropped just below the knee. The one coat that replaces three.",
+      fit: "Runs true to size. Model is 5'9\" wearing a size Medium. Shoulder seam sits slightly dropped by design.",
+      fabric: "92% wool, 8% nylon shell. Cupro lining. Dry clean only.",
+      colors: ["#B5764A","#211D1A","#8C8577"],
+      sizes: ["XS","S","M","L","XL"]
+    },
+    "wool-trench": {
+      name: "Unlined Wool Trench", price: 512, shape: "coat",
+      desc: "An unlined trench in brushed wool — lighter than the classic cotton gabardine version, warm enough to wear without a jacket underneath.",
+      fit: "Oversized through the body, self-belt at the waist to shape it. Model wears a size Small.",
+      fabric: "100% brushed wool. Spot clean or dry clean.",
+      colors: ["#5E5A4E","#211D1A"],
+      sizes: ["XS","S","M","L"]
+    },
+    "merino-half-zip": {
+      name: "Merino Half-Zip", price: 168, shape: "knit",
+      desc: "A fine-gauge merino half-zip, cut close but not tight. Works alone in spring, layers under the overcoat in winter.",
+      fit: "True to size, slightly cropped at the hip.",
+      fabric: "100% merino wool. Hand wash cold, lay flat to dry.",
+      colors: ["#3F4A38","#B5764A","#F3EEE6"],
+      sizes: ["XS","S","M","L","XL"]
+    },
+    "cable-crew": {
+      name: "Cable Crewneck", price: 174, shape: "knit",
+      desc: "A heavier cable-knit crewneck for the coldest months. Ribbed hem and cuffs that hold their shape wash after wash.",
+      fit: "Relaxed fit, meant to be sized down if you prefer it fitted.",
+      fabric: "80% wool, 20% cashmere blend. Hand wash cold.",
+      colors: ["#8C8577","#211D1A"],
+      sizes: ["S","M","L","XL"]
+    },
+    "wide-leg-trouser": {
+      name: "Wide-Leg Trouser", price: 212, shape: "tailor",
+      desc: "A wide-leg trouser with a clean waistband and no visible pockets on the front panel. Cut to break just above the shoe.",
+      fit: "High-rise, wide through the leg. Model wears a size 27.",
+      fabric: "98% wool, 2% elastane. Dry clean recommended.",
+      colors: ["#211D1A","#5E5A4E"],
+      sizes: ["24","25","26","27","28","29","30"]
+    },
+    "silk-shirt": {
+      name: "Silk Camp Shirt", price: 186, shape: "tailor",
+      desc: "A camp-collar shirt in washed silk, cut for an open button or two and a relaxed drape.",
+      fit: "Boxy, relaxed fit through the body.",
+      fabric: "100% washed silk. Hand wash cold or dry clean.",
+      colors: ["#F3EEE6","#B5764A"],
+      sizes: ["XS","S","M","L"]
+    },
+    "structured-tote": {
+      name: "Structured Tote", price: 186, shape: "bag",
+      desc: "A structured leather tote sized for a laptop and a change of clothes. One interior pocket, magnetic close, no branding on the exterior.",
+      fit: "13\" W x 11\" H x 5\" D.",
+      fabric: "Full-grain vegetable-tanned leather. Wipe clean, condition twice a year.",
+      colors: ["#8C6A4A","#211D1A"],
+      sizes: ["One size"]
+    },
+    "leather-belt": {
+      name: "Saddle Leather Belt", price: 96, shape: "bag",
+      desc: "A 3.5cm saddle leather belt with a solid brass buckle. Ages into a deeper color with wear.",
+      fit: "Sized to your waist measurement, not pant size.",
+      fabric: "Full-grain leather, solid brass hardware.",
+      colors: ["#8C6A4A","#211D1A"],
+      sizes: ["S (28-32)","M (32-36)","L (36-40)"]
+    }
+  };
+
+  var ART = {
+    coat: '<path d="M60 60 L100 40 L140 60 L155 100 L135 250 L65 250 L45 100 Z" fill="none" stroke="var(--ink)" stroke-width="1.4"/><path d="M60 60 L30 130 L48 145 L70 100" fill="none" stroke="var(--ink)" stroke-width="1.4"/><path d="M140 60 L170 130 L152 145 L130 100" fill="none" stroke="var(--ink)" stroke-width="1.4"/>',
+    knit: '<path d="M65 70 L100 55 L135 70 L145 95 L128 100 L128 220 L72 220 L72 100 L55 95 Z" fill="none" stroke="var(--ink)" stroke-width="1.4"/><path d="M78 90 h44 M78 110 h44 M78 130 h44 M78 150 h44 M78 170 h44 M78 190 h44" stroke="var(--border-strong)" stroke-width="1.4"/>',
+    tailor: '<path d="M70 55 L100 68 L130 55 L150 90 L134 100 L130 230 L70 230 L66 100 L50 90 Z" fill="none" stroke="var(--ink)" stroke-width="1.4"/><path d="M92 68 L100 100 L108 68" fill="none" stroke="var(--ink)" stroke-width="1.4"/>',
+    bag: '<rect x="55" y="110" width="90" height="70" rx="4" fill="none" stroke="var(--ink)" stroke-width="1.4"/><path d="M75 110 Q75 80 100 80 Q125 80 125 110" fill="none" stroke="var(--ink)" stroke-width="1.4"/>'
+  };
+
+  function artSVG(shape, viewBox){
+    return '<svg viewBox="' + viewBox + '" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="1000" height="1000" fill="var(--surface-2)"/><g transform="translate(280,140) scale(2.3)">' + ART[shape] + '</g></svg>';
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if (!id || !PRODUCTS[id]) id = 'overcoat-clay';
+  var product = PRODUCTS[id];
+  var selectedColor = 0;
+  var selectedSize = null;
+
+  document.getElementById('doc-title').textContent = product.name + ' — Arlo Studio';
+  document.getElementById('crumb-name').textContent = product.name;
+  document.getElementById('p-name').textContent = product.name;
+  document.getElementById('p-price').textContent = '$' + product.price;
+  document.getElementById('p-desc').textContent = product.desc;
+  document.getElementById('acc-fit').textContent = product.fit;
+  document.getElementById('acc-fabric').textContent = product.fabric;
+  document.getElementById('art-main').innerHTML = artSVG(product.shape, '0 0 1000 1000');
+  document.getElementById('art-detail').innerHTML = artSVG(product.shape, '0 0 1000 440');
+
+  var swatchesEl = document.getElementById('swatches');
+  swatchesEl.innerHTML = product.colors.map(function(c, i){
+    return '<button class="swatch' + (i === 0 ? ' active' : '') + '" style="background:' + c + '" data-i="' + i + '" aria-label="Color option ' + (i+1) + '"></button>';
+  }).join('');
+  swatchesEl.querySelectorAll('.swatch').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      swatchesEl.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active'); });
+      btn.classList.add('active');
+      selectedColor = parseInt(btn.dataset.i, 10);
+    });
+  });
+
+  var sizesEl = document.getElementById('sizes');
+  sizesEl.innerHTML = product.sizes.map(function(s){
+    return '<button class="size-opt" data-s="' + s + '">' + s + '</button>';
+  }).join('');
+  sizesEl.querySelectorAll('.size-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      sizesEl.querySelectorAll('.size-opt').forEach(function(s){ s.classList.remove('active'); });
+      btn.classList.add('active');
+      selectedSize = btn.dataset.s;
+      document.getElementById('add-note').textContent = '';
+    });
+  });
+
+  document.querySelectorAll('.acc-item button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.closest('.acc-item').classList.toggle('open');
+    });
+  });
+
+  document.getElementById('add-btn').addEventListener('click', function(){
+    if (!selectedSize){
+      document.getElementById('add-note').textContent = 'Please select a size.';
+      return;
+    }
+    var count = parseInt(localStorage.getItem('arlo_bag_count') || '0', 10) + 1;
+    localStorage.setItem('arlo_bag_count', String(count));
+    document.getElementById('bag-count').textContent = String(count);
+    var btn = document.getElementById('add-btn');
+    btn.textContent = 'Added to bag';
+    btn.classList.add('added');
+    document.getElementById('add-note').textContent = '';
+    setTimeout(function(){ btn.textContent = 'Add to bag'; btn.classList.remove('added'); }, 1600);
+  });
+
+  (function(){
+    var count = parseInt(localStorage.getItem('arlo_bag_count') || '0', 10);
+    document.getElementById('bag-count').textContent = String(count);
+    var user = null;
+    try { user = JSON.parse(localStorage.getItem('arlo_user') || 'null'); } catch(e){}
+    if (user && user.email) document.getElementById('account-link').textContent = user.email.split('@')[0];
+  })();
+</script>
+
+</body>
+</html>
