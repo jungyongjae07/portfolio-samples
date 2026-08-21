@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex Summit 2026 — Register now</title>
+<meta name="description" content="A two-day product & growth conference — schedule, speakers, and ticket registration.">
+<meta property="og:title" content="Vertex Summit 2026">
+<meta property="og:description" content="A two-day product & growth conference — schedule, speakers, and ticket registration.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FBFAF7;
+    --surface:#F2F0EA;
+    --surface-2:#EAE7DE;
+    --ink:#1B1D1A;
+    --ink-soft:#565A52;
+    --ink-faint:#8B8F84;
+    --border:#DEDBD0;
+    --border-strong:#C9C5B6;
+    --accent:#0F6B5C;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E1EEE9;
+    --accent-dark:#0A4B41;
+    --cta-bg:#1B1D1A;
+    --cta-ink:#FBFAF7;
+    --gold:#B5852E;
+    --gold-soft:#F4E9D4;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces',Georgia,serif; margin:0; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  button{ font-family:inherit; cursor:pointer; }
+  img,svg{ display:block; max-width:100%; }
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,250,247,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+  .logo{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; letter-spacing:.01em; }
+  .logo .mark{ width:26px; height:26px; border-radius:6px; background:var(--accent); position:relative; }
+  .logo .mark::after{ content:""; position:absolute; inset:6px; background:var(--gold); border-radius:2px; }
+  .nav-links{ display:flex; gap:28px; font-size:.94rem; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 20px; border-radius:9px; border:1px solid var(--border-strong);
+    background:transparent; color:var(--ink); font-weight:600; font-size:.92rem;
+    text-decoration:none; transition:background .15s ease, transform .1s ease;
+  }
+  .btn:hover{ background:var(--surface); }
+  .btn-primary{ background:var(--cta-bg); color:var(--cta-ink); border-color:var(--cta-bg); }
+  .btn-primary:hover{ background:#000; }
+  .btn-accent{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .btn-accent:hover{ background:var(--accent-dark); }
+  .btn:active{ transform:scale(.98); }
+  .hide-mobile{ display:inline-flex; }
+  @media (max-width:760px){ .nav-links{ display:none; } .hide-mobile{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:72px 0 56px; border-bottom:1px solid var(--border); }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+  .eyebrow-plain{ font-size:.86rem; color:var(--accent); font-weight:600; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(2.1rem,4.6vw,3.4rem); font-weight:600; line-height:1.12; letter-spacing:-.01em; }
+  .hero p.lead{ margin:18px 0 28px; color:var(--ink-soft); font-size:1.08rem; max-width:46ch; }
+  .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-meta{ display:flex; gap:22px; margin-top:30px; flex-wrap:wrap; font-size:.88rem; color:var(--ink-soft); }
+  .hero-meta span{ display:flex; align-items:center; gap:7px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+
+  .countdown-card{
+    background:var(--ink); color:#fff; border-radius:16px; padding:28px 26px;
+  }
+  .countdown-card .label{ font-size:.82rem; color:#C9CCC5; margin-bottom:16px; }
+  .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; text-align:center; }
+  .countdown .num{ font-family:'Fraunces',serif; font-size:1.9rem; font-weight:600; }
+  .countdown .unit{ font-size:.72rem; color:#9AA097; text-transform:uppercase; letter-spacing:.06em; margin-top:2px; }
+  .countdown-divider{ height:1px; background:#33362F; margin:20px 0; }
+  .countdown-loc{ font-size:.9rem; color:#D8DAD3; display:flex; justify-content:space-between; }
+
+  /* ---------- stats ---------- */
+  .stats{ padding:36px 0; border-bottom:1px solid var(--border); }
+  .stats-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; }
+  @media (max-width:700px){ .stats-row{ grid-template-columns:repeat(2,1fr); } }
+  .stats-row .num{ font-family:'Fraunces',serif; font-size:2rem; font-weight:600; color:var(--accent); }
+  .stats-row .cap{ font-size:.84rem; color:var(--ink-soft); margin-top:4px; }
+
+  /* ---------- section shell ---------- */
+  section{ padding:72px 0; }
+  section.alt{ background:var(--surface); }
+  .section-head{ margin-bottom:40px; max-width:60ch; }
+  .section-head .kicker{ font-size:.82rem; font-weight:600; color:var(--accent); margin-bottom:8px; }
+  .section-head h2{ font-size:clamp(1.6rem,3vw,2.1rem); font-weight:600; }
+  .section-head p{ color:var(--ink-soft); margin-top:10px; }
+
+  /* ---------- schedule ---------- */
+  .day-tabs{ display:flex; gap:8px; margin-bottom:28px; }
+  .day-tab{
+    padding:9px 18px; border-radius:8px; border:1px solid var(--border-strong);
+    background:#fff; font-weight:600; font-size:.88rem; color:var(--ink-soft);
+  }
+  .day-tab.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .agenda{ border-top:1px solid var(--border); }
+  .agenda-row{
+    display:grid; grid-template-columns:130px 1fr 200px; gap:20px;
+    padding:20px 0; border-bottom:1px solid var(--border); align-items:start;
+  }
+  @media (max-width:700px){ .agenda-row{ grid-template-columns:1fr; gap:6px; } }
+  .agenda-row .time{ font-weight:600; color:var(--accent); font-size:.92rem; }
+  .agenda-row .title{ font-weight:600; }
+  .agenda-row .desc{ color:var(--ink-soft); font-size:.92rem; margin-top:4px; }
+  .agenda-row .track{ font-size:.82rem; color:var(--ink-faint); text-align:right; }
+  @media (max-width:700px){ .agenda-row .track{ text-align:left; } }
+  .tag{ display:inline-block; padding:3px 10px; border-radius:20px; background:var(--surface-2); font-size:.76rem; color:var(--ink-soft); }
+
+  /* ---------- speakers ---------- */
+  .speaker-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  @media (max-width:900px){ .speaker-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .speaker-grid{ grid-template-columns:1fr; } }
+  .speaker-card{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:22px; }
+  .avatar{
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:#fff; margin-bottom:14px;
+  }
+  .speaker-card h3{ font-size:1.02rem; font-weight:600; margin-bottom:2px; }
+  .speaker-card .role{ font-size:.85rem; color:var(--ink-soft); margin-bottom:10px; }
+  .speaker-card .talk{ font-size:.86rem; color:var(--ink-faint); border-top:1px solid var(--border); padding-top:10px; }
+
+  /* ---------- venue ---------- */
+  .venue-grid{ display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; }
+  @media (max-width:800px){ .venue-grid{ grid-template-columns:1fr; } }
+  .venue-map{
+    aspect-ratio:4/3; border-radius:16px; background:
+      linear-gradient(0deg, var(--surface-2) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg, var(--surface-2) 1px, transparent 1px) 0 0/28px 28px,
+      var(--surface);
+    border:1px solid var(--border); position:relative; overflow:hidden;
+  }
+  .venue-map .pin{
+    position:absolute; left:50%; top:46%; transform:translate(-50%,-100%);
+    width:34px; height:34px; border-radius:50% 50% 50% 0; background:var(--accent);
+    transform-origin:bottom center;
+  }
+  .venue-list{ list-style:none; margin:20px 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .venue-list li{ display:flex; gap:12px; font-size:.94rem; color:var(--ink-soft); }
+  .venue-list strong{ color:var(--ink); }
+
+  /* ---------- tickets ---------- */
+  .ticket-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-bottom:44px; }
+  @media (max-width:900px){ .ticket-grid{ grid-template-columns:1fr; } }
+  .ticket-card{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:28px; display:flex; flex-direction:column; }
+  .ticket-card.featured{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .ticket-card .badge{ align-self:flex-start; font-size:.74rem; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:3px 10px; border-radius:20px; margin-bottom:14px; }
+  .ticket-card h3{ font-size:1.1rem; font-weight:600; }
+  .ticket-card .price{ font-family:'Fraunces',serif; font-size:2rem; font-weight:600; margin:10px 0 4px; }
+  .ticket-card .price span{ font-size:.9rem; font-weight:400; color:var(--ink-faint); }
+  .ticket-card ul{ list-style:none; padding:0; margin:18px 0 24px; display:flex; flex-direction:column; gap:10px; font-size:.9rem; color:var(--ink-soft); flex:1; }
+  .ticket-card li{ display:flex; gap:8px; }
+  .ticket-card li::before{ content:"✓"; color:var(--accent); font-weight:700; }
+
+  /* ---------- register form ---------- */
+  .register-panel{ background:var(--ink); color:#fff; border-radius:20px; padding:44px clamp(24px,5vw,52px); }
+  .register-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  @media (max-width:800px){ .register-grid{ grid-template-columns:1fr; } }
+  .register-panel h2{ color:#fff; font-size:1.7rem; }
+  .register-panel p{ color:#C9CCC5; margin-top:10px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:.82rem; color:#C9CCC5; margin-bottom:6px; }
+  .field input, .field select{
+    width:100%; padding:11px 14px; border-radius:9px; border:1px solid #3A3D35;
+    background:#24261F; color:#fff; font-size:.94rem; font-family:inherit;
+  }
+  .field input:focus, .field select:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+  .ticket-options{ display:flex; gap:10px; flex-wrap:wrap; }
+  .ticket-opt{
+    flex:1; min-width:120px; padding:10px 12px; border-radius:9px; border:1px solid #3A3D35;
+    background:#24261F; text-align:center; font-size:.86rem; font-weight:600;
+  }
+  .ticket-opt input{ display:none; }
+  .ticket-opt.checked{ border-color:var(--accent); background:var(--accent); }
+  .form-msg{ margin-top:14px; font-size:.88rem; color:var(--gold); min-height:1.4em; }
+  .confirm-box{ display:none; }
+  .confirm-box.show{ display:block; }
+  .confirm-box .check{
+    width:52px; height:52px; border-radius:50%; background:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:16px;
+  }
+
+  /* ---------- faq ---------- */
+  .faq-item{ border-bottom:1px solid var(--border); }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; padding:20px 0; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:.98rem; color:var(--ink); }
+  .faq-q .plus{ font-size:1.3rem; color:var(--accent); transition:transform .2s ease; }
+  .faq-item.open .plus{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease; color:var(--ink-soft); font-size:.92rem; }
+  .faq-item.open .faq-a{ max-height:200px; padding-bottom:20px; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:44px 0; border-top:1px solid var(--border); }
+  .footer-grid{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .footer-links{ display:flex; gap:22px; font-size:.86rem; color:var(--ink-soft); }
+  .footer-note{ font-size:.82rem; color:var(--ink-faint); margin-top:18px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo"><span class="mark"></span> VERTEX SUMMIT</div>
+    <nav class="nav-links">
+      <a href="#schedule">Schedule</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#venue">Venue</a>
+      <a href="#tickets">Tickets</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#register" class="btn hide-mobile">Sign in</a>
+      <a href="#register" class="btn btn-accent">Register</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-plain">MARCH 14–15, 2027 · SEOUL</div>
+      <h1>Where product &amp; growth leaders compare notes.</h1>
+      <p class="lead">Two days, 24 sessions, and a room full of people who've actually shipped the thing you're stuck on. No keynote fluff — just working sessions with people doing the work.</p>
+      <div class="hero-actions">
+        <a href="#tickets" class="btn btn-accent">Get your ticket</a>
+        <a href="#schedule" class="btn">View schedule</a>
+      </div>
+      <div class="hero-meta">
+        <span><i class="dot"></i> 2 full days</span>
+        <span><i class="dot"></i> 24 sessions, 4 tracks</span>
+        <span><i class="dot"></i> 800+ attendees expected</span>
+      </div>
+    </div>
+    <div class="countdown-card">
+      <div class="label">STARTS IN</div>
+      <div class="countdown" id="countdown">
+        <div><div class="num" id="cd-d">--</div><div class="unit">Days</div></div>
+        <div><div class="num" id="cd-h">--</div><div class="unit">Hours</div></div>
+        <div><div class="num" id="cd-m">--</div><div class="unit">Min</div></div>
+        <div><div class="num" id="cd-s">--</div><div class="unit">Sec</div></div>
+      </div>
+      <div class="countdown-divider"></div>
+      <div class="countdown-loc"><span>COEX Convention Center</span><span>Seoul, KR</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-row">
+    <div><div class="num">24</div><div class="cap">Sessions</div></div>
+    <div><div class="num">32</div><div class="cap">Speakers</div></div>
+    <div><div class="num">4</div><div class="cap">Tracks</div></div>
+    <div><div class="num">800+</div><div class="cap">Attendees</div></div>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">SCHEDULE</div>
+      <h2>Two days, four tracks, zero filler</h2>
+      <p>Every session is picked to actually be useful — not a sponsor pitch in disguise.</p>
+    </div>
+    <div class="day-tabs">
+      <button class="day-tab active" data-day="1">Day 1 · Mar 14</button>
+      <button class="day-tab" data-day="2">Day 2 · Mar 15</button>
+    </div>
+    <div class="agenda" id="agenda-day-1">
+      <div class="agenda-row">
+        <div class="time">09:00 – 09:30</div>
+        <div><div class="title">Registration &amp; coffee</div><div class="desc">Badge pickup, light breakfast, expo hall opens.</div></div>
+        <div class="track"><span class="tag">All tracks</span></div>
+      </div>
+      <div class="agenda-row">
+        <div class="time">09:30 – 10:15</div>
+        <div><div class="title">Opening keynote — What actually moves retention</div><div class="desc">A data-backed look at the levers that matter, and the ones that don't.</div></div>
+        <div class="track"><span class="tag">Main stage</span></div>
+      </div>
+      <div class="agenda-row">
+        <div class="time">10:30 – 11:15</div>
+        <div><div class="title">Pricing pages that don't undersell you</div><div class="desc">Live teardown of three real pricing pages, rebuilt on stage.</div></div>
+        <div class="track"><span class="tag">Growth</span></div>
+      </div>
+      <div class="agenda-row">
+        <div class="time">13:00 – 13:45</div>
+        <div><div class="title">Shipping fast without breaking trust</div><div class="desc">How three teams ship weekly without a QA army.</div></div>
+        <div class="track"><span class="tag">Product</span></div>
+      </div>
+    </div>
+    <div class="agenda" id="agenda-day-2" style="display:none;">
+      <div class="agenda-row">
+        <div class="time">09:30 – 10:15</div>
+        <div><div class="title">Day 2 keynote — Building for the next 1,000 users</div><div class="desc">What breaks between 10 and 1,000 customers, and how to see it coming.</div></div>
+        <div class="track"><span class="tag">Main stage</span></div>
+      </div>
+      <div class="agenda-row">
+        <div class="time">10:30 – 11:15</div>
+        <div><div class="title">Onboarding flows, dissected</div><div class="desc">Screen-by-screen breakdown of onboarding from five fast-growing apps.</div></div>
+        <div class="track"><span class="tag">Design</span></div>
+      </div>
+      <div class="agenda-row">
+        <div class="time">14:00 – 14:45</div>
+        <div><div class="title">Closing panel — What we'd do differently</div><div class="desc">Five founders, one honest hour, no PR filter.</div></div>
+        <div class="track"><span class="tag">Main stage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="speakers">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">SPEAKERS</div>
+      <h2>People who've actually shipped it</h2>
+      <p>Practitioners, not professional keynote circuit regulars.</p>
+    </div>
+    <div class="speaker-grid">
+      <div class="speaker-card">
+        <div class="avatar" style="background:#0F6B5C;">JK</div>
+        <h3>Jamie Kwon</h3>
+        <div class="role">VP Product, Northline</div>
+        <div class="talk">"What actually moves retention"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="avatar" style="background:#B5852E;">RS</div>
+        <h3>Reo Sato</h3>
+        <div class="role">Head of Growth, Fenwick</div>
+        <div class="talk">"Pricing pages that don't undersell you"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="avatar" style="background:#3D5A80;">AM</div>
+        <h3>Ana Moreno</h3>
+        <div class="role">Eng Lead, Ledger Labs</div>
+        <div class="talk">"Shipping fast without breaking trust"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="avatar" style="background:#7A4B3A;">TH</div>
+        <h3>Theo Hwang</h3>
+        <div class="role">Design Director, Fieldnote</div>
+        <div class="talk">"Onboarding flows, dissected"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="venue">
+  <div class="wrap venue-grid">
+    <div class="venue-map"><div class="pin"></div></div>
+    <div>
+      <div class="section-head" style="margin-bottom:0;">
+        <div class="kicker">VENUE</div>
+        <h2>COEX Convention Center</h2>
+      </div>
+      <ul class="venue-list">
+        <li><strong>Address —</strong> 513 Yeongdong-daero, Gangnam-gu, Seoul</li>
+        <li><strong>Nearest station —</strong> Samseong (Line 2), Exit 6, 4 min walk</li>
+        <li><strong>Parking —</strong> On-site garage, validated for attendees</li>
+        <li><strong>Accessibility —</strong> Step-free entry, elevator access to all levels</li>
+      </ul>
+      <a href="#" class="btn" style="margin-top:20px;">Get directions</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="tickets">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">TICKETS</div>
+      <h2>Pick your pass</h2>
+      <p>Prices go up 30 days before the event — lock in the current rate now.</p>
+    </div>
+    <div class="ticket-grid">
+      <div class="ticket-card">
+        <h3>Standard</h3>
+        <div class="price">$149 <span>/ person</span></div>
+        <ul>
+          <li>Both days, all sessions</li>
+          <li>Lunch &amp; coffee breaks</li>
+          <li>Session recordings after the event</li>
+        </ul>
+        <a href="#register" class="btn">Select Standard</a>
+      </div>
+      <div class="ticket-card featured">
+        <div class="badge">MOST POPULAR</div>
+        <h3>VIP</h3>
+        <div class="price">$299 <span>/ person</span></div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Front-row reserved seating</li>
+          <li>Speaker dinner, Day 1 evening</li>
+          <li>1:1 office-hours slot with a speaker</li>
+        </ul>
+        <a href="#register" class="btn btn-accent">Select VIP</a>
+      </div>
+      <div class="ticket-card">
+        <h3>Group (5+)</h3>
+        <div class="price">$119 <span>/ person</span></div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Reserved group seating block</li>
+          <li>Dedicated invoice for finance</li>
+        </ul>
+        <a href="#register" class="btn">Select Group</a>
+      </div>
+    </div>
+
+    <div class="register-panel" id="register">
+      <div class="register-grid">
+        <div>
+          <h2>Reserve your seat</h2>
+          <p>Takes about 30 seconds. You'll get a confirmation with your ticket details right here — a real email confirmation ships in the delivered version.</p>
+        </div>
+        <div>
+          <form id="rsvp-form">
+            <div class="field">
+              <label for="rsvp-name">Full name</label>
+              <input id="rsvp-name" type="text" required placeholder="Jane Cooper">
+            </div>
+            <div class="field">
+              <label for="rsvp-email">Email</label>
+              <input id="rsvp-email" type="email" required placeholder="jane@company.com">
+            </div>
+            <div class="field">
+              <label>Ticket type</label>
+              <div class="ticket-options" id="ticket-options">
+                <label class="ticket-opt checked"><input type="radio" name="ticket" value="Standard" checked>Standard</label>
+                <label class="ticket-opt"><input type="radio" name="ticket" value="VIP">VIP</label>
+                <label class="ticket-opt"><input type="radio" name="ticket" value="Group">Group</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-accent" style="width:100%; margin-top:6px;">Confirm registration</button>
+            <div class="form-msg" id="rsvp-msg"></div>
+          </form>
+          <div class="confirm-box" id="rsvp-confirm">
+            <div class="check">✓</div>
+            <h3 style="color:#fff; font-size:1.15rem;">You're in, <span id="confirm-name"></span>.</h3>
+            <p style="margin-top:6px;">A <strong id="confirm-ticket"></strong> pass is reserved for <span id="confirm-email"></span>. Confirmation sent (in the live version).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head">
+      <div class="kicker">FAQ</div>
+      <h2>Before you register</h2>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is there a refund policy?<span class="plus">+</span></button>
+      <div class="faq-a">Full refund up to 30 days before the event, 50% up to 7 days before. No refunds inside 7 days, but transfers to a colleague are always free.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Will sessions be recorded?<span class="plus">+</span></button>
+      <div class="faq-a">Yes — all main-stage and track sessions are recorded and shared with registered attendees within a week.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is there a group discount?<span class="plus">+</span></button>
+      <div class="faq-a">Yes, the Group pass applies automatically for 5+ tickets on one order. For 15+, contact us for a custom rate.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is the venue accessible?<span class="plus">+</span></button>
+      <div class="faq-a">Yes — step-free entry and elevator access to every level, plus reserved accessible seating on request.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="logo"><span class="mark"></span> VERTEX SUMMIT</div>
+      <div class="footer-links">
+        <a href="#schedule">Schedule</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#venue">Venue</a>
+        <a href="#tickets">Tickets</a>
+      </div>
+    </div>
+    <div class="footer-note">Portfolio sample — fictional event built to demonstrate an event/conference website build (RSVP form, countdown, schedule, speaker gallery, ticket tiers). Not a real event.</div>
+  </div>
+</footer>
+
+<script>
+  // Countdown to a fixed future date
+  (function(){
+    var target = new Date("2027-03-14T09:00:00+09:00").getTime();
+    function tick(){
+      var now = Date.now();
+      var diff = Math.max(0, target - now);
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-d').textContent = d;
+      document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+      document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Day tabs
+  document.querySelectorAll('.day-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.day-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var day = btn.getAttribute('data-day');
+      document.getElementById('agenda-day-1').style.display = (day === '1') ? '' : 'none';
+      document.getElementById('agenda-day-2').style.display = (day === '2') ? '' : 'none';
+    });
+  });
+
+  // Ticket option chips inside the form
+  document.querySelectorAll('.ticket-opt').forEach(function(label){
+    label.addEventListener('click', function(){
+      document.querySelectorAll('.ticket-opt').forEach(function(l){ l.classList.remove('checked'); });
+      label.classList.add('checked');
+    });
+  });
+
+  // RSVP form — real client-side validation + confirmation state
+  document.getElementById('rsvp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('rsvp-name').value.trim();
+    var email = document.getElementById('rsvp-email').value.trim();
+    var ticket = document.querySelector('input[name="ticket"]:checked').value;
+    var msg = document.getElementById('rsvp-msg');
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if(!name || !emailOk){
+      msg.textContent = 'Enter your name and a valid email to continue.';
+      return;
+    }
+    msg.textContent = '';
+    document.getElementById('confirm-name').textContent = name.split(' ')[0];
+    document.getElementById('confirm-ticket').textContent = ticket;
+    document.getElementById('confirm-email').textContent = email;
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-confirm').classList.add('show');
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

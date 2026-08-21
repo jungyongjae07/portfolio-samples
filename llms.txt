@@ -3,9 +3,10 @@
 > Fast, hand-coded websites for small businesses and startups, built by a freelance web developer (FreelanceJae). Every site below is a real, working build — not a static mockup — used to demonstrate range across niches for freelance clients evaluating the work.
 
 ## What this is
-A set of self-initiated sample builds (not real client projects) covering six niches, each shipped as a real deployed site with functional navigation and interactions, not screenshots.
+A set of self-initiated sample builds (not real client projects) covering seven niches, each shipped as a real deployed site with functional navigation and interactions, not screenshots.
 
 ## Samples
+- [Vertex Summit](https://jungyongjae07.github.io/portfolio-samples/samples/event/vertex-summit/): Two-day conference site — live countdown timer, day-by-day schedule, speaker gallery, and a working RSVP/ticket registration form.
 - [The Larder](https://jungyongjae07.github.io/portfolio-samples/samples/restaurant/the-larder/): 3-page restaurant site — Home, Menu, Reservations — with a working reservation form.
 - [univ.us](https://jungyongjae07.github.io/portfolio-samples/samples/startup/univ-us/): SaaS/startup early-access landing page with a clickable in-page app demo.
 - [Ember Roasting Co.](https://jungyongjae07.github.io/portfolio-samples/samples/ecommerce/ember-roasting/): E-commerce product page with a live grind/quantity selector and price calculation.
