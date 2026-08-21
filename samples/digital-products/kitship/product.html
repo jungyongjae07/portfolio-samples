@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitship — Product</title>
+<meta name="description" content="Buy a website template kit and get it delivered automatically — on screen and by email — the moment payment clears.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF7; --surface:#F1F0EA; --surface-2:#E8E6DD;
+    --ink:#1A1C1E; --ink-soft:#565B5E; --ink-faint:#8B9195;
+    --border:#DDDBD1; --border-strong:#C7C4B6;
+    --accent:#2A5CDB; --accent-ink:#FFFFFF; --accent-soft:#E7EDFB;
+    --success:#2E7D4F; --success-soft:#E5F3EA; --star:#D9A441;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16181B; --surface:#1E2124; --surface-2:#262A2E;
+      --ink:#EDEEEC; --ink-soft:#AEB4B8; --ink-faint:#767D82;
+      --border:#2C3034; --border-strong:#3A3F44;
+      --accent:#6E93F2; --accent-ink:#101318; --accent-soft:#212B3D;
+      --success:#79C293; --success-soft:#1B2A20; --star:#E3B85C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16181B; --surface:#1E2124; --surface-2:#262A2E;
+    --ink:#EDEEEC; --ink-soft:#AEB4B8; --ink-faint:#767D82;
+    --border:#2C3034; --border-strong:#3A3F44;
+    --accent:#6E93F2; --accent-ink:#101318; --accent-soft:#212B3D;
+    --success:#79C293; --success-soft:#1B2A20; --star:#E3B85C;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans',system-ui,sans-serif; font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+
+  header.site{ position:sticky; top:0; z-index:30; background:var(--bg); border-bottom:1px solid var(--border); }
+  .site-row{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .logo{ font-family:'Fraunces',serif; font-weight:700; font-size:1.2rem; text-decoration:none; color:var(--ink); }
+  nav.site-nav{ display:flex; align-items:center; gap:26px; }
+  nav.site-nav a.navlink{ font-size:.9rem; color:var(--ink-soft); text-decoration:none; }
+  nav.site-nav a.navlink:hover{ color:var(--ink); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:.94rem; border-radius:10px; cursor:pointer; border:1px solid transparent; text-decoration:none; }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); padding:13px 22px; width:100%; }
+  .btn-primary:hover{ opacity:.9; }
+  .btn-outline{ background:none; color:var(--ink); border-color:var(--border-strong); padding:10px 18px; }
+  .btn-block{ width:100%; }
+
+  .section{ padding:clamp(40px,6vw,64px) 0; }
+  .crumb{ font-size:.85rem; color:var(--ink-faint); margin-bottom:24px; }
+  .crumb a{ text-decoration:none; color:var(--ink-faint); }
+  .crumb a:hover{ color:var(--ink); }
+
+  .product-layout{ display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:start; }
+  .product-visual{ aspect-ratio:16/11; border-radius:16px; background:var(--surface); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .product-visual svg{ width:44%; }
+  .product-name{ font-size:1.9rem; margin-bottom:8px; }
+  .rating-row{ display:flex; align-items:center; gap:8px; color:var(--star); font-size:.92rem; margin-bottom:16px; }
+  .rating-row .count{ color:var(--ink-faint); }
+  .product-desc{ color:var(--ink-soft); margin-bottom:22px; }
+  .spec-list{ border-top:1px solid var(--border); padding-top:16px; margin-bottom:26px; }
+  .spec-row{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--border); font-size:.9rem; }
+  .spec-row span:first-child{ color:var(--ink-faint); }
+
+  .buy-box{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:26px; position:sticky; top:96px; }
+  .buy-price{ font-size:1.7rem; font-weight:700; margin-bottom:4px; font-family:'Fraunces',serif; }
+  .buy-note{ color:var(--ink-faint); font-size:.82rem; margin-bottom:20px; }
+
+  .review-summary{ display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+  .review-avg{ font-family:'Fraunces',serif; font-size:2.4rem; }
+  .review-stars{ color:var(--star); }
+  .review-list{ display:flex; flex-direction:column; gap:16px; margin-bottom:32px; }
+  .review-card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .review-card .stars{ color:var(--star); font-size:.88rem; margin-bottom:8px; }
+  .review-card p{ margin:0 0 10px; color:var(--ink-soft); font-size:.94rem; }
+  .review-name{ font-size:.82rem; color:var(--ink-faint); font-weight:600; }
+
+  .review-form{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; }
+  .review-form h3{ font-size:1.05rem; margin-bottom:16px; }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:.82rem; color:var(--ink-faint); margin-bottom:6px; }
+  .field input, .field textarea{ width:100%; padding:10px 12px; border-radius:9px; border:1px solid var(--border-strong); background:var(--bg); color:var(--ink); font-family:inherit; font-size:.94rem; }
+  .field textarea{ min-height:80px; resize:vertical; }
+  .star-picker{ display:flex; gap:6px; font-size:1.3rem; }
+  .star-picker button{ background:none; border:none; cursor:pointer; color:var(--border-strong); padding:0; }
+  .star-picker button.active, .star-picker button:hover{ color:var(--star); }
+
+  /* checkout modal */
+  .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:100; padding:20px; }
+  .modal-backdrop.open{ display:flex; }
+  .modal{ background:var(--bg); border-radius:16px; max-width:420px; width:100%; padding:28px; position:relative; border:1px solid var(--border); }
+  .modal-close{ position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; color:var(--ink-faint); font-size:1.2rem; }
+  .modal h3{ font-size:1.3rem; margin-bottom:6px; }
+  .modal-sub{ color:var(--ink-faint); font-size:.85rem; margin-bottom:20px; }
+  .demo-badge{ display:inline-block; background:var(--accent-soft); color:var(--accent); font-size:.74rem; font-weight:600; padding:4px 9px; border-radius:6px; margin-bottom:16px; }
+  .order-line{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:.92rem; }
+  .order-line.total{ font-weight:700; border-bottom:none; padding-top:14px; }
+
+  .state{ display:none; }
+  .state.active{ display:block; }
+  .spinner{ width:34px; height:34px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; margin:20px auto; animation:spin .8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .success-icon{ width:52px; height:52px; border-radius:50%; background:var(--success-soft); color:var(--success); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); padding:12px 20px; border-radius:10px; font-size:.88rem; opacity:0; transition:opacity .25s, transform .25s; z-index:200; pointer-events:none; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  footer.site{ background:var(--surface); border-top:1px solid var(--border); padding:40px 0; margin-top:20px; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-links{ display:flex; gap:20px; font-size:.84rem; color:var(--ink-soft); }
+  .footer-links a{ text-decoration:none; }
+
+  @media (max-width:860px){
+    .product-layout{ grid-template-columns:1fr; }
+    .buy-box{ position:static; }
+    nav.site-nav .navlink{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-row">
+    <a class="logo" href="index.html">Kitship</a>
+    <nav class="site-nav">
+      <a class="navlink" href="index.html#kits">Kits</a>
+      <a class="navlink" href="admin.html">Admin</a>
+      <a class="btn btn-outline" href="index.html">All kits</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap section">
+    <div class="crumb"><a href="index.html">Kits</a> / <span id="crumbName">…</span></div>
+
+    <div class="product-layout">
+      <div>
+        <div class="product-visual" id="productVisual"></div>
+
+        <div style="margin-top:40px;">
+          <h2 style="font-size:1.3rem; margin-bottom:20px;">Ratings &amp; reviews</h2>
+          <div class="review-summary">
+            <div class="review-avg" id="ratingAvg">–</div>
+            <div>
+              <div class="review-stars" id="ratingStars">☆☆☆☆☆</div>
+              <div style="color:var(--ink-faint); font-size:.85rem;" id="ratingCount">0 reviews</div>
+            </div>
+          </div>
+          <div class="review-list" id="reviewList"></div>
+
+          <div class="review-form">
+            <h3>Leave a review</h3>
+            <div class="field">
+              <label>Your name</label>
+              <input type="text" id="reviewName" placeholder="Jane D.">
+            </div>
+            <div class="field">
+              <label>Rating</label>
+              <div class="star-picker" id="starPicker">
+                <button type="button" data-val="1">★</button>
+                <button type="button" data-val="2">★</button>
+                <button type="button" data-val="3">★</button>
+                <button type="button" data-val="4">★</button>
+                <button type="button" data-val="5">★</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Review</label>
+              <textarea id="reviewText" placeholder="What did you use this kit for?"></textarea>
+            </div>
+            <button class="btn btn-primary btn-block" id="submitReview" type="button">Post review</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h1 class="product-name" id="productName">…</h1>
+        <div class="rating-row">
+          <span id="miniStars">☆☆☆☆☆</span>
+          <span class="count" id="miniCount">(0 reviews)</span>
+        </div>
+        <p class="product-desc" id="productDesc"></p>
+        <div class="spec-list" id="specList"></div>
+
+        <div class="buy-box">
+          <div class="buy-price" id="buyPrice">$0</div>
+          <div class="buy-note">One-time purchase · instant download</div>
+          <button class="btn btn-primary" id="buyBtn" type="button">Buy now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <a class="logo" href="index.html">Kitship</a>
+    <div class="footer-links">
+      <a href="admin.html">Seller admin</a>
+      <a href="mailto:hello@kitship.demo">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- checkout modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" type="button">✕</button>
+
+    <div class="state active" id="stateCheckout">
+      <span class="demo-badge">Demo checkout — no real card is charged</span>
+      <h3>Checkout</h3>
+      <p class="modal-sub">Simulates a Stripe Checkout redirect for this portfolio demo.</p>
+      <div class="order-line"><span id="modalProductName">—</span><span id="modalProductPrice">$0</span></div>
+      <div class="order-line total"><span>Total</span><span id="modalTotal">$0</span></div>
+      <div class="field" style="margin-top:16px;">
+        <label>Email (for delivery)</label>
+        <input type="email" id="checkoutEmail" placeholder="you@example.com" value="buyer@example.com">
+      </div>
+      <button class="btn btn-primary btn-block" id="payBtn" type="button" style="margin-top:8px;">Pay now</button>
+    </div>
+
+    <div class="state" id="stateProcessing" style="text-align:center;">
+      <div class="spinner"></div>
+      <p style="color:var(--ink-soft);">Processing payment…</p>
+    </div>
+
+    <div class="state" id="stateSuccess" style="text-align:center;">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>Payment successful</h3>
+      <p class="modal-sub" id="successSub">Your download is ready — a copy was also sent to your email.</p>
+      <a class="btn btn-primary btn-block" id="downloadBtn" href="#" download>Download your files</a>
+      <button class="btn btn-outline btn-block" id="modalDoneBtn" type="button" style="margin-top:10px;">Done</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="products.js"></script>
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var id = params.get('id') || 'portfolio-kit';
+  var products = KITSHIP_PRODUCTS();
+  var product = products.find(function(p){ return p.id === id; }) || products[0];
+
+  document.title = product.name + ' — Kitship';
+  document.getElementById('crumbName').textContent = product.name;
+  document.getElementById('productVisual').innerHTML = product.icon;
+  document.getElementById('productName').textContent = product.name;
+  document.getElementById('productDesc').textContent = product.desc;
+  document.getElementById('buyPrice').textContent = '$' + product.price;
+  document.getElementById('modalProductName').textContent = product.name;
+  document.getElementById('modalProductPrice').textContent = '$' + product.price;
+  document.getElementById('modalTotal').textContent = '$' + product.price;
+
+  var specList = document.getElementById('specList');
+  Object.keys(product.specs).forEach(function(k){
+    var row = document.createElement('div');
+    row.className = 'spec-row';
+    row.innerHTML = '<span>' + k + '</span><span>' + product.specs[k] + '</span>';
+    specList.appendChild(row);
+  });
+
+  function starString(rating){
+    var full = Math.round(rating);
+    return '★★★★★☆☆☆☆☆'.slice(5 - full, 10 - full);
+  }
+
+  function renderReviews(){
+    var fresh = KITSHIP_PRODUCTS().find(function(p){ return p.id === id; });
+    document.getElementById('ratingAvg').textContent = fresh.rating.toFixed(1);
+    document.getElementById('ratingStars').textContent = starString(fresh.rating);
+    document.getElementById('ratingCount').textContent = fresh.reviews.length + ' review' + (fresh.reviews.length === 1 ? '' : 's');
+    document.getElementById('miniStars').textContent = starString(fresh.rating);
+    document.getElementById('miniCount').textContent = '(' + fresh.reviews.length + ' review' + (fresh.reviews.length === 1 ? '' : 's') + ')';
+
+    var list = document.getElementById('reviewList');
+    list.innerHTML = '';
+    fresh.reviews.slice().reverse().forEach(function(r){
+      var card = document.createElement('div');
+      card.className = 'review-card';
+      card.innerHTML = '<div class="stars">' + starString(r.rating) + '</div><p></p><div class="review-name"></div>';
+      card.querySelector('p').textContent = r.text;
+      card.querySelector('.review-name').textContent = '— ' + r.name;
+      list.appendChild(card);
+    });
+  }
+  renderReviews();
+
+  // star picker
+  var chosenRating = 5;
+  var starBtns = document.querySelectorAll('#starPicker button');
+  function paintStars(){
+    starBtns.forEach(function(b){ b.classList.toggle('active', +b.dataset.val <= chosenRating); });
+  }
+  paintStars();
+  starBtns.forEach(function(b){
+    b.addEventListener('click', function(){ chosenRating = +b.dataset.val; paintStars(); });
+  });
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  document.getElementById('submitReview').addEventListener('click', function(){
+    var name = document.getElementById('reviewName').value.trim() || 'Anonymous';
+    var text = document.getElementById('reviewText').value.trim();
+    if (!text){ showToast('Write a few words first.'); return; }
+    KITSHIP_ADD_REVIEW(id, name, chosenRating, text);
+    document.getElementById('reviewName').value = '';
+    document.getElementById('reviewText').value = '';
+    renderReviews();
+    showToast('Review posted — thanks!');
+  });
+
+  // checkout modal
+  var backdrop = document.getElementById('modalBackdrop');
+  var stCheckout = document.getElementById('stateCheckout');
+  var stProcessing = document.getElementById('stateProcessing');
+  var stSuccess = document.getElementById('stateSuccess');
+
+  function showState(el){
+    [stCheckout, stProcessing, stSuccess].forEach(function(s){ s.classList.remove('active'); });
+    el.classList.add('active');
+  }
+  function openModal(){ showState(stCheckout); backdrop.classList.add('open'); }
+  function closeModal(){ backdrop.classList.remove('open'); }
+
+  document.getElementById('buyBtn').addEventListener('click', openModal);
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalDoneBtn').addEventListener('click', function(){
+    closeModal();
+    renderReviews();
+  });
+  backdrop.addEventListener('click', function(e){ if (e.target === backdrop) closeModal(); });
+
+  document.getElementById('payBtn').addEventListener('click', function(){
+    var email = document.getElementById('checkoutEmail').value.trim() || 'buyer@example.com';
+    showState(stProcessing);
+    setTimeout(function(){
+      var order = KITSHIP_ADD_ORDER(product.id, product.name, product.price, email);
+      document.getElementById('downloadBtn').href = product.file;
+      document.getElementById('downloadBtn').setAttribute('download', '');
+      document.getElementById('successSub').textContent = 'Your download is ready — a confirmation would be emailed to ' + email + '. Order ' + order.id + '.';
+      showState(stSuccess);
+      showToast('Payment cleared — delivery sent automatically.');
+    }, 1400);
+  });
+})();
+</script>
+</body>
+</html>

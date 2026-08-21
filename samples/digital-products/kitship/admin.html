@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitship — Seller Admin</title>
+<meta name="description" content="Seller dashboard for Kitship — upload products, track orders, and moderate reviews.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF7; --surface:#F1F0EA; --surface-2:#E8E6DD;
+    --ink:#1A1C1E; --ink-soft:#565B5E; --ink-faint:#8B9195;
+    --border:#DDDBD1; --border-strong:#C7C4B6;
+    --accent:#2A5CDB; --accent-ink:#FFFFFF; --accent-soft:#E7EDFB;
+    --success:#2E7D4F; --success-soft:#E5F3EA; --star:#D9A441; --danger:#C0392B;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16181B; --surface:#1E2124; --surface-2:#262A2E;
+      --ink:#EDEEEC; --ink-soft:#AEB4B8; --ink-faint:#767D82;
+      --border:#2C3034; --border-strong:#3A3F44;
+      --accent:#6E93F2; --accent-ink:#101318; --accent-soft:#212B3D;
+      --success:#79C293; --success-soft:#1B2A20; --star:#E3B85C; --danger:#E08677;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16181B; --surface:#1E2124; --surface-2:#262A2E;
+    --ink:#EDEEEC; --ink-soft:#AEB4B8; --ink-faint:#767D82;
+    --border:#2C3034; --border-strong:#3A3F44;
+    --accent:#6E93F2; --accent-ink:#101318; --accent-soft:#212B3D;
+    --success:#79C293; --success-soft:#1B2A20; --star:#E3B85C; --danger:#E08677;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans',system-ui,sans-serif; font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+
+  .shell{ display:grid; grid-template-columns:220px 1fr; min-height:100vh; }
+  aside{ background:var(--surface); border-right:1px solid var(--border); padding:24px 18px; }
+  .logo{ font-family:'Fraunces',serif; font-weight:700; font-size:1.15rem; text-decoration:none; color:var(--ink); display:block; margin-bottom:28px; }
+  .nav-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:9px; color:var(--ink-soft); text-decoration:none; font-size:.9rem; font-weight:500; cursor:pointer; border:none; background:none; width:100%; text-align:left; }
+  .nav-item.active, .nav-item:hover{ background:var(--surface-2); color:var(--ink); }
+  .back-link{ display:block; margin-top:24px; font-size:.82rem; color:var(--ink-faint); text-decoration:none; }
+
+  main{ padding:32px clamp(20px,4vw,44px); }
+  .page{ display:none; }
+  .page.active{ display:block; }
+  .page-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .page-head h1{ font-size:1.5rem; }
+
+  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px; }
+  .stat-card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .stat-label{ font-size:.8rem; color:var(--ink-faint); margin-bottom:8px; }
+  .stat-val{ font-family:'Fraunces',serif; font-size:1.7rem; }
+
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:24px; }
+  .card h3{ font-size:1.05rem; margin-bottom:16px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:.88rem; }
+  th{ text-align:left; color:var(--ink-faint); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; padding:0 10px 10px; border-bottom:1px solid var(--border); }
+  td{ padding:12px 10px; border-bottom:1px solid var(--border); }
+  tr:last-child td{ border-bottom:none; }
+  .empty-row td{ color:var(--ink-faint); text-align:center; padding:28px 10px; }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:.88rem; border-radius:9px; cursor:pointer; border:1px solid transparent; text-decoration:none; padding:9px 16px; }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); }
+  .btn-primary:hover{ opacity:.9; }
+  .btn-ghost{ background:none; border:1px solid var(--border-strong); color:var(--ink); }
+  .btn-sm{ padding:6px 12px; font-size:.8rem; }
+  .badge{ font-size:.76rem; font-weight:600; padding:3px 9px; border-radius:6px; }
+  .badge.hidden{ background:var(--danger); color:#fff; opacity:.85; }
+  .badge.visible{ background:var(--success-soft); color:var(--success); }
+
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:.82rem; color:var(--ink-faint); margin-bottom:6px; }
+  .field input, .field textarea, .field select{ width:100%; padding:10px 12px; border-radius:9px; border:1px solid var(--border-strong); background:var(--bg); color:var(--ink); font-family:inherit; font-size:.9rem; }
+  .field textarea{ min-height:70px; resize:vertical; }
+
+  .bar-chart{ display:flex; align-items:flex-end; gap:10px; height:140px; padding-top:10px; }
+  .bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .bar{ width:100%; background:var(--accent); border-radius:6px 6px 0 0; min-height:4px; }
+  .bar-label{ font-size:.72rem; color:var(--ink-faint); }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); padding:12px 20px; border-radius:10px; font-size:.88rem; opacity:0; transition:opacity .25s, transform .25s; z-index:200; pointer-events:none; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:900px){
+    .shell{ grid-template-columns:1fr; }
+    aside{ display:flex; align-items:center; gap:6px; overflow-x:auto; border-right:none; border-bottom:1px solid var(--border); padding:14px 16px; }
+    .logo{ margin:0 14px 0 0; }
+    .back-link{ display:none; }
+    .stat-grid{ grid-template-columns:repeat(2,1fr); }
+    .form-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside>
+    <a class="logo" href="index.html">Kitship</a>
+    <button class="nav-item active" data-page="overview">Overview</button>
+    <button class="nav-item" data-page="products">Products</button>
+    <button class="nav-item" data-page="orders">Orders</button>
+    <button class="nav-item" data-page="reviews">Reviews</button>
+    <a class="back-link" href="index.html">← Back to storefront</a>
+  </aside>
+
+  <main>
+    <!-- Overview -->
+    <section class="page active" id="page-overview">
+      <div class="page-head"><h1>Overview</h1></div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">Total sales</div><div class="stat-val" id="statSales">$0</div></div>
+        <div class="stat-card"><div class="stat-label">Orders</div><div class="stat-val" id="statOrders">0</div></div>
+        <div class="stat-card"><div class="stat-label">Products live</div><div class="stat-val" id="statProducts">0</div></div>
+        <div class="stat-card"><div class="stat-label">Avg. rating</div><div class="stat-val" id="statRating">–</div></div>
+      </div>
+      <div class="card">
+        <h3>Sales by product</h3>
+        <div class="bar-chart" id="barChart"></div>
+      </div>
+      <div class="card">
+        <h3>Recent orders</h3>
+        <table>
+          <thead><tr><th>Order</th><th>Product</th><th>Buyer email</th><th>Amount</th></tr></thead>
+          <tbody id="recentOrdersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="page" id="page-products">
+      <div class="page-head"><h1>Products</h1></div>
+      <div class="card">
+        <h3>Upload a new kit</h3>
+        <div class="form-grid">
+          <div class="field"><label>Product name</label><input type="text" id="pName" placeholder="e.g. Agency Kit"></div>
+          <div class="field"><label>Price (USD)</label><input type="number" id="pPrice" placeholder="49"></div>
+        </div>
+        <div class="field"><label>Tagline</label><input type="text" id="pTagline" placeholder="One line describing the kit"></div>
+        <div class="field"><label>Description</label><textarea id="pDesc" placeholder="What's included, stack, license…"></textarea></div>
+        <button class="btn btn-primary" id="addProductBtn" type="button">Publish product</button>
+      </div>
+      <div class="card">
+        <h3>Live products</h3>
+        <table>
+          <thead><tr><th>Product</th><th>Price</th><th>Rating</th><th>Orders</th></tr></thead>
+          <tbody id="productsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section class="page" id="page-orders">
+      <div class="page-head"><h1>Orders</h1></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Order ID</th><th>Product</th><th>Buyer email</th><th>Amount</th><th>Date</th></tr></thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="page" id="page-reviews">
+      <div class="page-head"><h1>Reviews</h1></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Product</th><th>Rating</th><th>Review</th><th>Status</th><th></th></tr></thead>
+          <tbody id="reviewsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="products.js"></script>
+<script>
+(function(){
+  // page switching
+  var navBtns = document.querySelectorAll('.nav-item[data-page]');
+  navBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      navBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('page-' + btn.dataset.page).classList.add('active');
+    });
+  });
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  function getOrders(){
+    try { return JSON.parse(localStorage.getItem('kitship_orders') || '[]'); } catch(e){ return []; }
+  }
+
+  function money(n){ return '$' + n.toFixed(2).replace(/\.00$/, ''); }
+
+  function render(){
+    var products = KITSHIP_PRODUCTS();
+    var orders = getOrders();
+
+    // overview stats
+    var totalSales = orders.reduce(function(s,o){ return s + o.price; }, 0);
+    document.getElementById('statSales').textContent = money(totalSales);
+    document.getElementById('statOrders').textContent = orders.length;
+    document.getElementById('statProducts').textContent = products.length;
+    var allReviews = [];
+    products.forEach(function(p){ allReviews = allReviews.concat(p.reviews); });
+    var avgRating = allReviews.length ? (allReviews.reduce(function(s,r){ return s+r.rating; },0) / allReviews.length) : 0;
+    document.getElementById('statRating').textContent = allReviews.length ? avgRating.toFixed(1) + ' ★' : '–';
+
+    // bar chart: orders per product
+    var chart = document.getElementById('barChart');
+    chart.innerHTML = '';
+    var maxOrders = Math.max(1, Math.max.apply(null, products.map(function(p){ return p.orderCount; })));
+    products.forEach(function(p){
+      var col = document.createElement('div');
+      col.className = 'bar-col';
+      var h = Math.round((p.orderCount / maxOrders) * 110) + 4;
+      col.innerHTML = '<div style="font-size:.76rem; color:var(--ink-soft);">' + p.orderCount + '</div>' +
+                       '<div class="bar" style="height:' + h + 'px;"></div>' +
+                       '<div class="bar-label">' + p.name.split(' ')[0] + '</div>';
+      chart.appendChild(col);
+    });
+
+    // recent orders (overview, top 5)
+    var recentBody = document.getElementById('recentOrdersBody');
+    recentBody.innerHTML = '';
+    if (!orders.length){
+      recentBody.innerHTML = '<tr class="empty-row"><td colspan="4">No orders yet — buy a demo kit from the storefront to see one land here automatically.</td></tr>';
+    } else {
+      orders.slice(0,5).forEach(function(o){ recentBody.appendChild(orderRow(o)); });
+    }
+
+    // full orders table
+    var ordersBody = document.getElementById('ordersBody');
+    ordersBody.innerHTML = '';
+    if (!orders.length){
+      ordersBody.innerHTML = '<tr class="empty-row"><td colspan="5">No orders yet.</td></tr>';
+    } else {
+      orders.forEach(function(o){
+        var tr = orderRow(o);
+        var dateTd = document.createElement('td');
+        dateTd.textContent = new Date(o.time).toLocaleString();
+        tr.appendChild(dateTd);
+        ordersBody.appendChild(tr);
+      });
+    }
+
+    // products table
+    var productsBody = document.getElementById('productsBody');
+    productsBody.innerHTML = '';
+    products.forEach(function(p){
+      var tr = document.createElement('tr');
+      var tdName = document.createElement('td'); tdName.textContent = p.name;
+      var tdPrice = document.createElement('td'); tdPrice.textContent = money(p.price);
+      var tdRating = document.createElement('td'); tdRating.textContent = p.rating.toFixed(1) + ' ★ (' + p.reviews.length + ')';
+      var tdOrders = document.createElement('td'); tdOrders.textContent = p.orderCount;
+      tr.appendChild(tdName); tr.appendChild(tdPrice); tr.appendChild(tdRating); tr.appendChild(tdOrders);
+      productsBody.appendChild(tr);
+    });
+
+    // reviews table — uses allReviews (unfiltered) so moderators can see hidden ones too
+    var reviewsBody = document.getElementById('reviewsBody');
+    reviewsBody.innerHTML = '';
+    var rows = [];
+    products.forEach(function(p){
+      p.allReviews.forEach(function(r){
+        rows.push({ product:p.name, productId:p.id, reviewId:r.id, rating:r.rating, text:r.text, name:r.name });
+      });
+    });
+    if (!rows.length){
+      reviewsBody.innerHTML = '<tr class="empty-row"><td colspan="5">No reviews yet.</td></tr>';
+    } else {
+      rows.forEach(function(r){
+        var isHidden = KITSHIP_IS_REVIEW_HIDDEN(r.productId, r.reviewId);
+        var tr = document.createElement('tr');
+        var tdProduct = document.createElement('td'); tdProduct.textContent = r.product;
+        var tdRating = document.createElement('td'); tdRating.textContent = r.rating + ' ★';
+        var tdText = document.createElement('td'); tdText.textContent = r.text + ' — ' + r.name; tdText.style.maxWidth='340px';
+        var tdStatus = document.createElement('td');
+        var badge = document.createElement('span');
+        badge.className = 'badge ' + (isHidden ? 'hidden' : 'visible');
+        badge.textContent = isHidden ? 'Hidden' : 'Visible';
+        tdStatus.appendChild(badge);
+        var tdAction = document.createElement('td');
+        var actBtn = document.createElement('button');
+        actBtn.className = 'btn btn-ghost btn-sm';
+        actBtn.textContent = isHidden ? 'Unhide' : 'Hide';
+        actBtn.addEventListener('click', function(){
+          var nowHidden = KITSHIP_TOGGLE_REVIEW(r.productId, r.reviewId);
+          render();
+          showToast(nowHidden ? 'Review hidden from product page' : 'Review restored');
+        });
+        tdAction.appendChild(actBtn);
+        tr.appendChild(tdProduct); tr.appendChild(tdRating); tr.appendChild(tdText); tr.appendChild(tdStatus); tr.appendChild(tdAction);
+        reviewsBody.appendChild(tr);
+      });
+    }
+  }
+
+  function orderRow(o){
+    var tr = document.createElement('tr');
+    var tdId = document.createElement('td'); tdId.textContent = o.id;
+    var tdProduct = document.createElement('td'); tdProduct.textContent = o.productName;
+    var tdEmail = document.createElement('td'); tdEmail.textContent = o.email;
+    var tdAmount = document.createElement('td'); tdAmount.textContent = money(o.price);
+    tr.appendChild(tdId); tr.appendChild(tdProduct); tr.appendChild(tdEmail); tr.appendChild(tdAmount);
+    return tr;
+  }
+
+  document.getElementById('addProductBtn').addEventListener('click', function(){
+    var name = document.getElementById('pName').value.trim();
+    var price = parseFloat(document.getElementById('pPrice').value);
+    var tagline = document.getElementById('pTagline').value.trim();
+    var desc = document.getElementById('pDesc').value.trim();
+    if (!name || !price || !tagline || !desc){ showToast('Fill in every field first.'); return; }
+    var id = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') + '-' + Date.now().toString(36).slice(-4);
+    KITSHIP_ADD_PRODUCT({
+      id: id,
+      icon: KITSHIP_ICON('portfolio'),
+      name: name, tagline: tagline, price: price,
+      file: 'downloads/portfolio-kit.zip',
+      desc: desc,
+      specs: { 'Stack':'HTML / CSS / JS', 'License':'Personal & commercial use' }
+    });
+    document.getElementById('pName').value = '';
+    document.getElementById('pPrice').value = '';
+    document.getElementById('pTagline').value = '';
+    document.getElementById('pDesc').value = '';
+    render();
+    showToast('Product published — it now shows on the storefront.');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
