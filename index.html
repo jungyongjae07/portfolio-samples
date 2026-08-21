@@ -4,18 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio Samples</title>
-<meta name="description" content="Sample websites — developer portfolio, wellness studio, startup landing page, e-commerce brand, restaurant with real multi-page navigation, and a digital-downloads marketplace with automated checkout — built as fast, hand-coded static sites.">
+<meta name="description" content="Fast, hand-coded websites for small businesses and startups — developer portfolio, wellness studio, startup landing page, e-commerce brand, restaurant with real multi-page navigation, and a digital-downloads marketplace with automated checkout.">
 <meta property="og:title" content="Portfolio Samples">
-<meta property="og:description" content="Sample websites across developer, wellness, startup, e-commerce, restaurant, and digital-marketplace niches.">
+<meta property="og:description" content="Fast, hand-coded websites for small businesses and startups — sample builds across six niches.">
 <meta property="og:type" content="website">
 <style>
-  body { margin:0; min-height:100vh; padding:3rem 1.5rem;
+  body { margin:0; min-height:100vh; padding:3rem 1.5rem 4rem;
     font-family: -apple-system, sans-serif; background:#111; color:#eee; }
   .wrap { max-width: 720px; margin: 0 auto; }
-  h1 { font-size: 1.3rem; font-weight: 600; margin: 0 0 2rem; }
+
+  .hero { margin-bottom: 2.6rem; }
+  h1.hero-h { font-size: 1.7rem; font-weight: 700; margin: 0 0 .7rem; line-height:1.3; letter-spacing:-.01em; }
+  p.hero-sub { margin: 0 0 1.3rem; color: #aaa; font-size: .95rem; line-height:1.6; max-width: 52ch; }
+  a.cta { display:inline-flex; align-items:center; gap:.4rem; background:#eee; color:#111; text-decoration:none;
+    font-weight:600; font-size:.88rem; padding:.65rem 1.1rem; border-radius:8px; }
+  a.cta:hover { opacity:.88; }
+  .trust { margin-top:1rem; color:#777; font-size:.8rem; }
+
   h2.category { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
-    color: #888; margin: 2.2rem 0 .8rem; }
-  h2.category:first-of-type { margin-top: 0; }
+    color: #888; margin: 2.2rem 0 .8rem; border-top:1px solid #262626; padding-top:2rem; }
+  h2.category:first-of-type { margin-top: 0; border-top:none; padding-top:0; }
   .grid { display:flex; gap:1rem; flex-wrap:wrap; }
   a.tile { display:block; width:260px; padding:1.5rem; border:1px solid #333; border-radius:10px;
     color:#eee; text-decoration:none; background:#1a1a1a; transition:transform .2s, border-color .2s; }
@@ -26,16 +34,16 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Portfolio samples</h1>
-
-    <h2 class="category">Wellness &amp; boutique services</h2>
-    <div class="grid">
-      <a class="tile" href="samples/wellness/salt-and-still/"><h3>Salt &amp; Still</h3><p>Boutique wellness studio — float therapy, sauna, massage booking page.</p></a>
+    <div class="hero">
+      <h1 class="hero-h">I build fast, hand-coded websites for small businesses and startups.</h1>
+      <p class="hero-sub">Six sample builds below show the range — restaurant, SaaS, e-commerce, wellness, developer portfolio, and a full digital-downloads marketplace with automated checkout. Every one is a real, working site, not a static mockup.</p>
+      <a class="cta" href="https://www.fiverr.com/freelancejae/build-a-custom-responsive-website-for-your-business-8ec5" target="_blank" rel="noopener">Get a quote on Fiverr →</a>
+      <div class="trust">Custom-coded, not templates — see the "How it works" note on each sample.</div>
     </div>
 
-    <h2 class="category">Developer &amp; personal brand</h2>
+    <h2 class="category">Local business &amp; hospitality</h2>
     <div class="grid">
-      <a class="tile" href="samples/developer/jae-codes/"><h3>jae.codes</h3><p>Freelance developer portfolio, styled as an open code editor.</p></a>
+      <a class="tile" href="samples/restaurant/the-larder/"><h3>The Larder</h3><p>Neighborhood bistro — real multi-page site with menu and a working reservation form.</p></a>
     </div>
 
     <h2 class="category">SaaS &amp; startup landing</h2>
@@ -48,14 +56,19 @@
       <a class="tile" href="samples/ecommerce/ember-roasting/"><h3>Ember Roasting Co.</h3><p>Small-batch coffee brand — product page with grind/quantity selector.</p></a>
     </div>
 
-    <h2 class="category">Local business &amp; hospitality</h2>
-    <div class="grid">
-      <a class="tile" href="samples/restaurant/the-larder/"><h3>The Larder</h3><p>Neighborhood bistro — real multi-page site with menu and a working reservation form.</p></a>
-    </div>
-
     <h2 class="category">Digital products &amp; marketplaces</h2>
     <div class="grid">
       <a class="tile" href="samples/digital-products/kitship/"><h3>Kitship</h3><p>Website-template marketplace — real checkout → instant download flow, reviews, and a seller admin dashboard.</p></a>
+    </div>
+
+    <h2 class="category">Wellness &amp; boutique services</h2>
+    <div class="grid">
+      <a class="tile" href="samples/wellness/salt-and-still/"><h3>Salt &amp; Still</h3><p>Boutique wellness studio — float therapy, sauna, massage booking page.</p></a>
+    </div>
+
+    <h2 class="category">Developer &amp; personal brand</h2>
+    <div class="grid">
+      <a class="tile" href="samples/developer/jae-codes/"><h3>jae.codes</h3><p>Freelance developer portfolio, styled as an open code editor.</p></a>
     </div>
   </div>
 </body>
