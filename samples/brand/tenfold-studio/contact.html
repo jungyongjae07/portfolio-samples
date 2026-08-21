@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Tenfold Studio</title>
+<meta name="description" content="Start a project with Tenfold Studio.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#F5F5F2; --surface-2:#EAEAE4;
+    --ink:#131313; --ink-soft:#54534C; --ink-faint:#8C8B82;
+    --border:#E2E1D9; --border-strong:#C9C8BC;
+    --accent:#2A46D6; --accent-ink:#FFFFFF; --error:#C4432B;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Public Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2{ font-family:'Unbounded', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Unbounded', sans-serif; font-size:17px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+
+  .layout{ display:grid; grid-template-columns:1fr 1fr; gap:64px; padding:64px 0 96px; }
+  .info h1{ font-size:38px; margin-bottom:16px; }
+  .info p{ font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:28px; max-width:420px; }
+  .info-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--border); font-size:14px; max-width:420px; }
+  .info-row span:first-child{ color:var(--ink-faint); }
+
+  form{ display:flex; flex-direction:column; gap:18px; }
+  .field label{ display:block; font-size:13px; color:var(--ink-soft); margin-bottom:6px; }
+  .field input, .field select, .field textarea{
+    width:100%; border:1px solid var(--border-strong); border-radius:6px;
+    background:var(--bg); padding:11px 12px; font-family:'Public Sans', sans-serif;
+    font-size:14px; color:var(--ink); resize:vertical;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--accent); }
+  .error-text{ font-size:12px; color:var(--error); margin-top:4px; min-height:14px; }
+
+  .submit-btn{
+    background:var(--ink); color:var(--bg); border:none; border-radius:999px;
+    font-family:'Public Sans', sans-serif; font-size:14px; font-weight:600;
+    padding:14px 0; cursor:pointer; margin-top:6px;
+  }
+  .submit-btn:hover{ opacity:0.85; }
+
+  .sent-card{ display:none; }
+  .sent-card.show{ display:block; }
+  .sent-card h2{ font-size:24px; margin-bottom:12px; }
+  .sent-card p{ font-size:15px; color:var(--ink-soft); line-height:1.7; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .layout{ grid-template-columns:1fr; gap:40px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Tenfold Studio</a>
+    <ul class="nav-links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="index.html#approach">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap layout">
+  <div class="info">
+    <h1>Start a project</h1>
+    <p>We take on four projects a year, booked roughly two months out. Tell us what you're working on and we'll reply within a few days — this is a demo form, so nothing is actually sent, but it works end to end.</p>
+    <div class="info-row"><span>Email</span><span>hello@tenfold.studio</span></div>
+    <div class="info-row"><span>Studio</span><span>Portland, OR</span></div>
+    <div class="info-row"><span>Next opening</span><span>Q3 2026</span></div>
+  </div>
+
+  <div>
+    <form id="contact-form">
+      <div class="field">
+        <label for="c-name">Name</label>
+        <input type="text" id="c-name" required>
+      </div>
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input type="email" id="c-email" required>
+      </div>
+      <div class="field">
+        <label for="c-company">Company</label>
+        <input type="text" id="c-company">
+      </div>
+      <div class="field">
+        <label for="c-budget">Budget range</label>
+        <select id="c-budget">
+          <option value="">Select a range</option>
+          <option value="under-15k">Under $15,000</option>
+          <option value="15-40k">$15,000 &ndash; $40,000</option>
+          <option value="40-80k">$40,000 &ndash; $80,000</option>
+          <option value="80k-plus">$80,000+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="c-msg">What are you working on?</label>
+        <textarea id="c-msg" rows="4" required></textarea>
+      </div>
+      <div class="error-text" id="c-error"></div>
+      <button type="submit" class="submit-btn">Send inquiry</button>
+    </form>
+
+    <div class="sent-card" id="sent-card">
+      <h2>Thanks, <span id="sent-name"></span>.</h2>
+      <p>This is a demo — nothing was actually sent to a real inbox — but the form validated and saved your inquiry locally. A real build would wire this to an email service or CRM.</p>
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Tenfold Studio. A demo portfolio site — not a real agency. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('c-name').value.trim();
+    var email = document.getElementById('c-email').value.trim();
+    var msg = document.getElementById('c-msg').value.trim();
+    var errEl = document.getElementById('c-error');
+
+    if (!name || !email || !msg){
+      errEl.textContent = 'Please fill in your name, email, and a short message.';
+      return;
+    }
+    errEl.textContent = '';
+
+    var inquiry = {
+      name: name,
+      email: email,
+      company: document.getElementById('c-company').value.trim(),
+      budget: document.getElementById('c-budget').value,
+      message: msg,
+      submittedAt: new Date().toISOString()
+    };
+    var log = [];
+    try { log = JSON.parse(localStorage.getItem('tenfold_inquiries') || '[]'); } catch(err){}
+    log.push(inquiry);
+    localStorage.setItem('tenfold_inquiries', JSON.stringify(log));
+
+    document.getElementById('sent-name').textContent = name;
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('sent-card').classList.add('show');
+  });
+</script>
+
+</body>
+</html>

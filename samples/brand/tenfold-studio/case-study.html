@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="doc-title">Case Study — Tenfold Studio</title>
+<meta name="description" content="A case study from Tenfold Studio — challenge, approach, and outcome.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#F5F5F2; --surface-2:#EAEAE4;
+    --ink:#131313; --ink-soft:#54534C; --ink-faint:#8C8B82;
+    --border:#E2E1D9; --border-strong:#C9C8BC;
+    --accent:#2A46D6; --accent-ink:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Public Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Unbounded', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Unbounded', sans-serif; font-size:17px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:var(--bg); font-family:'Public Sans', sans-serif; font-size:14px; font-weight:600; padding:12px 22px; border-radius:999px; }
+  .btn:hover{ opacity:0.85; }
+
+  .crumb{ padding:20px 0 0; font-size:13px; color:var(--ink-faint); }
+  .crumb a:hover{ color:var(--ink); }
+
+  .cs-head{ padding:24px 0 40px; }
+  .cs-head .tag{ font-size:13px; color:var(--accent); font-weight:600; margin-bottom:10px; }
+  .cs-head h1{ font-size:clamp(32px,4.4vw,48px); margin-bottom:14px; }
+  .cs-head p{ font-size:16px; color:var(--ink-soft); max-width:620px; line-height:1.6; }
+
+  .hero-art{ aspect-ratio:16/8; border-radius:6px; overflow:hidden; background:var(--surface-2); margin-bottom:56px; }
+
+  .cs-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; padding-bottom:64px; border-bottom:1px solid var(--border); margin-bottom:64px; }
+  .cs-grid h3{ font-size:16px; margin-bottom:10px; }
+  .cs-grid p{ font-size:14px; color:var(--ink-soft); line-height:1.6; }
+
+  .detail-art{ display:grid; grid-template-columns:1fr 1fr; gap:24px; padding-bottom:96px; }
+  .detail-art .art{ aspect-ratio:4/3; border-radius:6px; overflow:hidden; background:var(--surface-2); }
+
+  .next{ padding:56px 0 88px; border-top:1px solid var(--border); text-align:center; }
+  .next .label{ font-size:13px; color:var(--ink-faint); margin-bottom:10px; }
+  .next h2{ font-size:28px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .cs-grid{ grid-template-columns:1fr; gap:24px; }
+    .detail-art{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Tenfold Studio</a>
+    <ul class="nav-links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="index.html#approach">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn">Start a project</a>
+  </nav>
+</header>
+
+<div class="wrap crumb"><a href="index.html">Home</a> / <a href="work.html">Work</a> / <span id="crumb-name">Project</span></div>
+
+<div class="wrap cs-head">
+  <div class="tag" id="cs-tag"></div>
+  <h1 id="cs-name">Loading…</h1>
+  <p id="cs-summary"></p>
+</div>
+
+<div class="wrap">
+  <div class="hero-art" id="hero-art"></div>
+
+  <div class="cs-grid">
+    <div>
+      <h3>Challenge</h3>
+      <p id="cs-challenge"></p>
+    </div>
+    <div>
+      <h3>Approach</h3>
+      <p id="cs-approach"></p>
+    </div>
+    <div>
+      <h3>Outcome</h3>
+      <p id="cs-outcome"></p>
+    </div>
+  </div>
+
+  <div class="detail-art" id="detail-art"></div>
+</div>
+
+<div class="next wrap">
+  <div class="label">Next project</div>
+  <a href="#" id="next-link"><h2 id="next-name"></h2></a>
+</div>
+
+<footer>&copy; 2026 Tenfold Studio. A demo portfolio site — not a real agency. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var PROJECTS = {
+    "parallel-coffee": {
+      name:"Parallel Coffee", tag:"Identity · Packaging · 2025", art:"marks",
+      summary:"Identity and packaging system for a three-location specialty roaster expanding into retail bags for the first time.",
+      challenge:"Parallel had three cafes with three different hand-drawn logos, no consistent bag design, and no way to tell their wholesale accounts apart from a supermarket shelf.",
+      approach:"We built one mark that reads at both espresso-cup and shelf-bag scale, then designed a modular label system so seasonal roasts could rotate colorways without touching the type or layout.",
+      outcome:"A single identity now covers all three cafes, wholesale bags, and merchandise. Rolled out over six weeks with no closure."
+    },
+    "northbrook": {
+      name:"Northbrook Clinic", tag:"Identity · Environmental · 2025", art:"grid",
+      summary:"A calmer wordmark and a wayfinding system for a physical therapy group opening its second location.",
+      challenge:"The existing mark read as a hospital, not a clinic people wanted to return to twice a week for months of recovery.",
+      approach:"We softened the mark, built a wayfinding system using a simple grid motif carried from signage down to appointment cards, and tested it with actual patients before finalizing.",
+      outcome:"Both locations now share one system. Staff report fewer 'where do I go' questions at the front desk."
+    },
+    "salt-line": {
+      name:"Salt Line Ferry", tag:"Identity · Wayfinding · 2024", art:"waves",
+      summary:"A new mark, route maps, and dock signage for a regional passenger ferry operator.",
+      challenge:"Four routes, four inconsistent map styles, and signage that hadn't been updated since the operator's last rebrand a decade earlier.",
+      approach:"A single wave-based mark that could be recolored per route without becoming four different logos, plus a redrawn map system legible from a moving boat.",
+      outcome:"New signage installed across five docks. Route maps now share one visual language for the first time."
+    },
+    "midfield": {
+      name:"Midfield Press", tag:"Identity · Editorial · 2024", art:"stack",
+      summary:"Full visual identity and a flexible cover system for an independent publisher of nonfiction.",
+      challenge:"A publisher with a strong backlist but no consistent spine or cover system, making their catalog hard to recognize as a set.",
+      approach:"A stacked-bar motif that reads as shelving from a distance, applied consistently across cover typography while leaving room for each book's own imagery.",
+      outcome:"Twelve backlist titles redesigned, plus a system the in-house designer can run without us for future releases."
+    }
+  };
+  var ART = {
+    marks: '<g fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="300" cy="200" r="90"/><circle cx="440" cy="200" r="90"/></g>',
+    grid: '<g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.7">' +
+      Array.from({length:9}).map(function(_,i){ return '<line x1="'+(80+i*70)+'" y1="60" x2="'+(80+i*70)+'" y2="340"/>'; }).join('') +
+      '</g>',
+    waves: '<g fill="none" stroke="var(--accent)" stroke-width="2.5" opacity="0.85"><path d="M60 180 Q 140 110, 220 180 T 380 180 T 540 180"/><path d="M60 250 Q 140 190, 220 250 T 380 250 T 540 250"/></g>',
+    stack: '<g fill="none" stroke="var(--ink-soft)" stroke-width="1.6" opacity="0.75"><rect x="180" y="90" width="280" height="34"/><rect x="180" y="140" width="280" height="34"/><rect x="180" y="190" width="280" height="34"/><rect x="180" y="240" width="280" height="34"/><rect x="180" y="290" width="280" height="34"/></g>'
+  };
+  var ORDER = ["parallel-coffee","northbrook","salt-line","midfield"];
+
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if (!id || !PROJECTS[id]) id = 'parallel-coffee';
+  var p = PROJECTS[id];
+
+  document.getElementById('doc-title').textContent = p.name + ' — Tenfold Studio';
+  document.getElementById('crumb-name').textContent = p.name;
+  document.getElementById('cs-tag').textContent = p.tag;
+  document.getElementById('cs-name').textContent = p.name;
+  document.getElementById('cs-summary').textContent = p.summary;
+  document.getElementById('cs-challenge').textContent = p.challenge;
+  document.getElementById('cs-approach').textContent = p.approach;
+  document.getElementById('cs-outcome').textContent = p.outcome;
+  document.getElementById('hero-art').innerHTML = '<svg viewBox="0 0 740 370" width="100%" height="100%"><rect width="740" height="370" fill="var(--surface-2)"/>' + ART[p.art] + '</svg>';
+  document.getElementById('detail-art').innerHTML =
+    '<div class="art"><svg viewBox="0 0 740 370" width="100%" height="100%"><rect width="740" height="370" fill="var(--surface-2)"/>' + ART[p.art] + '</svg></div>' +
+    '<div class="art"><svg viewBox="0 0 740 370" width="100%" height="100%"><rect width="740" height="370" fill="var(--surface-2)"/>' + ART[p.art] + '</svg></div>';
+
+  var idx = ORDER.indexOf(id);
+  var nextId = ORDER[(idx + 1) % ORDER.length];
+  document.getElementById('next-link').href = 'case-study.html?id=' + nextId;
+  document.getElementById('next-name').textContent = PROJECTS[nextId].name;
+</script>
+
+</body>
+</html>

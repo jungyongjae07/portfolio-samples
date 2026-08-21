@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Tenfold Studio</title>
+<meta name="description" content="Selected identity, packaging, and wayfinding projects from Tenfold Studio.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FFFFFF; --surface:#F5F5F2; --surface-2:#EAEAE4;
+    --ink:#131313; --ink-soft:#54534C; --ink-faint:#8C8B82;
+    --border:#E2E1D9; --border-strong:#C9C8BC;
+    --accent:#2A46D6; --accent-ink:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Public Sans', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2{ font-family:'Unbounded', Arial, sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{ position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--border); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px; }
+  .wordmark{ font-family:'Unbounded', sans-serif; font-size:17px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; color:var(--ink-soft); }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:var(--bg); font-family:'Public Sans', sans-serif; font-size:14px; font-weight:600; padding:12px 22px; border-radius:999px; }
+  .btn:hover{ opacity:0.85; }
+
+  .page-head{ padding:56px 0 32px; }
+  .page-head h1{ font-size:38px; margin-bottom:10px; }
+  .page-head p{ color:var(--ink-soft); font-size:15px; }
+
+  .filter-row{ display:flex; gap:10px; padding-bottom:36px; flex-wrap:wrap; }
+  .filter-pill{ font-size:13px; padding:8px 16px; border-radius:999px; border:1px solid var(--border-strong); background:none; color:var(--ink-soft); cursor:pointer; font-family:'Public Sans', sans-serif; }
+  .filter-pill.active, .filter-pill:hover{ border-color:var(--ink); color:var(--ink); background:var(--surface-2); }
+
+  .work-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; padding-bottom:96px; }
+  .work-card .art{ aspect-ratio:4/3; border-radius:4px; overflow:hidden; background:var(--surface-2); margin-bottom:14px; transition:transform 220ms ease; }
+  .work-card:hover .art{ transform:translateY(-4px); }
+  .work-card .name{ font-family:'Unbounded', sans-serif; font-size:17px; font-weight:600; }
+  .work-card .desc{ font-size:14px; color:var(--ink-soft); margin-top:4px; }
+  .work-card .tag{ font-size:12px; color:var(--ink-faint); margin-top:8px; }
+
+  footer{ padding:40px 0; border-top:1px solid var(--border); font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .work-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="wordmark">Tenfold Studio</a>
+    <ul class="nav-links">
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="index.html#approach">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn">Start a project</a>
+  </nav>
+</header>
+
+<div class="wrap page-head">
+  <h1>Work</h1>
+  <p>Four projects a year — this is most of them.</p>
+</div>
+
+<div class="wrap">
+  <div class="filter-row" id="filter-row">
+    <button class="filter-pill active" data-f="all">All</button>
+    <button class="filter-pill" data-f="identity">Identity</button>
+    <button class="filter-pill" data-f="packaging">Packaging</button>
+    <button class="filter-pill" data-f="wayfinding">Wayfinding</button>
+  </div>
+  <div class="work-grid" id="work-grid"></div>
+</div>
+
+<footer>&copy; 2026 Tenfold Studio. A demo portfolio site — not a real agency. Made by <a href="https://www.fiverr.com/freelancejae" style="text-decoration:underline;">FreelanceJae</a>.</footer>
+
+<script>
+  var PROJECTS = [
+    { id:"parallel-coffee", name:"Parallel Coffee", desc:"Identity and packaging for a three-location roaster.", tag:"2025", disc:["identity","packaging"], art:"marks" },
+    { id:"northbrook", name:"Northbrook Clinic", desc:"Wordmark and wayfinding system for a physical therapy group.", tag:"2025", disc:["identity","wayfinding"], art:"grid" },
+    { id:"salt-line", name:"Salt Line Ferry", desc:"Route maps, signage, and a new mark for a regional ferry operator.", tag:"2024", disc:["identity","wayfinding"], art:"waves" },
+    { id:"midfield", name:"Midfield Press", desc:"Full visual identity and cover system for an independent publisher.", tag:"2024", disc:["identity","packaging"], art:"stack" }
+  ];
+  var ART = {
+    marks: '<g fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="140" cy="100" r="46"/><circle cx="200" cy="100" r="46"/></g>',
+    grid: '<g stroke="var(--ink-soft)" stroke-width="1.2" opacity="0.7">' +
+      Array.from({length:5}).map(function(_,i){ return '<line x1="'+(60+i*45)+'" y1="30" x2="'+(60+i*45)+'" y2="170"/>'; }).join('') +
+      '</g>',
+    waves: '<g fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.85"><path d="M40 80 Q 80 50, 120 80 T 200 80 T 280 80"/><path d="M40 120 Q 80 90, 120 120 T 200 120 T 280 120"/></g>',
+    stack: '<g fill="none" stroke="var(--ink-soft)" stroke-width="1.4" opacity="0.75"><rect x="90" y="40" width="140" height="20"/><rect x="90" y="70" width="140" height="20"/><rect x="90" y="100" width="140" height="20"/><rect x="90" y="130" width="140" height="20"/></g>'
+  };
+
+  var grid = document.getElementById('work-grid');
+  var active = 'all';
+
+  function render(){
+    var items = PROJECTS.filter(function(p){ return active === 'all' || p.disc.indexOf(active) > -1; });
+    grid.innerHTML = items.map(function(p){
+      return '' +
+        '<a href="case-study.html?id=' + p.id + '" class="work-card">' +
+        '  <div class="art"><svg viewBox="0 0 320 200" width="100%" height="100%"><rect width="320" height="200" fill="var(--surface-2)"/>' + ART[p.art] + '</svg></div>' +
+        '  <div class="name">' + p.name + '</div>' +
+        '  <div class="desc">' + p.desc + '</div>' +
+        '  <div class="tag">' + p.tag + '</div>' +
+        '</a>';
+    }).join('');
+  }
+  render();
+
+  document.getElementById('filter-row').addEventListener('click', function(e){
+    var btn = e.target.closest('.filter-pill');
+    if (!btn) return;
+    document.querySelectorAll('.filter-pill').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    active = btn.dataset.f;
+    render();
+  });
+</script>
+
+</body>
+</html>
